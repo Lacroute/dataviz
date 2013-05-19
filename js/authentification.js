@@ -7,10 +7,10 @@ $(document).ready(function(){
 		authorize: function(){
 			var url = "https://foursquare.com/oauth2/authenticate";
 			url += "?client_id="+this.clientId;
-			url += "&response_type=code";
+			url += '&response_type=token';
 			url += "&redirect_uri="+this.redirectUrl;
 
-			window.location.replace(url);
+			window.location.replace(url);	
 		}
 	};
 	$('#foursquareConnect').click(function(event){
