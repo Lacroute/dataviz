@@ -42,16 +42,13 @@ $(document).ready(function(){
 			var hr = value.createdAt%86400;
 			var heure = 3600;
 			
-			if(hr<2*heure){
-				coucheTard++;
-				console.log("coucheTard");
-			}else if(hr<6*heure){
+			if(hr<6*heure){
 				insomniaque++;
 				console.log("insomniaque");
-			}else if(hr<10*heure){
+			}else if(hr<12*heure){
 				matinal = matinal + 1;
 				console.log("matinal");
-			}else if(hr<22*heure){
+			}else if(hr<19*heure){
 				diurne++;
 				console.log("diurne");
 			}else{
@@ -62,7 +59,7 @@ $(document).ready(function(){
 		
 		var max = Math.max(coucheTard, insomniaque ,matinal ,diurne);
 		console.log("tard :"+coucheTard);
-		console.log("atin :"+matinal);
+		console.log("matin :"+matinal);
 		console.log("diurne :"+diurne);
 		console.log("insomniaque:"+insomniaque);
 		
@@ -76,6 +73,25 @@ $(document).ready(function(){
 			console.log("Resultat : Insomniaque !");	
 		}
 	}
+	
+	user.getDistance = function(){
+		
+	}
+	
+	user.getMayorship = function(){
+		console.log("Nb Mayorship : "+user.mayorshipNumber);
+		if(user.mayorshipNumber==0){
+			console.log("Resultat : Candidat");
+		}else if(user.mayorshipNumber<25){
+			console.log("Resultat : Conseiller général");
+		}else if(user.mayorshipNumber<50){
+			console.log("Resultat : Député");	
+		}else{
+			console.log("Resultat : Président");	
+		}
+	}
+	
+	
 
 
 	// Fonction de Clément pour récuperer le Token dans l'url
