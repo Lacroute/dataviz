@@ -1,6 +1,9 @@
 var user = {};
+
+$(document).ready(function(){
+
 user.init = function(data){
-	console.log(data);
+	
 	user.id = data.response.user.id;
 	user.lastName = data.response.user.lastName;
 	user.firstName = data.response.user.firstName;
@@ -9,14 +12,26 @@ user.init = function(data){
 	user.tipsNumber = data.response.user.tips.count;
 	user.followNumber = data.response.user.following.count;
 	user.checkinsNumber = data.response.user.checkins.count;
-	user.checkins = function(){
-		//requete ajax avec user.id dans l'url
-		//return object des checkins
-	}
+	
+	//checkins
+	jQuery.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: "https://api.foursquare.com/v2/users/self/checkins?limit=200&oauth_token="+getUrlParam('access_token'),
+		success: function(data, textStatus, jqXHR) {
+			console.log(textStatus);
+			user.checkins = data.response.checkins;
+			},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log('KO');
+			console.log(textStatus);
+			console.log(errorThrown);
+		}
+	});
+	console.log(user);
+	
 }	
 
-
-$(document).ready(function(){
 
 	// Fonction de Clément pour récuperer le Token dans l'url
 	function getUrlParam(name){
@@ -65,9 +80,6 @@ $(document).ready(function(){
 			console.log(errorThrown);
 		}
 	});
-
-
-	
 
 
 
