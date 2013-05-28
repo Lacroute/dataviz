@@ -1,14 +1,24 @@
 var user = {};
 user.init = function(data){
-	console.log(data.response.user.firstName);
+	console.log(data);
+	user.id = data.response.user.id;
 	user.lastName = data.response.user.lastName;
 	user.firstName = data.response.user.firstName;
-}
+	user.city = data.response.user.homeCity;
+	user.mayorshipNumber = data.response.user.mayorships.count;
+	user.tipsNumber = data.response.user.tips.count;
+	user.followNumber = data.response.user.following.count;
+	user.checkinsNumber = data.response.user.checkins.count;
+	user.checkins = function(){
+		//requete ajax avec user.id dans l'url
+		//return object des checkins
+	}
+}	
 
 
 $(document).ready(function(){
 
-	// Fonction de Clémenrt pour récuperer le Token dans l'url
+	// Fonction de Clément pour récuperer le Token dans l'url
 	function getUrlParam(name){
 		var url = window.location.href,
 			re = new RegExp('(#|&|$)'),
@@ -38,7 +48,6 @@ $(document).ready(function(){
 	};
 
 	//On lance la requete qui retourne les données de l'API relative à l'user connecté
-
 	jQuery.ajax({
 		type: 'GET',
 		dataType: 'json',
