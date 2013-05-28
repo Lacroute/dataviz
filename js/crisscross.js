@@ -44,16 +44,12 @@ $(document).ready(function(){
 			
 			if(hr<6*heure){
 				insomniaque++;
-				console.log("insomniaque");
 			}else if(hr<12*heure){
 				matinal = matinal + 1;
-				console.log("matinal");
 			}else if(hr<19*heure){
 				diurne++;
-				console.log("diurne");
 			}else{
 				coucheTard++;
-				console.log("coucheTard");
 			}
 		})
 		
@@ -118,6 +114,19 @@ $(document).ready(function(){
 			console.log("Resultat : Frétillant");
 		}else{
 			console.log("Resultat : Hyper-actif");	
+		}
+	}
+	
+	user.getTips = function(){
+		console.log("Nb Tips : "+user.tipsNumber);
+		if(user.tipsNumber<2){
+			console.log("Resultat : Egoïste");
+		}else if(user.tipsNumber<6){
+			console.log("Resultat : Avare");
+		}else if(user.tipsNumber<20){
+			console.log("Resultat : Charitable");	
+		}else{
+			console.log("Resultat : Bienfaisant");	
 		}
 	}
 
