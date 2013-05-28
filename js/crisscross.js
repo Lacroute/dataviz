@@ -21,7 +21,7 @@ $(document).ready(function(){
 	var foursquareAPI = {
 		clientId: '0PCSDR4BPTWOSAHNTQQX2Z4C2JCBLZGA3BO5GC5N0E2510BV',
 		clientSecret: 'IOWDTFOLWYJZ0GAULQNDYGNVPFIUMN11KV4CZGRKE1GYVI1U',
-		redirectUrl: 'http://localhost/dataviz/ok.html',
+		redirectUrl: 'http://localhost:8888/dataviz/ok.html',
 		token: getUrlParam('access_token'),
 		apiUrl: 'https://api.foursquare.com/v2',
 
@@ -48,4 +48,10 @@ $(document).ready(function(){
 			console.log(errorThrown);
 		}
 	});
+
+
+	var user = {};
+
+
+
 });
