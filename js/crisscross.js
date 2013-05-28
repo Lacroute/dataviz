@@ -17,7 +17,7 @@ $(document).ready(function(){
 		jQuery.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: "https://api.foursquare.com/v2/users/self/checkins?limit=200&oauth_token="+getUrlParam('access_token'),
+			url: "https://api.foursquare.com/v2/users/self/checkins?limit=250&oauth_token="+getUrlParam('access_token'),
 			success: function(data, textStatus, jqXHR) {
 				console.log(textStatus);
 				user.checkins = data.response.checkins.items;
@@ -71,7 +71,31 @@ $(document).ready(function(){
 	}
 	
 	user.getDistance = function(){
-		
+		var lat,
+			lng;
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"address":user.city}, function(data,status){
+			if(status=='OK'){
+				console.log("Ville : "+user.city)
+				lat=data[0].geometry.location.lat();
+				lng=data[0].geometry.location.lng();
+			}else{
+				//Si aucun resultat sur l'api de google maps
+				console.log("Aucun résultat, calcul du barycentre :");
+				var totalLat = 0,
+					totalLng = 0;
+					
+				$.each(user.checkins, function (index, value) {
+					totalLat = totalLat + value.venue.location.lat;
+					totalLng = totalLng + value.venue.location.lng;
+				})
+				//calcul de la moyenne
+				lat = totalLat/(user.checkins.length);
+				lng = totalLng/(user.checkins.length);
+			}
+			console.log("Lattitude: "+lat);
+			console.log("Longitude: "+lng);
+		});
 	}
 	
 	user.getMayorship = function(){
@@ -117,7 +141,7 @@ $(document).ready(function(){
 		}
 	}
 	
-	user.getTips = function(){
+	user.getTip = function(){
 		console.log("Nb Tips : "+user.tipsNumber);
 		if(user.tipsNumber<2){
 			console.log("Resultat : Egoïste");
@@ -127,6 +151,17 @@ $(document).ready(function(){
 			console.log("Resultat : Charitable");	
 		}else{
 			console.log("Resultat : Bienfaisant");	
+		}
+	}
+	
+	user.getFollow = function(){
+		console.log("Nb Follows : "+user.followNumber);
+		if(user.followNumber<4){
+			console.log("Resultat : Marginal");
+		}else if(user.followNumber<15){
+			console.log("Resultat : Groupie");
+		}else{
+			console.log("Resultat : Mouton");	
 		}
 	}
 

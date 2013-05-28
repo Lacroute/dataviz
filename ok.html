@@ -5,9 +5,20 @@
 	<title>Zboubification</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.ba-bbq.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	<script type="text/javascript" src="js/crisscross.js"></script>
 </head>
 <body>
 	<p>page affichée en callback, token dans l'url</p>
+	<p>
+		<ul>
+			<li>Nuit/Jour : <input type="button" onClick="user.getHour();" value="user.getHour()"/></li>
+			<li>Distance check (not working yet) : <input type="button" onClick="user.getDistance();" value="user.getDistance()"/></li>
+			<li>Nombre de mayorship : <input type="button" onClick="user.getMayorship();" value="user.getMayorship()"/></li>
+			<li>Moyenne des checks : <input type="button" onClick="user.getCheck();" value="user.getCheck()"/></li>
+			<li>Nombre de tips : <input type="button" onClick="user.getTip();" value="user.getTip()"/></li>
+			<li>Nombre de follow : <input type="button" onClick="user.getFollow();" value="user.getFollow()"/></li>
+		</ul>
+	</p>
 </body>
 </html>
