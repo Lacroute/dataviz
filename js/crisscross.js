@@ -95,7 +95,33 @@ $(document).ready(function(){
 			}
 			console.log("Lattitude: "+lat);
 			console.log("Longitude: "+lng);
+			
+			//On set le point de depart pour calculer les distances
+			var point1 = new google.maps.LatLng(lat, lng);
+			//Variable de max et point2
+			var maxDistance = 0,
+				distance = 0;
+			//Parcours des checkins
+			$.each(user.checkins, function (index, value) {
+				//Set du point 2 (checkin parcouru) pour le calcul
+				var point2 = new google.maps.LatLng((value.venue.location.lat),(value.venue.location.lng));
+				//Calcul de la distance et test si c'est la valeur maximale
+				distance = google.maps.geometry.spherical.computeDistanceBetween(point1, point2);
+				if(distance>maxDistance){
+					maxDistance = distance;
+				}
+			})
+			console.log("Check le plus loin : "+(maxDistance/1000)+" km");
+			//Test final selon la valeur max pour definir la classification
+			if(maxDistance<50000){
+				console.log("Resultat : Sédentaire !");
+			}else if(maxDistance<400000){
+				console.log("Resultat : Nomade !");
+			}else{
+				console.log("Resultat : Voyageur !");	
+			}
 		});
+		
 	}
 	
 	user.getMayorship = function(){
