@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+	var user = {};
+
+
 	// fonctionne bizarrement
 	function getURLParameter(name) {
 		return decodeURI(
@@ -40,7 +44,9 @@ $(document).ready(function(){
 		url: foursquareAPI.selfInfoUrl(),
 		success: function(data, textStatus, jqXHR) {
 			console.log(textStatus);
-			console.log(data);
+			// console.log(data);
+
+			initUser(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			console.log('KO');
@@ -49,8 +55,14 @@ $(document).ready(function(){
 		}
 	});
 
+	function initUser(data){
+		console.log(data.response.user.firstName);
+		user.lastName = data.response.user.lastName;
+		user.firstName = data.response.user.firstName;
+	}
 
-	var user = {};
+
+	
 
 
 
