@@ -36,11 +36,11 @@ $(document).ready(function(){
 		var coucheTard = 0,
 			insomniaque = 0,
 			matinal = 0,
-			diurne = 0;
+			diurne = 0,
+			heure = 3600;
 			
 		$.each(user.checkins, function (index, value) {
 			var hr = value.createdAt%86400;
-			var heure = 3600;
 			
 			if(hr<6*heure){
 				insomniaque++;
@@ -91,7 +91,35 @@ $(document).ready(function(){
 		}
 	}
 	
-	
+	user.getCheck = function(){
+		var recent = 0,
+			ancien = Math.floor((new Date()));
+			
+		$.each(user.checkins, function (index, value) {
+			if(value.createdAt<ancien){
+				ancien = value.createdAt;
+			}
+			if(value.createdAt>recent){
+				recent = value.createdAt;
+			}
+		})
+		
+		console.log("Check plus recent : "+recent);
+		console.log("Check plus ancien : "+ancien);
+		console.log("Nb de check dans le tableau : "+user.checkins.length);
+		
+		//Calcul de la moyenne
+		var moyCheck = Math.floor((user.checkins.length)/Math.floor((recent-ancien)/86400));
+		console.log("Moyenne de checks : "+moyCheck+" /jour");
+		
+		if(moyCheck==0){
+			console.log("Resultat : Flemmard");
+		}else if(moyCheck<4){
+			console.log("Resultat : Frétillant");
+		}else{
+			console.log("Resultat : Hyper-actif");	
+		}
+	}
 
 
 	// Fonction de Clément pour récuperer le Token dans l'url
