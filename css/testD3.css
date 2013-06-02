@@ -1,0 +1,14 @@
+circle.little {
+    fill: #AAAAAA;
+    stroke: #666666;
+    stroke-width: 1.5px;
+}
+
+.data rect {
+    fill: #EEEEEE;
+    stroke: #CCCCCC;
+}
+
+svg {
+	border-left: solid 2px #ddd;
+}
