@@ -8,7 +8,13 @@ circle.little {
     fill: #EEEEEE;
     stroke: #CCCCCC;
 }
-
+#pool{
+	width: 100%;
+	height: 100%;
+}
 svg {
-	border-left: solid 2px #ddd;
+	background-color: #00182b;
+	width: 70%;
+	height: 700px;
+	margin: auto;
 }
