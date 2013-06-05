@@ -5,27 +5,8 @@ $(document).ready(function(){
 		x = d3.scale.ordinal().domain([10, 20, 30]).rangePoints([0, w], 1),
 		y = 150;
 
-	var svg = d3.select('#pool').append('svg:svg');
-
-	// var firstLevelTest = svg.selectAll('.firstLevelTest')
-	// 					.data(donnees)
-	// 					.enter().append('line')
-	// 					.attr('class', 'firstLevelTest')
-	// 					.attr('x1', 50)
-	// 					.attr('y1', 100)
-	// 					.attr('x2', 50)
-	// 					.attr('y2', 100)
-	// 					.attr('stroke', 'black')
-	// 					.attr('stroke-width', '1');
-
-	// d3.select('#deployTest').on('click', function() {
-	// 	firstLevelTest.attr('class', 'deployed');
-	// 	firstLevelTest.transition().duration(300).delay(0).attr('x1', 100);
-	// 	firstLevelTest.transition().duration(500).delay(300).attr('y1', function(d){return d;});
-	// });
-
-
-	var o = {x:400, y:300}, // point origine
+	var svg = d3.select('#pool').append('svg:svg'),
+		o = {x:400, y:300}, // point origine
 		pi = Math.PI,
 		r = [100, 150, 200], // rayon de distance
 		ro = 50, // rayon origine
@@ -127,6 +108,7 @@ $(document).ready(function(){
 		return test;
 	}
 
+	// Initialisation des données
 	checkJson = checkCoords(checkJson);
 	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
 	tips = tipsCoords(tips);
@@ -200,7 +182,7 @@ $(document).ready(function(){
 		.attr('class', 'tips')
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('d', function(d){return arcFunction(d);})
-		.style('opacity', 1)
+		.style('opacity', 0)
 		.attr('fill', tc);
 
 	var checkAvg = svg.append('path')
@@ -208,7 +190,7 @@ $(document).ready(function(){
 		.attr('d', function(){return arcFunction(checkAvgJson);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
-		.attr('opacity', 0.5);
+		.attr('opacity', 0);
 
 	d3.select('#deploy').on('click', function(){
 		checks
