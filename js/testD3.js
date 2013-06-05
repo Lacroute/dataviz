@@ -32,36 +32,34 @@ $(document).ready(function(){
 		rh = 250, // rayon horaire
 		rvi = 269, // rayon vert interne
 		rvii = 275, // rayon vert interne invisible
-		rve = 290,
+		rve = 290, // rayon vert externe
 		h = [0, 3, 6, 9, 12, 15, 18, 21], // horaires
 		json = [{h:0, d:10},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
+		tips = [{h:2}, {h:12}],
+		test = [{}]
 		bgc = '#00182b', // background color
 		cc = '#f2f2f2', // check color
-		rvc = '#2adb2a'; // rond vert color
+		rvc = '#2adb2a', // rond vert color
+		tc = '#0071dc'; // tips color
 
+
+	// Retourne un angle pour coordonnées polaires, ici demi cercle divisé en 12h dans le sens horaire avec un désalage de pi/2
 	function getAlpha(h){
-		return h*pi/12;
+		return -h*pi/12+pi/2;
 	}
 
+	// Retourne y en fonction d'un angle, d'une abscisse d'origine (généralement o.x), et d'une distance
 	function getX(alpha, offsetX, radius){
 		return offsetX+radius*Math.cos(alpha);
 	}
 
+	// Retourne y en fonction d'un angle, d'une ordonnée d'origine (généralement o.y), et d'une distance
 	function getY(alpha, offsetY, radius){
-		return offsetY+radius*Math.sin(alpha);	
+		return offsetY-radius*Math.sin(alpha);	
 	}
 
-	for (var i = 0; i < h.length; i++) {
-		alphaTmp = getAlpha(h[i]);
-		h[i] = {
-			val: h[i],
-			alpha: alphaTmp,
-			x: o.x+rh*Math.cos(alphaTmp),
-			y: o.y-rh*Math.sin(alphaTmp)
-		};
-	}
-
-	function setJson(rawChecks){
+	// Ajoute les coordonées aux checks
+	function checkCoords(rawChecks){
 		$.each(rawChecks, function(key, value){
 			value.alpha = getAlpha(value.h);
 			value.x1 = o.x+ro*Math.cos(value.alpha);
@@ -71,7 +69,61 @@ $(document).ready(function(){
 		});
 		return rawChecks;
 	}
+
+	// Fonction qui fournit un path de ligne
+	var lineFunction = d3.svg.line()
+		.x(function(d) { return d.x; })
+		.y(function(d) { return d.y; })
+		.interpolate("linear-closed");
+
+	// Fonction qui permet de dessiner un arc en fonction d'un départ et d'une t'aille (en radian)
+	var arcFunction = d3.svg.arc()
+		.innerRadius(ro)
+		.outerRadius(rve)
+		.startAngle(function(d, i){return d.start;})
+		.endAngle(function(d, i){return d.start + d.size;});
+
+	// Set coordonnées pour les horaires
+	for (var i = 0; i < h.length; i++) {
+		alphaTmp = getAlpha(h[i]);
+		h[i] = {
+			val: h[i],
+			alpha: alphaTmp,
+			x: o.x+rh*Math.cos(alphaTmp),
+			y: o.y-rh*Math.sin(alphaTmp)
+		};
+	}
 	
+	// génère le triangle pour un ensemble de tips #old
+	function tipsCoordsOld(rawTips){
+		var tipsCoords = [],
+			alphaTmp;
+		$.each(rawTips, function(key, value){
+			alphaTmp = getAlpha(value.h);
+			tipsCoords[key] = [
+				{x: getX(alphaTmp, o.x, ro), y: getY(alphaTmp, o.y, ro)},
+				{x: getX(alphaTmp-0.015, o.x, rve), y: getY(alphaTmp-0.015, o.y, rve)},
+				{x: getX(alphaTmp+0.015, o.x, rve), y: getY(alphaTmp+0.015, o.y, rve)},
+			];
+		});
+		return tipsCoords;
+	}
+
+	// Génère les coordonées d'un arc de cercle par tips
+	function tipsCoords(rawTips){
+		var tipsCoords = [],
+			alphaTmp;
+		$.each(rawTips, function(key, value){
+			alphaTmp = getAlpha(value.h);
+			tipsCoords[key] = {start: alphaTmp-0.015, size:0.03};
+		});
+		return tipsCoords;
+	}
+
+	function checksAvgCoords(checkStart, checkEnd){
+		
+	}
+
 	var echelle = svg.selectAll('circle')
 		.data(r)
 		.enter()
@@ -85,7 +137,6 @@ $(document).ready(function(){
 		.style('stroke-dasharray',('2, 2'))
 		.style('stroke-width', 1);
 
-	console.log(h);
 	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
 	
 	svg.append('circle').attr('id', 'horaire').attr('class', 'invisible').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
@@ -115,15 +166,16 @@ $(document).ready(function(){
 		.enter()
 		.append('text')
 		.attr('class', '.indics')
-		.attr('x', function(d){return getX(h[5].alpha, o.x, d);})
-		.attr('y', function(d){return getY(h[5].alpha, o.y, d);})
+		.attr('x', function(d){return getX(h[h.length-1].alpha, o.x, d);})
+		.attr('y', function(d){return getY(h[h.length-1].alpha, o.y, d);})
 		.attr("fill", cc)
 		.attr('text-anchor', 'middle')
-		.attr('font-size', 12)
+		.attr('font-size', 10)
+		.style('opacity', 0.8)
 		.text(function(d){return d;});
 
 	var checks = svg.selectAll('.checks')
-		.data(setJson(json))
+		.data(checkCoords(json))
 		.enter()
 		.append('line')
 		.attr('class', 'checks')
@@ -134,20 +186,16 @@ $(document).ready(function(){
 		.attr('x2', function(d){return d.x1;})
 		.attr('y2', function(d){return d.y1;});
 
-	// var tips = svg.selectAll('.tips')
-	// 	.data(tips)
-	// 	.enter()
-	// 	.append('polygon')
-	// 	.attr('class', 'tips')
-	// 	.attr('fill', 'red')
-	// 	.attr('x1', function(d){return d.x1;})
-	// 	.attr('y1', function(d){return d.y1;})
-	// 	.attr('x2', function(d){return d.x1;})
-	// 	.attr('y2', function(d){return d.y1;});
-
-
-	// <polygon fill="lime" stroke="blue" stroke-width="10" points="850,75  958,137.5 958,262.5 850,325 742,262.6 742,137.5" />
-
+	var tips = svg.selectAll('.tips')
+		.data(tipsCoords(tips))
+		.enter()
+		.append("path")
+		.attr('class', 'tips')
+		.attr("d", function(d){return arcFunction(d);})
+		.attr("transform", function(){return 'translate('+o.x+','+o.y+')';})
+		.style('opacity', 0)
+		.attr("fill", tc);
+    
 	d3.select('#deploy').on('click', function(){
 		checks
 			.transition()
@@ -155,5 +203,11 @@ $(document).ready(function(){
 			.delay(200)
 			.attr('x2', function(d){return d.x2;})
 			.attr('y2', function(d){return d.y2;});
+
+		tips
+			.transition()
+			.duration(500)
+			.delay(700)
+			.style('opacity', 0.8);
 	});
 });
