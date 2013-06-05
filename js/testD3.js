@@ -34,13 +34,14 @@ $(document).ready(function(){
 		rvii = 275, // rayon vert interne invisible
 		rve = 290, // rayon vert externe
 		h = [0, 3, 6, 9, 12, 15, 18, 21], // horaires
-		json = [{h:0, d:10},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
-		tips = [{h:2}, {h:12}],
-		test = [{}]
+		checkJson = [{h:0, d:10},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
+		tips = [{h:9}, {h:12}],
+		checkAvgJson = [{h:0, d:10},{h:3, d:5}],
 		bgc = '#00182b', // background color
 		cc = '#f2f2f2', // check color
 		rvc = '#2adb2a', // rond vert color
-		tc = '#0071dc'; // tips color
+		tc = '#0071dc', // tips color
+		avgc = '#ff00ff'; // avg check color
 
 
 	// Retourne un angle pour coordonnées polaires, ici demi cercle divisé en 12h dans le sens horaire avec un désalage de pi/2
@@ -74,7 +75,7 @@ $(document).ready(function(){
 	var lineFunction = d3.svg.line()
 		.x(function(d) { return d.x; })
 		.y(function(d) { return d.y; })
-		.interpolate("linear-closed");
+		.interpolate('linear-closed');
 
 	// Fonction qui permet de dessiner un arc en fonction d'un départ et d'une t'aille (en radian)
 	var arcFunction = d3.svg.arc()
@@ -120,10 +121,16 @@ $(document).ready(function(){
 		return tipsCoords;
 	}
 
-	function checksAvgCoords(checkStart, checkEnd){
-		
+	function checksAvgCoords(checkAvgJson){
+		var  checkEnd = checkAvgJson.pop(),
+			checkStart = checkAvgJson.pop();
+		var test = {start: checkStart.alpha-pi/2, size: Math.abs(checkStart.alpha-checkEnd.alpha)};
+		return test;
 	}
 
+	checkJson = checkCoords(checkJson);
+	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
+	console.log(checkJson);
 	var echelle = svg.selectAll('circle')
 		.data(r)
 		.enter()
@@ -140,9 +147,9 @@ $(document).ready(function(){
 	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
 	
 	svg.append('circle').attr('id', 'horaire').attr('class', 'invisible').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
-	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style("fill", "none").style("stroke", rvc).style("stroke-width", 25);
-	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style("stroke-width", 15);
-	svg.append('circle').attr('class', 'invisible').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style("stroke-width", 1);
+	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25);
+	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style('stroke-width', 15);
+	svg.append('circle').attr('class', 'invisible').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
 	
 	var heures = svg.selectAll('text')
 		.data(h)
@@ -156,7 +163,7 @@ $(document).ready(function(){
 	heures.append('text')
 		.attr('x', function(d){return d.x;})
 		.attr('y', function(d){return d.y+4;})
-		.attr("fill", cc)
+		.attr('fill', cc)
 		.attr('text-anchor', 'middle')
 		.attr('font-size', 12)
 		.text(function(d){return d.val;});
@@ -168,14 +175,14 @@ $(document).ready(function(){
 		.attr('class', '.indics')
 		.attr('x', function(d){return getX(h[h.length-1].alpha, o.x, d);})
 		.attr('y', function(d){return getY(h[h.length-1].alpha, o.y, d);})
-		.attr("fill", cc)
+		.attr('fill', cc)
 		.attr('text-anchor', 'middle')
 		.attr('font-size', 10)
 		.style('opacity', 0.8)
 		.text(function(d){return d;});
 
 	var checks = svg.selectAll('.checks')
-		.data(checkCoords(json))
+		.data(checkJson)
 		.enter()
 		.append('line')
 		.attr('class', 'checks')
@@ -189,13 +196,21 @@ $(document).ready(function(){
 	var tips = svg.selectAll('.tips')
 		.data(tipsCoords(tips))
 		.enter()
-		.append("path")
+		.append('path')
 		.attr('class', 'tips')
-		.attr("d", function(d){return arcFunction(d);})
-		.attr("transform", function(){return 'translate('+o.x+','+o.y+')';})
+		.attr('d', function(d){return arcFunction(d);})
+		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.style('opacity', 0)
-		.attr("fill", tc);
-    
+		.attr('fill', tc);
+
+	var checkAvg = svg.append('path')
+		.attr('id', 'checkAvg')
+		.attr('d', function(){return arcFunction(checkAvgJson);})
+		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
+		.attr('fill', avgc)
+		.attr('opacity', 0.5);
+
+	console.log(checks);
 	d3.select('#deploy').on('click', function(){
 		checks
 			.transition()
@@ -209,5 +224,11 @@ $(document).ready(function(){
 			.duration(500)
 			.delay(700)
 			.style('opacity', 0.8);
+
+		checkAvg
+			.transition()
+			.duration(500)
+			.delay(900)
+			.style('opacity', 0.1);
 	});
 });
