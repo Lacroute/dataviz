@@ -35,7 +35,7 @@ $(document).ready(function(){
 		rve = 290, // rayon vert externe
 		h = [0, 3, 6, 9, 12, 15, 18, 21], // horaires
 		checkJson = [{h:0, d:10},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
-		tips = [{h:9}, {h:12}],
+		tips = [{h:12}],
 		checkAvgJson = [{h:0, d:10},{h:3, d:5}],
 		bgc = '#00182b', // background color
 		cc = '#f2f2f2', // check color
@@ -81,8 +81,8 @@ $(document).ready(function(){
 	var arcFunction = d3.svg.arc()
 		.innerRadius(ro)
 		.outerRadius(rve)
-		.startAngle(function(d, i){return d.start;})
-		.endAngle(function(d, i){return d.start + d.size;});
+		.startAngle(function(d){return d.start;})
+		.endAngle(function(d){return d.start + d.size;});
 
 	// Set coordonnées pour les horaires
 	for (var i = 0; i < h.length; i++) {
@@ -112,13 +112,12 @@ $(document).ready(function(){
 
 	// Génère les coordonées d'un arc de cercle par tips
 	function tipsCoords(rawTips){
-		var tipsCoords = [],
-			alphaTmp;
 		$.each(rawTips, function(key, value){
-			alphaTmp = getAlpha(value.h);
-			tipsCoords[key] = {start: alphaTmp-0.015, size:0.03};
+			value.alpha = getAlpha(value.h);
+			value.size = 0.03;
+			value.start = value.alpha-pi/2-value.size/2;
 		});
-		return tipsCoords;
+		return rawTips;
 	}
 
 	function checksAvgCoords(checkAvgJson){
@@ -130,7 +129,8 @@ $(document).ready(function(){
 
 	checkJson = checkCoords(checkJson);
 	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
-	console.log(checkJson);
+	tips = tipsCoords(tips);
+
 	var echelle = svg.selectAll('circle')
 		.data(r)
 		.enter()
@@ -194,13 +194,13 @@ $(document).ready(function(){
 		.attr('y2', function(d){return d.y1;});
 
 	var tips = svg.selectAll('.tips')
-		.data(tipsCoords(tips))
+		.data(tips)
 		.enter()
 		.append('path')
 		.attr('class', 'tips')
-		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
-		.style('opacity', 0)
+		.attr('d', function(d){return arcFunction(d);})
+		.style('opacity', 1)
 		.attr('fill', tc);
 
 	var checkAvg = svg.append('path')
@@ -210,7 +210,6 @@ $(document).ready(function(){
 		.attr('fill', avgc)
 		.attr('opacity', 0.5);
 
-	console.log(checks);
 	d3.select('#deploy').on('click', function(){
 		checks
 			.transition()
