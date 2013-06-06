@@ -10,6 +10,7 @@ $('#menu').on('click', function(){
 
 	$('#content').toggleClass('on');
 
+
 });
 	
 });

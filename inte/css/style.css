@@ -1,4 +1,44 @@
-body {background: #00182b;margin:0;padding: 0;overflow: hidden;}
+/*FONTS*/
+
+@font-face {
+    font-family: 'DINProRegular';
+    src: url('../font/dinpro-regular.eot');
+    src: url('../font/dinpro-regular.eot') format('embedded-opentype'),
+         url('../font/dinpro-regular.woff') format('woff'),
+         url('../font/dinpro-regular.ttf') format('truetype'),
+         url('../font/dinpro-regular.svg#DINProRegular') format('svg');
+}
+
+@font-face {
+    font-family: 'DINProMedium';
+    src: url('../font/dinpro-medium.eot');
+    src: url('../font/dinpro-medium.eot') format('embedded-opentype'),
+         url('../font/dinpro-medium.woff') format('woff'),
+         url('../font/dinpro-medium.ttf') format('truetype'),
+         url('../font/dinpro-medium.svg#DINProMedium') format('svg');
+}
+
+@font-face {
+    font-family: 'DINProBold';
+    src: url('../font/dinpro-bold.eot');
+    src: url('../font/dinpro-bold.eot') format('embedded-opentype'),
+         url('../font/dinpro-bold.woff') format('woff'),
+         url('../font/dinpro-bold.ttf') format('truetype'),
+         url('../font/dinpro-bold.svg#DINProBold') format('svg');
+}
+
+body {background: #00182b;margin:0;padding: 0;overflow: hidden;font-family: 'DINProRegular', arial, sans-serif;}
+
+/***********************************************CONNEXION*****************************************************************/
+
+#connexion p {color: #f2f2f2;}
+#connexion p:nth-child(1) {font-size: 2em;text-transform: uppercase;width: 400px;text-align: center;margin: 200px auto 0px;}
+#connexion p:nth-child(2) {font-size: 1em;width: 800px;font-style: italic;text-align:center;margin: 30px auto 50px;}
+#connexion a {width:300px; height:30px; display: block;margin: auto;color: white;font-family: arial;text-transform: uppercase; border: 2px solid #f2f2f2;
+text-decoration: none;text-align: center;padding-top: 15px;-webkit-transition:all ease .2s;border-radius: 2px;}
+#connexion a:hover {color:#091e33;background: #f2f2f2; }
+
+/***********************************************DATAVIZ*****************************************************************/
 
 #content {background: #00182b; width:100%;height:100%;-webkit-transition:all ease .5s;padding:19px 5px 0px 25px;z-index:994;position: absolute;
 -moz-box-shadow: -2px 0px 15px 0px rgba(0,0,0, .5);
@@ -12,10 +52,10 @@ box-shadow: -2px 0px 15px 0px  rgba(0,0,0, .5);}
 
 #circle {background: #f2f2f2; width:700px;height: 700px;border-radius: 100%;margin: 70px }
 
-#menu {background: #091e33; width:30%;height:100%;display: inline-block; vertical-align: top;-webkit-transition:all ease .5s;z-index:993;
+#menu {background: #091e33; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;
 position: absolute;top:0;left:0;}
 
-#photoProfil {width: 150px;height: 150px;border-radius: 100%; margin: 50px auto 0px; background: #f2f2f2;border: 5px solid #c7c2c3;}
+#photoProfil {width: 130px;height: 130px;border-radius: 100%; margin: 30px auto 0px; background: #f2f2f2;border: 5px solid #c7c2c3;}
 
 #menu ul {list-style-type: none;margin: 30px 0;padding: 0;-webkit-transition:all ease .2s 1s;}
 #menu ul li {background: #f2f2f2;padding: 15px 0px 15px 10px;border-bottom: 1px solid #091e33;-webkit-transition:all ease .2s;cursor: pointer;}
@@ -23,11 +63,11 @@ position: absolute;top:0;left:0;}
 #menu ul li a {color: #091e33; text-transform: uppercase;font-family: arial;text-decoration: none;
 background: url(img/listmenu-bleu.png) 0 0 no-repeat;padding: 10px 0px 20px 50px;}
 
-#menu > p:nth-child(2) {text-align: center;color: #f2f2f2;font-family: arial;margin:10px 0 0 0;padding: 0;}
-#menu > p:nth-child(2) span {text-align: center;color: #f2f2f2;font-family: arial;text-transform: uppercase;}
-#menu > p:nth-child(3) {text-align: center;color: #f2f2f2;font-family: arial;margin:5px 0 0 0;padding: 0;}
-#menu > p:nth-child(5) {text-align: center;color: #f2f2f2;text-transform: uppercase;font-family: arial;font-size: 1.4em;}
-#menu > a {width:300px; height:30px; display: block;margin: auto;color: white;font-family: arial;text-transform: uppercase; border: 2px solid #f2f2f2;
+#menu > p:nth-child(2) {text-align: center;color: #f2f2f2;margin:10px 0 0 0;padding: 0;}
+#menu > p:nth-child(2) span {text-align: center;color: #f2f2f2;text-transform: uppercase;}
+#menu > p:nth-child(3) {text-align: center;color: #f2f2f2;margin:5px 0 0 0;padding: 0;}
+#menu > p:nth-child(5) {text-align: center;color: #f2f2f2;text-transform: uppercase;font-size: 1.4em;}
+#menu > a {width:300px; height:30px; display: block;margin: auto;color: #f2f2f2;text-transform: uppercase; border: 2px solid #f2f2f2;
 text-decoration: none;text-align: center;padding-top: 15px;-webkit-transition:all ease .2s;border-radius: 2px;}
 #menu > a:hover {color:#091e33;background: #f2f2f2; }
 
