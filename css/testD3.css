@@ -18,6 +18,10 @@ svg {
 	height: 700px;
 	margin: auto;
 }
-.invisible{
+.echelleDistance, .echelleCat, .echelleDeco{
 	opacity: 0.2;
+}
+#menu{
+	float: left;
+	list-style: none;
 }

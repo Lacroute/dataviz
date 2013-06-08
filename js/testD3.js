@@ -1,33 +1,85 @@
 $(document).ready(function(){
-	var w = 700,
-		h = 700,
-		donnees = [120, 180, 60, 30, 90],
-		x = d3.scale.ordinal().domain([10, 20, 30]).rangePoints([0, w], 1),
-		y = 150;
 
+	/*** Initialisation des variables ***/
 	var svg = d3.select('#pool').append('svg:svg'),
-		o = {x:400, y:300}, // point origine
+		o = {x:400, y:330}, // point origine
 		pi = Math.PI,
-		r = [100, 150, 200], // rayon de distance
+		rdist = [100, 200, 300], // rayon de distance
+		rcat = [50, 150, 250], // rayon de distance
 		ro = 50, // rayon origine
 		rh = 250, // rayon horaire
 		rvi = 269, // rayon vert interne
 		rvii = 275, // rayon vert interne invisible
 		rve = 290, // rayon vert externe
-		h = [0, 3, 6, 9, 12, 15, 18, 21], // horaires
-		checkJson = [{h:0, d:10},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
-		tips = [{h:12}],
-		checkAvgJson = [{h:0, d:10},{h:3, d:5}],
+		roi = 300, // rayon orange interne
+		roe = 320, // rayon orange externe
+		rd = 330, // rayon décoration
+		h = [{h:0, t:0}, {h:3, t:3}, {h:6, t:6}, {h:9, t:9}, {h:12, t:12}, {h:15, t:15}, {h:18, t:18}, {h:21, t:21}], // horaires
+		m = [{h:0, t:'0%'}, {h:6, t:'25%'}, {h:12, t:'50%'}, {h:18, t:'75%'}], // moyenne check
+		checkJson = [{h:0, d:150},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
+		tipsJson = [{h:0}, {h:5}],
+		checkAvgJson = [{h:0},{h:4}],
+		catJson = [{name: 'biscuit', count: 20}, {name: 'tartine', count: 40}, {name: 'chou', count: 15}, {name: 'plume', count: 26}, {name: 'biscuit', count: 18}, {name: 'chiot', count: 55}, {name: 'mollusque', count: 6}, {name: 'dirigeable', count: 22}, {name: 'semelle', count: 13}],
+		dailyAvgJson = [{h:0}, {h:12}],
+		decoJson = [{h:5}, {h:13}, {h:21}],
 		bgc = '#00182b', // background color
 		cc = '#f2f2f2', // check color
 		rvc = '#2adb2a', // rond vert color
 		tc = '#0071dc', // tips color
-		avgc = '#ff00ff'; // avg check color
+		avgc = '#ff00ff', // avg check color
+		cac = '#e74c3c',  // category color
+		sr =  15.016, // soleil r
+		// scx =  60, // soleil cx
+		// scy =  90, // soleil cy
+		// sccx = 60, // soleilCouchant cx
+		// sccy = 60, // soleilCouchant cy
+		// lcx =  60, // lune cx
+		// lcy =  130; // lune cx
 
+		/*** [END] Initialisation variables ***/
+
+	/*** Initialisation json ***/
+	h = textCoords(h);
+	m = textCoords(m);
+	checkJson = checkCoords(checkJson);
+	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
+	dailyAvgJson = checksAvgCoords(checkCoords(dailyAvgJson));
+	tipsJson = tipsCoords(tipsJson);
+	catJson = catCoords(catJson);
+	decoJson = decoCoords(decoJson);
+
+	console.log(tipsJson[0]);
+	console.log(h[0]);
+
+	/*** [END] Initialisation json ***/
+
+	/*** Initialisation décoration **/
+	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
+
+	svg.append('circle').attr('id', 'horaire').attr('class', 'echelleDeco').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
+	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25);
+	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style('stroke-width', 15);
+	svg.append('circle').attr('class', 'echelleDeco').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
+	svg.append('circle').attr('class', 'echelleDeco').attr('r', rd).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1);
+
+	soleilCouchant = svg.append('g').attr('id', 'soleilCouchant');
+	soleilCouchant.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[0].x).attr('cy', decoJson[0].y).attr('r', sr);
+	soleilCouchant.append('circle').attr('fill', 'none').attr('stroke', bgc).attr('stroke-width', 14).attr('stroke-dasharray', '5.272, 2.1088').attr('cx', decoJson[0].x + 0.334).attr('cy', decoJson[0].y - 0.057).attr('r', sr + 2.609);
+	soleilCouchant.append('ellipse').attr('fill', bgc).attr('cx', decoJson[0].x + 0.104).attr('cy', decoJson[0].y + 8.745).attr('rx', 20.375).attr('ry', 11.688);
+
+	soleil = svg.append('g').attr('id', 'soleil');
+	soleil.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[1].x).attr('cy', decoJson[1].y).attr('r', sr);
+	soleil.append('circle').attr('fill', 'none').attr('stroke', bgc).attr('stroke-width', 14).attr('stroke-dasharray', '5.272, 2.1088').attr('cx', decoJson[1].x + 0.334).attr('cy', decoJson[1].y - 0.057).attr('r', sr + 2.609);
+
+	lune = svg.append('g').attr('id', 'lune');
+	lune.append('circle').attr('fill', '#E6E6E6').attr('cx', decoJson[2].x).attr('cy', decoJson[2].y).attr('r', sr-1.849);
+	lune.append('circle').attr('fill', bgc).attr('cx', decoJson[2].x+7).attr('cy', decoJson[2].y-4).attr('r', sr-1.849);
+
+	/*** [END] Initialisation décoration **/
 
 	// Retourne un angle pour coordonnées polaires, ici demi cercle divisé en 12h dans le sens horaire avec un désalage de pi/2
 	function getAlpha(h){
-		return -h*pi/12+pi/2;
+		return h*pi/12 -pi/2;
 	}
 
 	// Retourne y en fonction d'un angle, d'une abscisse d'origine (généralement o.x), et d'une distance
@@ -44,125 +96,140 @@ $(document).ready(function(){
 	function checkCoords(rawChecks){
 		$.each(rawChecks, function(key, value){
 			value.alpha = getAlpha(value.h);
-			value.x1 = o.x+ro*Math.cos(value.alpha);
-			value.y1 = o.y-ro*Math.sin(value.alpha);
-			value.x2 = o.x+(ro+value.d)*Math.cos(value.alpha);
-			value.y2 = o.y-(ro+value.d)*Math.sin(value.alpha);
+			value.x1 = getX(value.alpha, o.x, ro);
+			value.y1 = getY(value.alpha, o.y, -ro);
+			value.x2 = getX(value.alpha, o.x, ro+value.d);
+			value.y2 = getY(value.alpha, o.y, -Math.abs(ro+value.d));
+			// value.x1 = o.x+ro*Math.cos(value.alpha);
+			// value.y1 = o.y-ro*Math.sin(value.alpha);
+			// value.x2 = o.x+(ro+value.d)*Math.cos(value.alpha);
+			// value.y2 = o.y-(ro+value.d)*Math.sin(value.alpha);
+			// alpha, offsetX, radius
 		});
 		return rawChecks;
 	}
 
-	// Fonction qui fournit un path de ligne
-	var lineFunction = d3.svg.line()
-		.x(function(d) { return d.x; })
-		.y(function(d) { return d.y; })
-		.interpolate('linear-closed');
-
 	// Fonction qui permet de dessiner un arc en fonction d'un départ et d'une t'aille (en radian)
 	var arcFunction = d3.svg.arc()
-		.innerRadius(ro)
-		.outerRadius(rve)
+		.innerRadius(function(d){return d.innerRadius;})
+		.outerRadius(function(d){return d.outerRadius;})
 		.startAngle(function(d){return d.start;})
 		.endAngle(function(d){return d.start + d.size;});
 
-	// Set coordonnées pour les horaires
-	for (var i = 0; i < h.length; i++) {
-		alphaTmp = getAlpha(h[i]);
-		h[i] = {
-			val: h[i],
-			alpha: alphaTmp,
-			x: o.x+rh*Math.cos(alphaTmp),
-			y: o.y-rh*Math.sin(alphaTmp)
-		};
-	}
-	
-	// génère le triangle pour un ensemble de tips #old
-	function tipsCoordsOld(rawTips){
-		var tipsCoords = [],
-			alphaTmp;
-		$.each(rawTips, function(key, value){
-			alphaTmp = getAlpha(value.h);
-			tipsCoords[key] = [
-				{x: getX(alphaTmp, o.x, ro), y: getY(alphaTmp, o.y, ro)},
-				{x: getX(alphaTmp-0.015, o.x, rve), y: getY(alphaTmp-0.015, o.y, rve)},
-				{x: getX(alphaTmp+0.015, o.x, rve), y: getY(alphaTmp+0.015, o.y, rve)},
-			];
+	// Génère les coordonées d'un text
+	function textCoords(textJson){
+		$.each(textJson, function(key, value){
+			value.alpha = getAlpha(value.h)
+			value.x = o.x+rh*Math.cos(value.alpha);
+			value.y = o.y+rh*Math.sin(value.alpha);
 		});
-		return tipsCoords;
+		return textJson;
 	}
 
 	// Génère les coordonées d'un arc de cercle par tips
-	function tipsCoords(rawTips){
-		$.each(rawTips, function(key, value){
+	function tipsCoords(tipsJson){
+		$.each(tipsJson, function(key, value){
 			value.alpha = getAlpha(value.h);
 			value.size = 0.03;
-			value.start = value.alpha-pi/2-value.size/2;
+			value.start = value.alpha+pi/2-value.size/2;
+			value.innerRadius = ro;
+			value.outerRadius = ro;
 		});
-		return rawTips;
+		return tipsJson;
 	}
 
+	// Génère les coordonées de l'arc de cercle pour la moyenne horaire des tips
 	function checksAvgCoords(checkAvgJson){
 		var  checkEnd = checkAvgJson.pop(),
 			checkStart = checkAvgJson.pop();
-		var test = {start: checkStart.alpha-pi/2, size: Math.abs(checkStart.alpha-checkEnd.alpha)};
-		return test;
+		return [{start: checkStart.h*(pi/12), size: Math.abs(checkStart.alpha-checkEnd.alpha), innerRadius: ro, outerRadius: ro}];
 	}
 
-	// Initialisation des données
-	checkJson = checkCoords(checkJson);
-	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
-	tips = tipsCoords(tips);
+	// Génère les coordonées d'un arc de cercle par catégorie
+	function catCoords(catJson){
+		var jsonlength = Object.keys(catJson).length;
+		var	catsize = 2*pi/(jsonlength+1);
+		var pas = catsize / jsonlength;
+		$.each(catJson, function(key, value){
+			value.alpha = key*(catsize+pas);
+			value.size = catsize;
+			value.start = value.alpha;
+			value.innerRadius = ro;
+			value.outerRadius = ro;
+		});
+		return catJson;
+	}
 
-	var echelle = svg.selectAll('circle')
-		.data(r)
-		.enter()
-		.append('circle')
-		.attr('class', 'invisible')
-		.attr('r', function(d){return d;})
-		.attr('cx', o.x)
-		.attr('cy', o.y)
-		.style('fill', 'none')
-		.style('stroke', cc)
-		.style('stroke-dasharray',('2, 2'))
-		.style('stroke-width', 1);
+	// Génère les cercles d'échelles
+	function echelleGenerator(cClass, myData){
+		var echelleCircle = svg.selectAll('.'+cClass)
+			.data(myData)
+			.enter()
+			.append('circle')
+			.attr('class', cClass)
+			.attr('r', 0)
+			.attr('cx', o.x)
+			.attr('cy', o.y)
+			.style('fill', 'none')
+			.style('stroke', cc)
+			.style('stroke-dasharray',('2, 2'))
+			.style('stroke-width', 1);
 
-	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
+		return echelleCircle;
+	}
 	
-	svg.append('circle').attr('id', 'horaire').attr('class', 'invisible').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
-	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25);
-	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style('stroke-width', 15);
-	svg.append('circle').attr('class', 'invisible').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
-	
-	var heures = svg.selectAll('text')
-		.data(h)
-		.enter()
-		.append('g');
-	heures.append('circle')
-		.attr('r', 10)
-		.attr('cx', function(d){return d.x;})
-		.attr('cy', function(d){return d.y;})
-		.attr('fill', bgc);
-	heures.append('text')
-		.attr('x', function(d){return d.x;})
-		.attr('y', function(d){return d.y+4;})
-		.attr('fill', cc)
-		.attr('text-anchor', 'middle')
-		.attr('font-size', 12)
-		.text(function(d){return d.val;});
+	// Génère un groupe contenant un cercle couleur bg et un texte en son centre
+	function textCircleGenerator(gClass, myData){
+		var group = svg.selectAll(gClass)
+			.data(myData)
+			.enter()
+			.append('g')
+			.attr('class', '.'+gClass);
+		group.append('circle')
+			.attr('r', 12)
+			.attr('cx', function(d){return d.x;})
+			.attr('cy', function(d){return d.y;})
+			.attr('fill', bgc);
+		group.append('text')
+			.attr('x', function(d){return d.x;})
+			.attr('y', function(d){return d.y+4;})
+			.attr('fill', cc)
+			.attr('text-anchor', 'middle')
+			.attr('font-size', 12)
+			.text(function(d){return d.t;});
+		group.style('opacity', 0);
 
-	var indics = svg.selectAll('.indics')
-		.data(r)
-		.enter()
-		.append('text')
-		.attr('class', '.indics')
-		.attr('x', function(d){return getX(h[h.length-1].alpha, o.x, d);})
-		.attr('y', function(d){return getY(h[h.length-1].alpha, o.y, d);})
-		.attr('fill', cc)
-		.attr('text-anchor', 'middle')
-		.attr('font-size', 10)
-		.style('opacity', 0.8)
-		.text(function(d){return d;});
+		return group;
+	}
 
+	// Génère le texte par dessus les échelles
+	function textEchelleGenerator(tClass, myData){
+		var indicateur = svg.selectAll('.'+tClass)
+			.data(myData)
+			.enter()
+			.append('text')
+			.attr('class', tClass)
+			.attr('x', function(d, i){return getX(h[h.length-1].alpha, o.x, (i+2)*ro);})
+			.attr('y', function(d, i){return getY(h[h.length-1].alpha, o.y, -(i+2)*ro);})
+			.attr('fill', cc)
+			.attr('text-anchor', 'middle')
+			.attr('font-size', 10)
+			.style('opacity', 0)
+			.text(function(d){return d;});
+
+		return indicateur
+	}
+
+	function decoCoords(decoJson){
+		$.each(decoJson, function(key, value){
+			value.alpha = getAlpha(value.h);
+			value.x = getX(value.alpha, o.x, rd);
+			value.y = getY(value.alpha, o.y, -rd);
+		});
+		return decoJson;
+	}
+
+	/*** Création sélecteurs***/
 	var checks = svg.selectAll('.checks')
 		.data(checkJson)
 		.enter()
@@ -176,40 +243,279 @@ $(document).ready(function(){
 		.attr('y2', function(d){return d.y1;});
 
 	var tips = svg.selectAll('.tips')
-		.data(tips)
+		.data(tipsJson)
 		.enter()
 		.append('path')
 		.attr('class', 'tips')
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('d', function(d){return arcFunction(d);})
-		.style('opacity', 0)
-		.attr('fill', tc);
+		.attr('fill', tc)
+		.style('opacity', 0.8);
 
-	var checkAvg = svg.append('path')
-		.attr('id', 'checkAvg')
-		.attr('d', function(){return arcFunction(checkAvgJson);})
+	var checkAvg = svg.selectAll('.checkAvg')
+		.data(checkAvgJson)
+		.enter()
+		.append('path')
+		.attr('class', 'checkAvg')
+		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
-		.attr('opacity', 0);
+		.style('opacity', 0.1);
 
-	d3.select('#deploy').on('click', function(){
+	var dailyAvg = svg.selectAll('.dailyAvg')
+		.data(dailyAvgJson)
+		.enter()
+		.append('path')
+		.attr('class', 'dailyAvg')
+		.attr('d', function(d){return arcFunction(d);})
+		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
+		.attr('fill', avgc)
+		.style('opacity', 0.5);
+
+	var cat = svg.selectAll('.cat')
+		.data(catJson)
+		.enter()
+		.append('path')
+		.attr('class', 'cat')
+		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
+		.attr('d', function(d){return arcFunction(d);})
+		.style('opacity', 0.5)
+		.attr('fill', cac);
+
+	/*** [END] Création selecteurs***/
+
+	/*** Initialisation des échelles ***/
+	var echelleDistance = echelleGenerator('echelleDistance', rdist);
+	var echelleCat = echelleGenerator('echelleCat', rcat);
+	var indicHoraire = textCircleGenerator('indicHoraire', h);
+	var indicPourcent = textCircleGenerator('indicPourcent', m);
+	console.log(indicHoraire);
+	var indicDistCheck = textEchelleGenerator('indicDistCheck', rdist);
+	console.log(h[h.length - 1]);
+	console.log(indicDistCheck);
+	var indicCatSize = textEchelleGenerator('indicCatSize', rcat);
+
+	/*** [END] Initialisation échelles ***/
+
+	/*** Gestion des survols ***/
+	cat.on('mouseover', function(){
+		d3.select(this)
+			.transition()
+			.duration(100)
+			.style('opacity', 1);
+	}).on('mouseout', function(){
+		d3.select(this)
+			.transition()
+			.duration(300)
+			.style('opacity', 0.5);
+	});
+
+	/*** [END] Gestion des survols ***/
+
+	/*** Gestion des disparitions **/
+	function hideCat(){
+		cat
+			.transition()
+			.duration(500)
+			.delay(0)
+			.attr('d', function(d){
+				d.outerRadius = ro;
+				return arcFunction(d);
+			});
+
+		indicCatSize
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0);
+
+		echelleCat
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('r', 0);
+	}
+
+	function hideCheck(){
 		checks
 			.transition()
 			.duration(500)
 			.delay(200)
+			.attr('x2', function(d){return d.x1;})
+			.attr('y2', function(d){return d.y1;});
+
+		tips
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('d', function(d){
+				d.outerRadius = ro;
+				return arcFunction(d);
+			});
+
+		checkAvg
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('d', function(d){
+				d.outerRadius = ro;
+				return arcFunction(d);
+			});
+
+		echelleDistance
+			.transition()
+			.duration(500)
+			.delay(0)
+			.attr('r', 0);
+
+		indicDistCheck
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0);
+
+		indicHoraire
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0);
+	}
+
+	function hideMoyenne(){
+		indicPourcent
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0);
+
+		dailyAvg
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('d', function(d){
+				d.outerRadius = ro;
+				return arcFunction(d);
+			});
+	}
+
+	/*** [END] Gestion des disparitons ***/
+
+	/*** Gestion des clics ***/
+	d3.select('#deployChecks').on('click', function(){
+
+		/*** Effacer les anciennes données ***/
+		
+		hideCat();
+		hideMoyenne();
+
+		/*** [END] Effacer ***/
+
+		/*** Afficher les nouvelles données ***/
+		echelleDistance
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('r', function(d, i){return (i+2)*ro;});
+
+		indicDistCheck
+			.transition()
+			.duration(500)
+			.delay(200)
+			.style('opacity', 0.8);
+
+		indicHoraire
+			.transition()
+			.duration(500)
+			.delay(250)
+			.style('opacity', 1);
+
+		checks
+			.transition()
+			.duration(500)
+			.delay(500)
 			.attr('x2', function(d){return d.x2;})
 			.attr('y2', function(d){return d.y2;});
 
 		tips
 			.transition()
 			.duration(500)
-			.delay(700)
-			.style('opacity', 0.8);
+			.delay(500)
+			.attr('d', function(d){
+				d.outerRadius = rve;
+				return arcFunction(d);
+			});
 
 		checkAvg
 			.transition()
 			.duration(500)
 			.delay(900)
-			.style('opacity', 0.1);
+			.attr('d', function(d){
+				d.outerRadius = rve;
+				return arcFunction(d);
+			});
+
+		/*** [END] Afficher ***/
 	});
+
+	d3.select('#deployCat').on('click', function(){
+
+		/*** Effacer les anciennes données ***/
+		hideCheck();
+		hideMoyenne();
+
+		/*** [END] Effacer ***/
+
+		/*** Afficher les nouvelles données ***/
+		echelleCat
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('r', function(d, i){return (i+2)*ro;});
+
+		indicCatSize
+			.transition()
+			.duration(500)
+			.delay(500)
+			.style('opacity', 0.8);
+
+		cat
+			.transition()
+			.duration(500)
+			.delay(700)
+			.attr('d', function(d){
+				d.outerRadius = ro + d.count;
+				return arcFunction(d);
+			});
+
+		/*** [END] Afficher ***/
+	});
+
+	d3.select('#deployDaily').on('click', function(){
+		/*** Effacer les anciennes données ***/
+		hideCheck();
+		hideCat();
+
+		/*** [END] Effacer ***/
+
+		/*** Afficher les nouvelles données ***/
+		dailyAvg
+			.transition()
+			.duration(500)
+			.delay(500)
+			.attr('d', function(d){
+				d.outerRadius = rh;
+				return arcFunction(d);
+			});
+
+		indicPourcent
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 1);
+
+		/*** [END] Afficher ***/
+
+	});
+
+	/*** [END] Gestion des clics ***/
 });

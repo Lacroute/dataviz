@@ -1370,24 +1370,22 @@
 	<g id="Calque_23">
 	</g>
 	<g id="Surbrillance_Heure">
-		<g id="Soleil_-_copie">
-			<circle id="Soleil_4_" fill="#F7931E" cx="1111.791" cy="256.068" r="15.016"/>
-			<g id="Cache_fond_9_">
-				
-					<circle fill="none" stroke="#00182B" stroke-width="14" stroke-miterlimit="10" stroke-dasharray="5.272,2.1088,5.272,2.1088,5.272,2.1088" cx="1112.125" cy="256.125" r="17.625"/>
+		<g id="soleilCouchant">
+			<circle fill="#F7931E" cx="1111.791" cy="256.068" r="15.016"/>
+			<g>
+				<circle fill="none" stroke="#00182B" stroke-width="14" stroke-miterlimit="10" stroke-dasharray="5.272,2.1088,5.272,2.1088,5.272,2.1088" cx="1112.125" cy="256.125" r="17.625"/>
 			</g>
 			<ellipse fill="#00182B" cx="1111.875" cy="264.813" rx="20.375" ry="11.688"/>
 		</g>
-		<g id="Soleil">
-			<circle id="Soleil_1_" fill="#F7931E" cx="963.791" cy="760.068" r="15.016"/>
-			<g id="Cache_fond_1_">
-				
-					<circle fill="none" stroke="#00182B" stroke-width="14" stroke-miterlimit="10" stroke-dasharray="5.272,2.1088,5.272,2.1088,5.272,2.1088" cx="964.125" cy="760.125" r="17.625"/>
+		<g id="soleil">
+			<circle fill="#F7931E" cx="963.791" cy="760.068" r="15.016"/>
+			<g>
+				<circle fill="none" stroke="#00182B" stroke-width="14" stroke-miterlimit="10" stroke-dasharray="5.272,2.1088,5.272,2.1088,5.272,2.1088" cx="964.125" cy="760.125" r="17.625"/>
 			</g>
 		</g>
-		<g id="Lune">
-			<ellipse id="Cache_fond_3_" fill="#00182B" cx="532.333" cy="285.602" rx="17.333" ry="16.936"/>
-			<path id="Lune_2_" fill="#E6E6E6" d="M541.804,291.981c-7.952-2.919-12.249-11.397-10.111-19.424
+		<g id="lune">
+			<ellipse fill="#00182B" cx="532.333" cy="285.602" rx="17.333" ry="16.936"/>
+			<path fill="#E6E6E6" d="M541.804,291.981c-7.952-2.919-12.249-11.397-10.111-19.424
 				c-2.882,1.261-5.267,3.646-6.437,6.833c-2.276,6.201,0.905,13.072,7.105,15.349c4.174,1.532,8.649,0.589,11.826-2.081
 				C543.389,292.496,542.592,292.271,541.804,291.981z"/>
 		</g>
