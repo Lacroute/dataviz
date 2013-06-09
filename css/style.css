@@ -91,9 +91,8 @@ padding-left:45px;margin-left: 20px;}
 #visualisation nav {width:100%;}
 #visualisation nav ul {list-style-type: none;margin: 0;padding: 0;}
 
-#visualisation nav ul li {background: transparent;margin: 0;padding: 25px 10px 25px 10px;border-bottom: 2px solid #f2f2f2;cursor: pointer;}
-#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;color: #f2f2f2;margin-left: 55px;-webkit-transition:margin ease .2s;
-display: block;}
+#visualisation nav ul li {background: transparent;margin: 0;border-bottom: 2px solid #f2f2f2;}
+#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;padding: 25px 10px 25px 65px;color: #f2f2f2;-webkit-transition:padding ease .2s;display: block;}
 #visualisation nav ul li a:before {content:'';position: absolute;}
 #visualisation nav ul li:first-child:hover {background: #f2f2f2;border-top: 1px solid #1abc9c;border-bottom: 2px solid #1abc9c;}
 #visualisation nav ul li:hover {background: #f2f2f2;border-bottom: 2px solid #1abc9c;}
