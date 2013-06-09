@@ -11,8 +11,6 @@ $(document).ready(function(){
 		rvi = 269, // rayon vert interne
 		rvii = 275, // rayon vert interne invisible
 		rve = 290, // rayon vert externe
-		roi = 300, // rayon orange interne
-		roe = 320, // rayon orange externe
 		rd = 330, // rayon décoration
 		h = [{h:0, t:0}, {h:3, t:3}, {h:6, t:6}, {h:9, t:9}, {h:12, t:12}, {h:15, t:15}, {h:18, t:18}, {h:21, t:21}], // horaires
 		m = [{h:0, t:'0%'}, {h:6, t:'25%'}, {h:12, t:'50%'}, {h:18, t:'75%'}], // moyenne check
@@ -53,13 +51,12 @@ $(document).ready(function(){
 	/*** [END] Initialisation json ***/
 
 	/*** Initialisation décoration **/
-	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
-
-	svg.append('circle').attr('id', 'horaire').attr('class', 'echelleExterieur').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
-	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25);
-	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style('stroke-width', 15);
-	svg.append('circle').attr('class', 'echelleExterieur').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
-	var echelleDeco = svg.append('circle').attr('class', 'echelleExterieur').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1).style('opacity', 0);
+	var origine = svg.append('circle').attr('id', 'origine').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1),
+		cerlceHoraire = svg.append('circle').attr('id', 'horaire').attr('class', 'echelleExterieur').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1),
+		cerlceVertInterne = svg.append('circle').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25),
+		cerlceVertInterneInvisible = svg.append('circle').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2.5, 2.5')).style('stroke', bgc).style('stroke-width', 15),
+		cerlceVertExterne = svg.append('circle').attr('class', 'echelleExterieur').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1),
+		echelleDeco = svg.append('circle').attr('class', 'echelleExterieur').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1).style('opacity', 0);
 
 	var soleilCouchant = svg.append('g').attr('id', 'soleilCouchant').attr('class', 'deco');
 	soleilCouchant.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[0].x).attr('cy', decoJson[0].y).attr('r', sr);
@@ -305,6 +302,33 @@ $(document).ready(function(){
 
 	/*** [END] Initialisation échelles ***/
 
+	/*** Aparition des décoration ***/
+	origine
+ 		.transition()
+		.duration(1000)
+		.delay(200)
+		.attr('r', ro);
+
+	cerlceVertInterne
+		.transition()
+		.duration(1000)
+		.delay(200)
+		.attr('r', rvi);
+
+	cerlceVertInterneInvisible
+		.transition()
+		.duration(1000)
+		.delay(200)
+		.attr('r', rvii);
+
+	cerlceVertExterne
+		.transition()
+		.duration(1000)
+		.delay(200)
+		.attr('r', rve);
+
+	/*** [END] Aparition des décorations ***/
+
 	/*** Gestion des survols ***/
 	cat.on('mouseover', function(){
 		d3.select(this)
@@ -437,6 +461,32 @@ $(document).ready(function(){
 			});
 	}
 
+	function hideDecoStatique(){
+		origine
+	 		.transition()
+			.duration(1000)
+			.delay(200)
+			.attr('r', 0);
+
+		cerlceVertInterne
+			.transition()
+			.duration(1000)
+			.delay(200)
+			.attr('r', 0);
+
+		cerlceVertInterneInvisible
+			.transition()
+			.duration(1000)
+			.delay(200)
+			.attr('r', 0);
+
+		cerlceVertExterne
+			.transition()
+			.duration(1000)
+			.delay(200)
+			.attr('r', 0);
+
+	}
 	/*** [END] Gestion des disparitons ***/
 
 	/*** Gestion des clics ***/
@@ -598,6 +648,17 @@ $(document).ready(function(){
 
 		/*** [END] Afficher ***/
 
+	});
+
+	d3.select('#deconnexion').on('click', function(){
+		/*** Effacer les données ***/
+			hideCheck();
+			hideCat();
+			hideMoyenneChecks();
+			hideMoyenneTips();
+			hideDecoStatique();
+
+		/*** [END] Effacer ***/
 	});
 
 	/*** [END] Gestion des clics ***/
