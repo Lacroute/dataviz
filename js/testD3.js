@@ -20,7 +20,8 @@ $(document).ready(function(){
 		tipsJson = [{h:0}, {h:5}],
 		checkAvgJson = [{h:0},{h:4}],
 		catJson = [{name: 'biscuit', count: 20}, {name: 'tartine', count: 40}, {name: 'chou', count: 15}, {name: 'plume', count: 26}, {name: 'biscuit', count: 18}, {name: 'chiot', count: 55}, {name: 'mollusque', count: 6}, {name: 'dirigeable', count: 22}, {name: 'semelle', count: 13}],
-		dailyAvgJson = [{h:0}, {h:12}],
+		dailyAvgChecksJson = [{h:0}, {h:12}],
+		dailyAvgTipsJson = [{h:0}, {h:9}],
 		decoJson = [{h:5}, {h:13}, {h:21}],
 		bgc = '#00182b', // background color
 		cc = '#f2f2f2', // check color
@@ -43,37 +44,37 @@ $(document).ready(function(){
 	m = textCoords(m);
 	checkJson = checkCoords(checkJson);
 	checkAvgJson = checksAvgCoords(checkCoords(checkAvgJson));
-	dailyAvgJson = checksAvgCoords(checkCoords(dailyAvgJson));
+	dailyAvgChecksJson = checksAvgCoords(checkCoords(dailyAvgChecksJson));
+	dailyAvgTipsJson = checksAvgCoords(checkCoords(dailyAvgTipsJson));
 	tipsJson = tipsCoords(tipsJson);
 	catJson = catCoords(catJson);
 	decoJson = decoCoords(decoJson);
-
-	console.log(tipsJson[0]);
-	console.log(h[0]);
 
 	/*** [END] Initialisation json ***/
 
 	/*** Initialisation décoration **/
 	svg.append('circle').attr('id', 'origine').attr('r', ro).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
 
-	svg.append('circle').attr('id', 'horaire').attr('class', 'echelleDeco').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
+	svg.append('circle').attr('id', 'horaire').attr('class', 'echelleExterieur').attr('r', rh).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', '#fff').style('stroke-width', 1);
 	svg.append('circle').attr('r', rvi).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25);
 	svg.append('circle').attr('r', rvii).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2, 2')).style('stroke', bgc).style('stroke-width', 15);
-	svg.append('circle').attr('class', 'echelleDeco').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
-	svg.append('circle').attr('class', 'echelleDeco').attr('r', rd).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1);
+	svg.append('circle').attr('class', 'echelleExterieur').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1);
+	var echelleDeco = svg.append('circle').attr('class', 'echelleExterieur').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1).style('opacity', 0);
 
-	soleilCouchant = svg.append('g').attr('id', 'soleilCouchant');
+	var soleilCouchant = svg.append('g').attr('id', 'soleilCouchant').attr('class', 'deco');
 	soleilCouchant.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[0].x).attr('cy', decoJson[0].y).attr('r', sr);
 	soleilCouchant.append('circle').attr('fill', 'none').attr('stroke', bgc).attr('stroke-width', 14).attr('stroke-dasharray', '5.272, 2.1088').attr('cx', decoJson[0].x + 0.334).attr('cy', decoJson[0].y - 0.057).attr('r', sr + 2.609);
 	soleilCouchant.append('ellipse').attr('fill', bgc).attr('cx', decoJson[0].x + 0.104).attr('cy', decoJson[0].y + 8.745).attr('rx', 20.375).attr('ry', 11.688);
 
-	soleil = svg.append('g').attr('id', 'soleil');
+	var soleil = svg.append('g').attr('id', 'soleil').attr('class', 'deco');
 	soleil.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[1].x).attr('cy', decoJson[1].y).attr('r', sr);
 	soleil.append('circle').attr('fill', 'none').attr('stroke', bgc).attr('stroke-width', 14).attr('stroke-dasharray', '5.272, 2.1088').attr('cx', decoJson[1].x + 0.334).attr('cy', decoJson[1].y - 0.057).attr('r', sr + 2.609);
 
-	lune = svg.append('g').attr('id', 'lune');
+	var lune = svg.append('g').attr('id', 'lune').attr('class', 'deco');
 	lune.append('circle').attr('fill', '#E6E6E6').attr('cx', decoJson[2].x).attr('cy', decoJson[2].y).attr('r', sr-1.849);
 	lune.append('circle').attr('fill', bgc).attr('cx', decoJson[2].x+7).attr('cy', decoJson[2].y-4).attr('r', sr-1.849);
+
+	var deco = svg.selectAll('.deco').attr('opacity', 0);
 
 	/*** [END] Initialisation décoration **/
 
@@ -192,7 +193,7 @@ $(document).ready(function(){
 			.attr('fill', bgc);
 		group.append('text')
 			.attr('x', function(d){return d.x;})
-			.attr('y', function(d){return d.y+4;})
+			.attr('y', function(d){return d.y+4;}) // pour centrer verticalement
 			.attr('fill', cc)
 			.attr('text-anchor', 'middle')
 			.attr('font-size', 12)
@@ -262,11 +263,21 @@ $(document).ready(function(){
 		.attr('fill', avgc)
 		.style('opacity', 0.1);
 
-	var dailyAvg = svg.selectAll('.dailyAvg')
-		.data(dailyAvgJson)
+	var dailyAvgChecks = svg.selectAll('.dailyAvgChecks')
+		.data(dailyAvgChecksJson)
 		.enter()
 		.append('path')
-		.attr('class', 'dailyAvg')
+		.attr('class', 'dailyAvgChecks')
+		.attr('d', function(d){return arcFunction(d);})
+		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
+		.attr('fill', avgc)
+		.style('opacity', 0.5);
+
+	var dailyAvgTips = svg.selectAll('.dailyAvgTips')
+		.data(dailyAvgTipsJson)
+		.enter()
+		.append('path')
+		.attr('class', 'dailyAvgTips')
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
@@ -289,10 +300,7 @@ $(document).ready(function(){
 	var echelleCat = echelleGenerator('echelleCat', rcat);
 	var indicHoraire = textCircleGenerator('indicHoraire', h);
 	var indicPourcent = textCircleGenerator('indicPourcent', m);
-	console.log(indicHoraire);
 	var indicDistCheck = textEchelleGenerator('indicDistCheck', rdist);
-	console.log(h[h.length - 1]);
-	console.log(indicDistCheck);
 	var indicCatSize = textEchelleGenerator('indicCatSize', rcat);
 
 	/*** [END] Initialisation échelles ***/
@@ -379,16 +387,47 @@ $(document).ready(function(){
 			.duration(500)
 			.delay(0)
 			.style('opacity', 0);
+
+		deco
+			.transition()
+			.duration(400)
+			.delay(100)
+			.attr('opacity', 0);
+
+		echelleDeco
+			.transition()
+			.duration(500)
+			.delay(0)
+			.attr('r', rve)
+			.transition()
+			.style('opacity', 0);
 	}
 
-	function hideMoyenne(){
+	function hideMoyenneChecks(){
 		indicPourcent
 			.transition()
 			.duration(500)
 			.delay(0)
 			.style('opacity', 0);
 
-		dailyAvg
+		dailyAvgChecks
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('d', function(d){
+				d.outerRadius = ro;
+				return arcFunction(d);
+			});
+	}
+
+	function hideMoyenneTips(){
+		indicPourcent
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0);
+
+		dailyAvgTips
 			.transition()
 			.duration(500)
 			.delay(200)
@@ -404,13 +443,27 @@ $(document).ready(function(){
 	d3.select('#deployChecks').on('click', function(){
 
 		/*** Effacer les anciennes données ***/
-		
 		hideCat();
-		hideMoyenne();
+		hideMoyenneChecks();
+		hideMoyenneTips();
 
 		/*** [END] Effacer ***/
 
 		/*** Afficher les nouvelles données ***/
+		deco
+			.transition()
+			.duration(500)
+			.delay(500)
+			.attr('opacity', 1);
+
+		echelleDeco
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0.2)
+			.transition()
+			.attr('r', rd);
+
 		echelleDistance
 			.transition()
 			.duration(500)
@@ -461,7 +514,8 @@ $(document).ready(function(){
 
 		/*** Effacer les anciennes données ***/
 		hideCheck();
-		hideMoyenne();
+		hideMoyenneChecks();
+		hideMoyenneTips();
 
 		/*** [END] Effacer ***/
 
@@ -490,15 +544,44 @@ $(document).ready(function(){
 		/*** [END] Afficher ***/
 	});
 
-	d3.select('#deployDaily').on('click', function(){
+	d3.select('#deployDailyChecks').on('click', function(){
 		/*** Effacer les anciennes données ***/
 		hideCheck();
 		hideCat();
+		hideMoyenneTips();
 
 		/*** [END] Effacer ***/
 
 		/*** Afficher les nouvelles données ***/
-		dailyAvg
+		dailyAvgChecks
+			.transition()
+			.duration(500)
+			.delay(500)
+			.attr('d', function(d){
+				d.outerRadius = rh;
+				return arcFunction(d);
+			});
+
+		indicPourcent
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 1);
+
+		/*** [END] Afficher ***/
+
+	});
+
+	d3.select('#deployDailyTips').on('click', function(){
+		/*** Effacer les anciennes données ***/
+		hideCheck();
+		hideCat();
+		hideMoyenneChecks();
+
+		/*** [END] Effacer ***/
+
+		/*** Afficher les nouvelles données ***/
+		dailyAvgTips
 			.transition()
 			.duration(500)
 			.delay(500)

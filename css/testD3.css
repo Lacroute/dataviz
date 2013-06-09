@@ -18,10 +18,15 @@ svg {
 	height: 700px;
 	margin: auto;
 }
-.echelleDistance, .echelleCat, .echelleDeco{
+.echelleDistance, .echelleCat, .echelleExterieur{
 	opacity: 0.2;
 }
 #menu{
 	float: left;
 	list-style: none;
+}
+#description{
+	position: absolute;
+	right: 0;
+	top: 0;
 }
