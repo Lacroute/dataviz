@@ -38,6 +38,16 @@ body {background: #061828;margin:0;padding: 0;overflow: hidden;font-family: 'DIN
 text-decoration: none;text-align: center;padding-top: 15px;-webkit-transition:all ease .2s;border-radius: 2px;}
 #connexion a:hover {color:#091e33;background: #f2f2f2; }
 
+/***********************************************NOTE*****************************************************************/
+#note {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s .5s;
+opacity: 0;}
+#note.on {height: 100%;opacity: 1;-webkit-transition:all ease .8s;}
+#note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png) 0 -360;-webkit-transition:all ease .3s;}
+#note.on a:hover { -webkit-transform:rotate(90deg);}
+#note p {font-family: 'DINProBold';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
+-webkit-transition:all ease .5s;}
+#note.on p {opacity: 1;margin-top:20px;}
+
 /***********************************************DATAVIZ*****************************************************************/
 
 #content {background: #00182b; width:100%;height:100%;-webkit-transition:all ease .5s;padding:0px 5px 0px 25px;z-index:994;position: absolute;
@@ -55,11 +65,11 @@ margin-top: 20px;}
 
 #menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;
 position: absolute;top:0;left:0;padding: 0px;margin: 0;}
-#info{width: 100%;padding: 0px 20px 20px 20px;}
-#info > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat 0 -28;padding: 0px 0px 0px 50px;}
+#info{width: 100%;padding: 0px 20px 20px 0px;}
+#info > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat 0 -28;padding: 0px 0px 0px 50px;margin-left: 20px}
 #info div:nth-child(2) {width: 110px;height:110px;background: url(img/photo.png);border-radius: 100%;overflow: hidden;border: 3px solid #e74c3c;
-display: inline-block;margin-top: 20px;}
-#info div:nth-child(3) {display: inline-block;vertical-align: top; margin-top: 60px;padding-left: 30px;}
+margin: 50px auto 0px;}
+#info div:nth-child(3) {margin: 20px auto ;text-align: center;}
 #info div:nth-child(3) > p {color: #f2f2f2;text-transform: uppercase;margin: 2px;}
 #info div:nth-child(3) > p:nth-child(1) {font-family: 'DINProRegular';}
 #info div:nth-child(3) > p:nth-child(2) {font-family: 'DINProMedium';}
@@ -73,7 +83,8 @@ padding-left:45px;margin-left: 20px;}
 
 
 #visualisation nav ul li {background: transparent;margin: 0;padding: 25px 10px 25px 10px;border-bottom: 2px solid #f2f2f2;cursor: pointer;}
-#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;color: #f2f2f2;margin-left: 55px;-webkit-transition:margin ease .2s}
+#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;color: #f2f2f2;margin-left: 55px;-webkit-transition:margin ease .2s;
+display: block;}
 #visualisation nav ul li a:before {content:'';position: absolute;}
 #visualisation nav ul li:first-child:hover {background: #f2f2f2;border-top: 1px solid #1abc9c;border-bottom: 2px solid #1abc9c;}
 #visualisation nav ul li:hover {background: #f2f2f2;border-bottom: 2px solid #1abc9c;}
