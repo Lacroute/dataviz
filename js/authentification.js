@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var foursquareConnector = {
 		clientId: '0PCSDR4BPTWOSAHNTQQX2Z4C2JCBLZGA3BO5GC5N0E2510BV',
 		clientSecret: 'IOWDTFOLWYJZ0GAULQNDYGNVPFIUMN11KV4CZGRKE1GYVI1U',
-		redirectUrl: 'http://localhost:8888/dataviz/me.html',
+		redirectUrl: 'http://omnisquare.alwaysdata.net/me.html',
 		authenticate: function(){
 			var url = "https://foursquare.com/oauth2/authenticate";
 			url += "?client_id="+this.clientId;
