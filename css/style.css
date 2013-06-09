@@ -65,6 +65,14 @@ margin-top: 35px;}
 #content header div {width: 293px; height: 70px;background: url(img/logo.png);display: inline-block;vertical-align: top; margin-left: 25px;border-radius: 2px;
 margin-top: 20px;}
 
+#pool {margin-top: 50px;display: inline-block;width: 55%}
+
+#description {display: inline-block;vertical-align: top}
+#description div:nth-child(1) {width: 1px;height: 200px;background: #1abc9c;position:absolute;-webkit-transform:rotate(-45deg);margin-top: 200px;}
+#description div:nth-child(2) {width: 1px;height: 50px;background: #1abc9c;position:absolute;-webkit-transform:rotate(90deg);margin-top: 500px;margin-left: 100px;}
+
+/***********************************************MENU*****************************************************************/
+
 #menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;
 position: absolute;top:0;left:0;padding: 0px;margin: 0;}
 #info{width: 100%;padding: 0px 20px 20px 0px;}
@@ -83,9 +91,8 @@ padding-left:45px;margin-left: 20px;}
 #visualisation nav {width:100%;}
 #visualisation nav ul {list-style-type: none;margin: 0;padding: 0;}
 
-
-#visualisation nav ul li {background: transparent;margin: 0;border-bottom: 2px solid #f2f2f2;}
-#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;padding: 25px 10px 25px 65px;color: #f2f2f2;-webkit-transition:padding ease .2s;
+#visualisation nav ul li {background: transparent;margin: 0;padding: 25px 10px 25px 10px;border-bottom: 2px solid #f2f2f2;cursor: pointer;}
+#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;color: #f2f2f2;margin-left: 55px;-webkit-transition:margin ease .2s;
 display: block;}
 #visualisation nav ul li a:before {content:'';position: absolute;}
 #visualisation nav ul li:first-child:hover {background: #f2f2f2;border-top: 1px solid #1abc9c;border-bottom: 2px solid #1abc9c;}
@@ -116,6 +123,6 @@ display: block;}
 margin: auto;}
 #deconnexion:hover {text-decoration: underline;}
 
-svg{width: 70%;height: 700px;margin: auto;}
+svg{width: 100%;height: 700px;margin: auto;}
 
 .echelleDistance, .echelleCat, .echelleExterieur{opacity: 0.2;}
