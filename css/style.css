@@ -65,6 +65,14 @@ margin-top: 35px;}
 #content header div {width: 293px; height: 70px;background: url(img/logo.png);display: inline-block;vertical-align: top; margin-left: 25px;border-radius: 2px;
 margin-top: 20px;}
 
+#pool {margin-top: 50px;display: inline-block;width: 55%}
+
+#description {display: inline-block;vertical-align: top}
+#description div:nth-child(1) {width: 1px;height: 200px;background: #1abc9c;position:absolute;-webkit-transform:rotate(-45deg);margin-top: 200px;}
+#description div:nth-child(2) {width: 1px;height: 50px;background: #1abc9c;position:absolute;-webkit-transform:rotate(90deg);margin-top: 500px;margin-left: 100px;}
+
+/***********************************************MENU*****************************************************************/
+
 #menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;
 position: absolute;top:0;left:0;padding: 0px;margin: 0;}
 #info{width: 100%;padding: 0px 20px 20px 0px;}
@@ -116,6 +124,6 @@ display: block;}
 margin: auto;}
 #deconnexion:hover {text-decoration: underline;}
 
-svg{width: 70%;height: 700px;margin: auto;}
+svg{width: 100%;height: 700px;margin: auto;}
 
 .echelleDistance, .echelleCat, .echelleExterieur{opacity: 0.2;}
