@@ -31,17 +31,19 @@ body {background: #061828;margin:0;padding: 0;overflow: hidden;font-family: 'DIN
 
 /***********************************************CONNEXION*****************************************************************/
 
+#background {width: 100%;height: 100%;background: url(img/background.png) center no-repeat;padding-top: 250px;margin: 0;background-size: cover;}
+
+#connexion div {width: 293px; height: 70px;background: url(img/logo.png);margin: auto;}
 #connexion p {color: #f2f2f2;}
-#connexion p:nth-child(1) {font-size: 2em;text-transform: uppercase;width: 400px;text-align: center;margin: 200px auto 0px;}
-#connexion p:nth-child(2) {font-size: 1em;width: 800px;font-style: italic;text-align:center;margin: 30px auto 50px;}
-#connexion a {width:300px; height:30px; display: block;margin: auto;color: white;font-family: arial;text-transform: uppercase; border: 2px solid #f2f2f2;
-text-decoration: none;text-align: center;padding-top: 15px;-webkit-transition:all ease .2s;border-radius: 2px;}
-#connexion a:hover {color:#091e33;background: #f2f2f2; }
+#connexion p:nth-child(2) {font-size: 1em;width: 800px;text-align:center;margin: 30px auto 50px;}
+#connexion p:nth-child(4) {font-size: .8em;width: 100%;text-align:center;margin:auto;bottom:15px;position: absolute;}
+#connexion a {width: 200px; height: 161px;background: url(img/sprite_bouton_connexion.png) 0 0;display: block;margin: auto;}
+#connexion a:hover {background: url(img/sprite_bouton_connexion.png) 227 0;}
 
 /***********************************************NOTE*****************************************************************/
 #note {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s .5s;
 opacity: 0;}
-#note.on {height: 100%;opacity: 1;-webkit-transition:all ease .8s;}
+#note.on {height: 100%;opacity: 1;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png) 0 -360;-webkit-transition:all ease .3s;}
 #note.on a:hover { -webkit-transform:rotate(90deg);}
 #note p {font-family: 'DINProBold';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
@@ -104,10 +106,13 @@ display: block;}
 
 #visualisation nav ul li a span {font-family: 'DINProBold';}
 
-#visualisation > a {text-decoration: none;text-transform: uppercase;color: #f2f2f2;margin-top: 100px;text-align: center;display: block;-webkit-transition:all ease .2s;}
-#visualisation > a:before {width:18px;height:24px;content:'';position: absolute;background: url(img/sprite.png) no-repeat 0 0;margin: -40px 0px 0px 80px;-webkit-transition:all ease .2s;}
+#visualisation > a {text-decoration: none;text-transform: uppercase;color: #f2f2f2;margin-top: 80px;text-align: center;display: block;-webkit-transition:all ease .2s;}
+#visualisation > a:before {width:18px;height:24px;content:'';position: absolute;background: url(img/sprite.png) no-repeat 0 0;margin: 0px 0px 0px -30px;
+-webkit-transition:all ease .2s;}
 #visualisation > a:hover {color: #3499d1;}
 #visualisation > a:hover:before {width:18px;height:24px;content:'';position: absolute;background: url(img/sprite.png) no-repeat -20 0;}
 
-
+#deconnexion {text-decoration: none;width:100%;text-align:center;color:#f2f2f2;font-size: .7em;position: absolute;bottom:30px;text-transform: uppercase;
+margin: auto;}
+#deconnexion:hover {text-decoration: underline;}
 
