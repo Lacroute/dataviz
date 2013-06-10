@@ -1,8 +1,11 @@
 var user = {};
+var json = {};
 
 $(document).ready(function(){
 
 	user.init = function(data){
+
+		console.log(data.response);
 		
 		user.id = data.response.user.id;
 		user.lastName = data.response.user.lastName;
@@ -29,6 +32,72 @@ $(document).ready(function(){
 			}
 		});
 		console.log(user);
+		
+	}
+
+	//Scale D3 pour calculer la distance en px correspondant à la distance du check sur l'échelle exp
+	var scaleDistance = d3.scale.linear()
+	        .domain([0, 2, 5, 20, 300])
+                    .range([0, 50, 100, 150, 200]);
+
+            var scaleHour = d3.scale.linear()
+	        .domain([0, 86400])
+                    .range([0, 1]);
+
+             console.log(scaleDistance(20));
+
+             console.log(scaleHour(80400));
+
+             user.getCheckins = function(){
+		var lat,
+		      lng;
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"address":user.city}, function(data,status){
+			if(status=='OK'){
+				console.log("Ville : "+user.city)
+				lat=data[0].geometry.location.lat();
+				lng=data[0].geometry.location.lng();
+			}else{
+				//Si aucun resultat sur l'api de google maps
+				console.log("Aucun résultat, calcul du barycentre :");
+				var totalLat = 0,
+					totalLng = 0;
+					
+				$.each(user.checkins, function (index, value) {
+					totalLat = totalLat + value.venue.location.lat;
+					totalLng = totalLng + value.venue.location.lng;
+				})
+				//calcul de la moyenne
+				lat = totalLat/(user.checkins.length);
+				lng = totalLng/(user.checkins.length);
+			}
+			console.log("Lattitude: "+lat);
+			console.log("Longitude: "+lng);
+			
+			//On set le point de depart pour calculer les distances
+			var point1 = new google.maps.LatLng(lat, lng);
+			//Variable de max et point2
+			var distance = 0;
+			//Parcours des checkins
+			$.each(user.checkins, function (index, value) {
+				//Set du point 2 (checkin parcouru) pour le calcul
+				var point2 = new google.maps.LatLng((value.venue.location.lat),(value.venue.location.lng));
+				//Calcul de la distance et test si c'est la valeur maximale
+				distance = google.maps.geometry.spherical.computeDistanceBetween(point1, point2);
+				if(distance>maxDistance){
+					maxDistance = distance;
+				}
+			})
+			console.log("Check le plus loin : "+(maxDistance/1000)+" km");
+			//Test final selon la valeur max pour definir la classification
+			if(maxDistance<50000){
+				console.log("Resultat : Sédentaire !");
+			}else if(maxDistance<400000){
+				console.log("Resultat : Nomade !");
+			}else{
+				console.log("Resultat : Voyageur !");	
+			}
+		});
 		
 	}
 	
