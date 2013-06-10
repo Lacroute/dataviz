@@ -12,7 +12,7 @@ $(document).ready(function(){
 		rvii = rh+25, // rayon vert interne invisible
 		rve = rh+40, // rayon vert externe
 		rd = ro*6, // rayon décoration
-		h = [{h:0, t:0}, {h:3, t:3}, {h:6, t:6}, {h:9, t:9}, {h:12, t:12}, {h:15, t:15}, {h:18, t:18}, {h:21, t:21}], // horaires
+		h = [{h:0, t:'0h'}, {h:3, t:'3h'}, {h:6, t:'6h'}, {h:9, t:'9h'}, {h:12, t:'12h'}, {h:15, t:'15h'}, {h:18, t:'18h'}, {h:21, t:'21h'}], // horaires
 		m = [{h:0, t:'0%'}, {h:6, t:'25%'}, {h:12, t:'50%'}, {h:18, t:'75%'}], // moyenne check
 		checkJson = [{h:0, d:150},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
 		tipsJson = [{h:0}, {h:5}],
@@ -98,11 +98,6 @@ $(document).ready(function(){
 			value.y1 = getY(value.alpha, o.y, -ro);
 			value.x2 = getX(value.alpha, o.x, ro+value.d);
 			value.y2 = getY(value.alpha, o.y, -Math.abs(ro+value.d));
-			// value.x1 = o.x+ro*Math.cos(value.alpha);
-			// value.y1 = o.y-ro*Math.sin(value.alpha);
-			// value.x2 = o.x+(ro+value.d)*Math.cos(value.alpha);
-			// value.y2 = o.y-(ro+value.d)*Math.sin(value.alpha);
-			// alpha, offsetX, radius
 		});
 		return rawChecks;
 	}
