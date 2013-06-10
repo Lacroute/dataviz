@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    
+
     $('#content header').on('click', function(event){
             event.preventDefault();
             $('#content').toggleClass('on');
@@ -28,6 +30,17 @@ $(document).ready(function(){
             $('#svgContent').toggleClass('on');
         }
     });
+
+    //resize des blocs en hauteur dans la div description
+    resizeDescriptionBlocks();
+    $(window).resize(function(){
+        resizeDescriptionBlocks();
+    });         
+
+    function resizeDescriptionBlocks(){
+        var height = $("#content").height();
+        $(".description").height((height/2)-$("header").height());
+    }
 
 	
 });
