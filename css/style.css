@@ -27,7 +27,7 @@
          url('../font/dinpro-bold.svg#DINProBold') format('svg');
 }
 
-body {background: #061828;margin:0;padding: 0;font-family: 'DINProRegular', arial, sans-serif;}
+body {background: #061828;margin:0;padding: 0;font-family: 'DINProRegular', arial, sans-serif;overflow: hidden;}
 
 /***********************************************CONNEXION*****************************************************************/
 
@@ -73,7 +73,7 @@ margin-top: 35px;}
 #content header div {width: 293px; height: 70px;background: url(img/logo.png);display: inline-block;vertical-align: top; margin-left: 25px;border-radius: 2px;
 margin-top: 20px;}
 
-#pool {display: inline-block;width: 55%}
+#pool {display: inline-block;width: 100%}
 
 #description {display: inline-block;vertical-align: top}
 #description div:nth-child(1) {width: 1px;height: 200px;background: #1abc9c;position:absolute;-webkit-transform:rotate(-45deg);margin-top: 200px;}
@@ -81,8 +81,7 @@ margin-top: 20px;}
 
 /***********************************************MENU*****************************************************************/
 
-#menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;
-position: absolute;top:0;left:0;padding: 0px;margin: 0;}
+#menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;padding: 0px;margin: 0;overflow-y:auto; }
 #info{width: 100%;padding: 0px 20px 20px 0px;}
 #info > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;background-position:0px -28px ;padding: 0px 0px 0px 50px;margin-left: 20px}
 #info div:nth-child(2) {width: 110px;height:110px;background: url(img/photo.png);border-radius: 100%;overflow: hidden;border: 3px solid #e74c3c;
