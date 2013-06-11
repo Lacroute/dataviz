@@ -6,8 +6,7 @@ json.maxChecks = [];
 json.categories = [];
 json.dailyAvgChecks = [];
 json.tipsAvg = [];
-
-$(document).ready(function(){
+json.general = {};
 
 	user.init = function(data){
 
@@ -59,7 +58,7 @@ $(document).ready(function(){
 
 	//Scale D3 pour calculer la distance en px correspondant à la distance du check sur l'échelle exp
 	var scaleDistance = d3.scale.linear()
-	        .domain([0, 2, 5, 20, 300])
+	        .domain([0, 2000, 5000, 20000, 300000])
                     .range([0, 50, 100, 150, 200]);
 
             var scaleHour = d3.scale.linear()
@@ -113,10 +112,10 @@ $(document).ready(function(){
 				hour = value.createdAt+7200;
 				json.checkins[index] = {} ;
 				json.checkins[index].h = scaleHour(hour%86400);
-				if(distance>300){
-					distance=300;
+				if(distance>300000){
+					distance=300000;
 				}
-				json.checkins[index].d = scaleDistance(distance/1000) ;
+				json.checkins[index].d = scaleDistance(distance) ;
 			})
 		});
 		
@@ -238,6 +237,10 @@ $(document).ready(function(){
 		json.tipsAvg = [{h:0}, {h:scaleTips(tips)}];
 	}
 
+	user.getGeneral = function(){
+		json.general={nom: user.firstName+" "+user.lastName, photo: user.photo};
+	}
+
 	user.getJson = function(){
 		 user.getCheckins();
 		 user.getTips();
@@ -245,7 +248,7 @@ $(document).ready(function(){
 		 user.getCategories();
 		 user.getDailyAvgChecks();
 		 user.getTipsAvg();
-		 console.log(json);
+		 user.getGeneral();
 		 return(json);
 	}
 
