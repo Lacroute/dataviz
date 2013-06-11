@@ -48,14 +48,44 @@ body {background: #061828;margin:0;padding: 0;font-family: 'DINProRegular', aria
 
 /***********************************************NOTE*****************************************************************/
 #note {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s .5s;
-opacity: 0;}
+overflow: hidden;}
 #note.on {height: 100%;opacity: 1;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
     background-position:0px -360px;-webkit-transition:all ease .3s;}
 #note.on a:hover { -webkit-transform:rotate(90deg);}
-#note p {font-family: 'DINProBold';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
+#note p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
 -webkit-transition:all ease .5s;}
-#note.on p {opacity: 1;margin-top:20px;}
+#note.on p {opacity: 1;margin-top:10px;}
+#note.on div {width: 100%;position: relative;}
+#note.on div #titreNote {width:50%;display: inline-block;background: #f2f2f2;text-align: center}
+#note div {display: none;}
+#note.on div {display: block;}
+#note.on div #titreNote p:nth-child(1) {font-size: 5em;color:  #061828;text-align: left;margin-left: 20px;margin-bottom: 8px;
+display: inline-block;text-align: center;}
+#note.on div #titreNote p:nth-child(1) span {font-family: 'DINProBold'}
+#note.on div #titreNote p:nth-child(2) {display: inline-block;vertical-align: top;color: #e74c3c;font-family: 'DINProBold';font-size: 15em;
+text-align: right;margin:-40px 0px -30px 20px;}
+
+#note div {display: none}
+#note.on div #descriptionNote {width: 45%;display: inline-block;vertical-align: text-bottom;padding-left: 20px}
+#note.on div #descriptionNote p {text-transform: none;font-size: 1em;text-align: justify;}
+
+#note.on div #totalNote {width: 50%;height:316px;background-color: #f2f2f2;background-image: url(img/tramage_note100.png);float: right;}
+#note.on div #totalNote p {font-size: 19em;color:#061828;text-align: center;font-family: 'DINProMedium';margin-top: -50px;}
+
+#legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;
+}
+#legende.on {height: 100%;opacity: 1;}
+#legende.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
+    background-position:0px -360px;-webkit-transition:all ease .3s;}
+#legende.on a:hover { -webkit-transform:rotate(90deg);}
+#legende p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -70px;
+-webkit-transition:all ease .5s;}
+#legende.on p {opacity: 1;margin:0px 0px 20px 0px;}
+#legende div {width: 80%;height: 0%;margin:10px auto 0px;-webkit-transition:all .8s ease 1;}
+#legende.on div {height: 80%;overflow: hidden;}
+#legende img {border: 1px solid #f2f2f2;width: 99%;display: none;}
+#legende.on img {display: block; }
 
 /***********************************************DATAVIZ*****************************************************************/
 
@@ -75,9 +105,37 @@ margin-top: 20px;}
 
 #pool {display: inline-block;width: 100%;height: auto;}
 
-#description {display: inline-block;vertical-align: top}
-#description div:nth-child(1) {width: 1px;height: 200px;background: #1abc9c;position:absolute;-webkit-transform:rotate(-45deg);margin-top: 200px;}
-#description div:nth-child(2) {width: 1px;height: 50px;background: #1abc9c;position:absolute;-webkit-transform:rotate(90deg);margin-top: 500px;margin-left: 100px;}
+
+#description{position: absolute;right: 40;top: 0;width: 45%;height: 100%;padding-right: 20px;}
+
+#desc-bloc1{width: 100%;display: block;height: auto;}
+#desc-bloc1 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
+background-position:2px -67px ;padding: 4px 0px 0px 65px;}
+#desc-bloc1 div {width: 173px;height: 173px;display: inline-block;vertical-align: top;}
+#grade {background: url(img/badge_president.png)}
+#check {background: url(img/badge_checkjour.png)}
+#check p {color:#1abc9c;font-size: 5em;font-family: 'DINProBold';margin-top:43px;text-align: center;}
+#amis {background: url(img/badge_sociable.png)}
+#amis p {color:#1abc9c;font-size: 3em;font-family: 'DINProBold';margin-top:43px;text-align: center;}
+#follow{background: url(img/badge_mouton.png)}
+#desc-bloc1 a {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;border: 1px solid #f2f2f2;
+padding: 10px;text-decoration: none;margin-top: 65px;display: block;width:140px;}
+#desc-bloc1 a:hover {color:#00182b;background: #f2f2f2;}
+
+#desc-bloc2{width: 100%;display: block;margin-top: 50px;height: auto;}
+#desc-bloc2 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
+background-position:20px -112px ;padding: 7px 0px 2px 69px;}
+#desc-bloc2 > p:nth-child(2) {color: #f2f2f2;font-size: 1.2em;margin-left: 20px;}
+#desc-bloc2 > p:nth-child(2) span {color: #1abc9c;font-family: 'DINProBold';}
+#desc-bloc2 > p:nth-child(2) span:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
+#desc-bloc2 > p:nth-child(3) {color: #f2f2f2;margin-left: 20px;text-align: justify;font-family: 'DINProRegular'}
+
+#desc-bloc3{ width: 100%;display: block;margin-top: 50px;height: auto;}
+#desc-bloc3 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
+background-position:-40px -359px ;padding: 7px 70px 3px 39px;text-transform: uppercase;}
+#desc-bloc3 div {background:url(img/background_top9_03.png);width: 501px;height: 249px;}
+#desc-bloc3 div ul {margin: 10px 0px 0px 85px;}
+#desc-bloc3 div ul li {list-style-type: none;color: #e74c3c;display: inline-block;margin-right: 3px;font-size: 2em;margin-top: 34px;}
 
 /***********************************************MENU*****************************************************************/
 
@@ -140,27 +198,6 @@ svg{width: 100%;height: 100%;margin: auto;}
     position: relative;
 }
 
-#description{
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 45%;
-    height: 100%;
-}
-
-#desc-bloc1{
-    width: 100%;
-    height: 200px;
-    display: block;
-    background: red;
-}
-
-#desc-bloc2{
-    width: 100%;
-    height: 200px;
-    display: block;
-    background: green;
-}
 
 
 

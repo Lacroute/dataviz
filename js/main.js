@@ -11,11 +11,23 @@ $(document).ready(function(){
     $('#openNote').on('click', function(event){
     	event.preventDefault();
     	$('#note').toggleClass('on');
+
+    });
+
+     $('#openLegende').on('click', function(event){
+        event.preventDefault();
+        $('#legende').toggleClass('on');
+    });
+
+    $('#closeLegende').on('click', function(event){
+        event.preventDefault();
+        $('#legende').toggleClass('on');
     });
 
     $('#closeNote').on('click', function(event){
     	event.preventDefault();
     	$('#note').toggleClass('on');
+        $('#content').toggleClass('on');
     });
 
     $('#menu a').on('click', function(event){
