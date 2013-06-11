@@ -22,10 +22,10 @@ $(document).ready(function(){
 		dailyAvgTipsJson = [{h:0}, {h:9}],
 		decoJson = [{h:5}, {h:13}, {h:21}],
 		bgc = '#00182b', // background color
-		cc = '#f2f2f2', // check color
-		rvc = '#2adb2a', // rond vert color
-		tc = '#0071dc', // tips color
-		avgc = '#ff00ff', // avg check color
+		cc = '#fbfbfb', // check color
+		rvc = ' #1abc9c', // rond vert color
+		tc = '#fbfbfb', // tips color
+		avgc = '#e74c3c', // avg check color
 		cac = '#e74c3c',  // category color
 		sr =  15.016, // soleil r
 		// scx =  60, // soleil cx
