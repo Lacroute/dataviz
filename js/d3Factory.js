@@ -1,4 +1,6 @@
-$(document).ready(function(){
+function magic(){
+
+	console.log( user.getJson());
 
 	/*** Initialisation des variables ***/
 	var svg = d3.select('#pool').append('svg:svg'),
@@ -657,4 +659,4 @@ $(document).ready(function(){
 	});
 
 	/*** [END] Gestion des clics ***/
-});
+}

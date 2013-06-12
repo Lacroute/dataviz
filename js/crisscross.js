@@ -30,7 +30,8 @@ json.general = {};
 			success: function(data, textStatus, jqXHR) {
 				console.log(textStatus);
 				user.checkins = data.response.checkins.items;
-				},
+			},
+			async: false,
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log('KO');
 				console.log(textStatus);
@@ -45,7 +46,8 @@ json.general = {};
 			success: function(data, textStatus, jqXHR) {
 				console.log(textStatus);
 				user.tips = data.response.tips.items;
-				},
+			},
+			async: false,
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log('KO');
 				console.log(textStatus);
@@ -452,7 +454,9 @@ json.general = {};
 
 			//on appelle la fonction qui initailise les données de l'user
 			user.init(data);
+			json = user.getJson();
 		},
+		async: false,
 		error: function(jqXHR, textStatus, errorThrown) {
 			console.log('KO');
 			console.log(textStatus);
@@ -460,4 +464,4 @@ json.general = {};
 		}
 	});
 
-});
+	magic();
