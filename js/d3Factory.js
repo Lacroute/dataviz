@@ -6,9 +6,9 @@ function magic(){
 	var svg = d3.select('#pool').append('svg:svg'),
 		o = {x:400, y:330}, // point origine
 		pi = Math.PI,
-		rcat = [50, 150, 250], // rayon de distance
-		ro = 45, // rayon origine
-		rdist = [2, 20, 300], // rayon de distance check
+		rcat = [10, 40, 100], // rayon de distance
+		ro = 50, // rayon origine
+		rdist = [2, 20, '300+'], // rayon de distance check
 		rh = ro*4.5, // rayon horaire
 		rvi = rh+19, // rayon vert interne
 		rvii = rh+25, // rayon vert interne invisible
@@ -198,8 +198,8 @@ function magic(){
 			.enter()
 			.append('text')
 			.attr('class', tClass)
-			.attr('x', function(d, i){return getX(h[h.length-1].alpha, o.x, (i+2)*ro);})
-			.attr('y', function(d, i){return getY(h[h.length-1].alpha, o.y, -(i+2)*ro);})
+			.attr('x', function(d, i){return getX(h[2].alpha, o.x, (i+2)*ro);})
+			.attr('y', function(d, i){return getY(h[2].alpha, o.y, -(i+2)*ro);})
 			.attr('fill', cc)
 			.attr('text-anchor', 'middle')
 			.attr('font-size', 10)
@@ -249,7 +249,7 @@ function magic(){
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
-		.style('opacity', 0.3);
+		.style('opacity', 0.2);
 
 	var dailyAvgChecks = svg.selectAll('.dailyAvgChecks')
 		.data(dailyAvgChecksJson)
@@ -544,7 +544,7 @@ function magic(){
 			.duration(500)
 			.delay(900)
 			.attr('d', function(d){
-				d.outerRadius = rve;
+				d.outerRadius = rh;
 				return arcFunction(d);
 			});
 
