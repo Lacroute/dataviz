@@ -50,7 +50,7 @@ function magic(){
 		cerlceVertInterne = svg.append('circle').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', rvc).style('stroke-width', 25),
 		cerlceVertInterneInvisible = svg.append('circle').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('2.5, 2.5')).style('stroke', bgc).style('stroke-width', 15),
 		cerlceVertExterne = svg.append('circle').attr('class', 'echelleExterieur').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke', cc).style('stroke-width', 1),
-		echelleDeco = svg.append('circle').attr('class', 'echelleExterieur').attr('r', 0).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1).style('opacity', 0);
+		echelleDeco = svg.append('circle').attr('class', 'echelleExterieur').attr('r', rve).attr('cx', o.x).attr('cy', o.y).style('fill', 'none').style('stroke-dasharray',('5, 5')).style('stroke', cc).style('stroke-width', 1).style('opacity', 0);
 
 	var soleilCouchant = svg.append('g').attr('id', 'soleilCouchant').attr('class', 'deco');
 	soleilCouchant.append('circle').attr('fill', '#F7931E').attr('cx', decoJson[0].x).attr('cy', decoJson[0].y).attr('r', sr);
