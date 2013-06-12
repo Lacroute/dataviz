@@ -26,7 +26,7 @@ json.general = {};
 		jQuery.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: "https://api.foursquare.com/v2/users/self/checkins?limit=250&oauth_token="+getUrlParam('access_token'),
+			url: "https://api.foursquare.com/v2/users/self/checkins?limit=20&oauth_token="+getUrlParam('access_token'),
 			success: function(data, textStatus, jqXHR) {
 				console.log(textStatus);
 				user.checkins = data.response.checkins.items;
@@ -60,15 +60,15 @@ json.general = {};
 
 	//Scale D3 pour calculer la distance en px correspondant à la distance du check sur l'échelle exp
 	var scaleDistance = d3.scale.linear()
-	        .domain([0, 2000, 5000, 20000, 300000])
-                    .range([0, 50, 100, 150, 200]);
+	        .domain([0, 2000, 20000, 300000])
+                    .range([0, 67, 134, 200]);
 
             var scaleHour = d3.scale.linear()
 	        .domain([0, 86400])
                     .range([0, 24]);
 
             var scaleCategorie = d3.scale.linear()
-	        .domain([0, 5, 20, 100])
+	        .domain([0, 2, 20, 100])
                     .range([0, 67, 134, 200]);
 
             var scaleAvgChecks = d3.scale.linear()
@@ -119,6 +119,7 @@ json.general = {};
 				}
 				json.checkins[index].d = scaleDistance(distance) ;
 			})
+			magic();
 		});
 		
 	}
@@ -244,14 +245,13 @@ json.general = {};
 	}
 
 	user.getJson = function(){
-		 user.getCheckins();
 		 user.getTips();
 		 user.getHours();
 		 user.getCategories();
 		 user.getDailyAvgChecks();
 		 user.getTipsAvg();
 		 user.getGeneral();
-		 return(json);
+		 user.getCheckins();
 	}
 
 	// user.getHour = function(){
@@ -454,7 +454,7 @@ json.general = {};
 
 			//on appelle la fonction qui initailise les données de l'user
 			user.init(data);
-			json = user.getJson();
+			user.getJson();
 		},
 		async: false,
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -463,5 +463,3 @@ json.general = {};
 			console.log(errorThrown);
 		}
 	});
-
-	magic();

@@ -1,14 +1,14 @@
 function magic(){
 
-	console.log( user.getJson());
+	console.log(json.checkins);
 
 	/*** Initialisation des variables ***/
 	var svg = d3.select('#pool').append('svg:svg'),
 		o = {x:400, y:330}, // point origine
 		pi = Math.PI,
-		rdist = [100, 200, 300], // rayon de distance
 		rcat = [50, 150, 250], // rayon de distance
 		ro = 45, // rayon origine
+		rdist = [2, 20, 300], // rayon de distance check
 		rh = ro*4.5, // rayon horaire
 		rvi = rh+19, // rayon vert interne
 		rvii = rh+25, // rayon vert interne invisible
@@ -16,12 +16,12 @@ function magic(){
 		rd = ro*6, // rayon décoration
 		h = [{h:0, t:'0h'}, {h:3, t:'3h'}, {h:6, t:'6h'}, {h:9, t:'9h'}, {h:12, t:'12h'}, {h:15, t:'15h'}, {h:18, t:'18h'}, {h:21, t:'21h'}], // horaires
 		m = [{h:0, t:'0%'}, {h:6, t:'25%'}, {h:12, t:'50%'}, {h:18, t:'75%'}], // moyenne check
-		checkJson = [{h:0, d:150},{h:1, d:10},{h:2, d:150},{h:3, d:50},{h:4, d:5},{h:5, d:70},{h:6, d:65},{h:7, d:20},{h:8, d:70},{h:9, d:52},{h:10, d:29},{h:11, d:82},{h:12, d:14},{h:13, d:100},{h:14, d:32},{h:15, d:50},{h:16, d:80},{h:17, d:10},{h:18, d:35},{h:19, d:120},{h:20, d:60},{h:21, d:130},{h:22, d:30},{h:23, d:55}],
-		tipsJson = [{h:0}, {h:5}],
-		checkAvgJson = [{h:0},{h:4}],
-		catJson = [{name: 'biscuit', count: 20}, {name: 'tartine', count: 40}, {name: 'chou', count: 15}, {name: 'plume', count: 26}, {name: 'biscuit', count: 18}, {name: 'chiot', count: 55}, {name: 'mollusque', count: 6}, {name: 'dirigeable', count: 22}, {name: 'semelle', count: 13}],
-		dailyAvgChecksJson = [{h:0}, {h:12}],
-		dailyAvgTipsJson = [{h:0}, {h:9}],
+		checkJson = json.checkins;
+		tipsJson = json.tips;
+		checkAvgJson = json.maxChecks,
+		catJson = json.categories,
+		dailyAvgChecksJson = json.dailyAvgChecks,
+		dailyAvgTipsJson = json.tipsAvg,
 		decoJson = [{h:5}, {h:13}, {h:21}],
 		bgc = '#00182b', // background color
 		cc = '#fbfbfb', // check color
@@ -29,13 +29,7 @@ function magic(){
 		tc = '#fbfbfb', // tips color
 		avgc = '#e74c3c', // avg check color
 		cac = '#e74c3c',  // category color
-		sr =  15.016, // soleil r
-		// scx =  60, // soleil cx
-		// scy =  90, // soleil cy
-		// sccx = 60, // soleilCouchant cx
-		// sccy = 60, // soleilCouchant cy
-		// lcx =  60, // lune cx
-		// lcy =  130; // lune cx
+		sr =  15.016; // soleil r
 
 		/*** [END] Initialisation variables ***/
 
@@ -255,7 +249,7 @@ function magic(){
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
-		.style('opacity', 0.1);
+		.style('opacity', 0.3);
 
 	var dailyAvgChecks = svg.selectAll('.dailyAvgChecks')
 		.data(dailyAvgChecksJson)
