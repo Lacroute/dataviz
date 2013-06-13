@@ -319,6 +319,7 @@ function magic(){
 		.delay(200)
 		.attr('r', rve);
 	}
+	deploy();
 	/*** [END] Aparition des décorations ***/
 
 	/*** Gestion des survols ***/
