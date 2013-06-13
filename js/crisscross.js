@@ -15,6 +15,7 @@ json.general = {};
 		user.id = data.response.user.id;
 		user.lastName = data.response.user.lastName;
 		user.firstName = data.response.user.firstName;
+		user.photo = data.response.user.photo;
 		user.city = data.response.user.homeCity;
 		user.mayorshipNumber = data.response.user.mayorships.count;
 		user.tips = data.response.user.tips
@@ -119,6 +120,7 @@ json.general = {};
 				}
 				json.checkins[index].d = scaleDistance(distance) ;
 			})
+			setBadges();
 			magic();
 		});
 		

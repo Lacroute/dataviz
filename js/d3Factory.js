@@ -24,7 +24,7 @@ function magic(){
 		bgc = '#00182b', // background color
 		cc = '#fbfbfb', // check color
 		rvc = ' #1abc9c', // rond vert color
-		tc = '#fbfbfb', // tips color
+		tc = '#2980b9', // tips color
 		avgc = '#fbfbfb', // avg check color
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
@@ -217,7 +217,9 @@ function magic(){
 	}
 
 	/*** Création sélecteurs***/
-	var checks = svg.selectAll('.checks')
+	var gcheck = svg.append('g').attr('id','gcheck');
+
+	var checks = gcheck.selectAll('.checks')
 		.data(checkJson)
 		.enter()
 		.append('line')
@@ -385,19 +387,19 @@ function magic(){
 
 		echelleDistance
 			.transition()
-			.duration(1000)
+			.duration(800)
 			.delay(0)
 			.attr('r', 0);
 
 		indicDistCheck
 			.transition()
-			.duration(1000)
+			.duration(800)
 			.delay(0)
 			.style('opacity', 0);
 
 		indicHoraire
 			.transition()
-			.duration(1000)
+			.duration(800)
 			.delay(0)
 			.style('opacity', 0);
 
@@ -409,7 +411,7 @@ function magic(){
 
 		echelleDeco
 			.transition()
-			.duration(1000)
+			.duration(400)
 			.delay(0)
 			.attr('r', rve)
 			.transition()
@@ -419,13 +421,13 @@ function magic(){
 	function hideMoyenneChecks(){
 		indicPourcent
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(0)
 			.style('opacity', 0);
 
 		dailyAvgChecks
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('d', function(d){
 				d.outerRadius = ro;
@@ -436,13 +438,13 @@ function magic(){
 	function hideMoyenneTips(){
 		indicPourcent
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(0)
 			.style('opacity', 0);
 
 		dailyAvgTips
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('d', function(d){
 				d.outerRadius = ro;
@@ -453,25 +455,25 @@ function magic(){
 	function hideDecoStatique(){
 		origine
 	 		.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('r', 0);
 
 		cerlceVertInterne
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('r', 0);
 
 		cerlceVertInterneInvisible
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('r', 0);
 
 		cerlceVertExterne
 			.transition()
-			.duration(1000)
+			.duration(600)
 			.delay(200)
 			.attr('r', 0);
 
@@ -491,13 +493,13 @@ function magic(){
 		/*** Afficher les nouvelles données ***/
 		deco
 			.transition()
-			.duration(1000)
-			.delay(1000)
+			.duration(500)
+			.delay(0)
 			.attr('opacity', 1);
 
 		echelleDeco
 			.transition()
-			.duration(1000)
+			.duration(500)
 			.delay(0)
 			.style('opacity', 0.2)
 			.transition()
@@ -505,33 +507,33 @@ function magic(){
 
 		echelleDistance
 			.transition()
-			.duration(1000)
+			.duration(500)
 			.delay(200)
 			.attr('r', function(d, i){return (i+2)*ro;});
 
 		indicDistCheck
 			.transition()
-			.duration(1000)
+			.duration(500)
 			.delay(200)
 			.style('opacity', 0.8);
 
 		indicHoraire
 			.transition()
-			.duration(1000)
+			.duration(500)
 			.delay(250)
 			.style('opacity', 1);
 
 		checks
 			.transition()
 			.duration(1000)
-			.delay(1000)
+			.delay(600)
 			.attr('x2', function(d){return d.x2;})
 			.attr('y2', function(d){return d.y2;});
 
 		tips
 			.transition()
 			.duration(1000)
-			.delay(1000)
+			.delay(600)
 			.attr('d', function(d){
 				d.outerRadius = rve;
 				return arcFunction(d);
@@ -540,7 +542,7 @@ function magic(){
 		checkAvg
 			.transition()
 			.duration(1000)
-			.delay(900)
+			.delay(700)
 			.attr('d', function(d){
 				d.outerRadius = rh;
 				return arcFunction(d);

@@ -5,7 +5,7 @@ $(document).ready(function(){
 		// redirectUrl: 'http://omnisquare.alwaysdata.net/me.html',
 		redirectUrl: 'http://localhost/dataviz/me.html',
 		authenticate: function(){
-			var url = "https://foursquare.com/oauth2/authenticate";
+			var url = "https://fr.foursquare.com/oauth2/authenticate";
 			url += "?client_id="+this.clientId;
 			url += '&response_type=token';
 			url += "&redirect_uri="+this.redirectUrl;
