@@ -62,11 +62,12 @@ function initComportement(){
     comportementDescription += '<p>'+json.badges[5].description+'</p>';
     
     updateComportement(comportementLabel, comportementDescription, 0);
-
-    comportementLabel = comportementDescription = '';
 }
 
 function updateComportement(label, description, toOffset){
+    cl.html('');
+    cd.html('');
+
     cl.html(label);
     cd.html(description);
     console.log(toOffset);
@@ -99,6 +100,7 @@ function setBadges () {
     });
 
     $('#amis p').html(json.badges[2].nb);
+    $('#amis img').attr('src', 'media/badge_'+noAccent(json.badges[2].label)+'.png');
     $('#amis').on('click', function(event){
         event.preventDefault();
         closeMenu();
