@@ -348,10 +348,10 @@ json.badges = [];
 		}
 	      json.badges[1]={};
 	      json.badges[1].nb=moyCheck;
-	     if(moyCheck==0){
+	     if(moyCheck<3){
 	         json.badges[1].label="flemmard";
 	         json.badges[1].description="Oh le flemmard ! Et bien, qu'est ce que tu attends pour checker ?";
-	     }else if(moyCheck<4){
+	     }else if(moyCheck<8){
 	         json.badges[1].label="frétillant";
 	         json.badges[1].description="Tu es dans la moyenne, c'est bien. Essaye de frétiller un peu plus pour voir…";
 	     }else{
