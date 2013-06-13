@@ -17,11 +17,13 @@ $(document).ready(function(){
      $('#openLegende').on('click', function(event){
         event.preventDefault();
         $('#legende').toggleClass('on');
+
     });
 
     $('#closeLegende').on('click', function(event){
         event.preventDefault();
         $('#legende').toggleClass('on');
+        $('#content').toggleClass('on');
     });
 
     $('#closeNote').on('click', function(event){
