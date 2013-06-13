@@ -67,7 +67,6 @@ function magic(){
 	lune.append('circle').attr('fill', bgc).attr('cx', decoJson[2].x+7).attr('cy', decoJson[2].y-4).attr('r', sr-1.849);
 
 	var deco = svg.selectAll('.deco').attr('opacity', 0);
-
 	/*** [END] Initialisation décoration **/
 
 	// Retourne un angle pour coordonnées polaires, ici demi cercle divisé en 12h dans le sens horaire avec un désalage de pi/2
@@ -295,6 +294,7 @@ function magic(){
 	/*** [END] Initialisation échelles ***/
 
 	/*** Aparition des décoration ***/
+	function deploy(){
 	origine
  		.transition()
 		.duration(1300)
@@ -318,7 +318,7 @@ function magic(){
 		.duration(1300)
 		.delay(200)
 		.attr('r', rve);
-
+	}
 	/*** [END] Aparition des décorations ***/
 
 	/*** Gestion des survols ***/
