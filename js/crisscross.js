@@ -23,6 +23,7 @@ json.badges = [];
 		user.tipsNumber = data.response.user.tips.count;
 		user.followNumber = data.response.user.following.count;
 		user.checkinsNumber = data.response.user.checkins.count;
+		user.friends = data.response.user.friends.count;
 		
 		//checkins
 		jQuery.ajax({
@@ -292,6 +293,21 @@ json.badges = [];
 		json.tipsAvg = [{h:0}, {h:scaleTips(tips)}];
 	}
 
+	user.getFriends = function(){
+	     json.badges[2]={};
+	     json.badges[2].nb=user.friends;
+	     if(user.friends<10){
+	         json.badges[2].label="solitaire";
+	         json.badges[2].description="Tu es un solitaire dans l'âme. Fais attention à ne pas te couper du monde !";
+	     }else if(user.friends<80){
+	         json.badges[2].label="sociable";
+	         json.badges[2].description="Tu es quelqu'un de sociable, c'est très bien. Ne change pas !";
+	     }else{
+	         json.badges[2].label="star";
+	         json.badges[2].description="Bravo, tu es une star ! Les gens t'adorent, tu as vraiment beaucoup d'amis. Mais fais attention, parfois la qualité vaut mieux que la quantité…";
+	     }
+	}
+
 	user.getMayorship = function(){
 	     json.badges[0]={};
 	     if(user.mayorshipNumber==0){
@@ -373,6 +389,7 @@ json.badges = [];
 		 user.getMayorship();
 		 user.getFrequence();
 		 user.getFollow();
+		 user.getFriends();
 	}
 
 	// Fonction de Clément pour récuperer le Token dans l'url
