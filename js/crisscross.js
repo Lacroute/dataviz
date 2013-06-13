@@ -7,6 +7,7 @@ json.categories = [];
 json.dailyAvgChecks = [];
 json.tipsAvg = [];
 json.general = {};
+json.badges = [];
 
 	user.init = function(data){
 
@@ -104,14 +105,19 @@ json.general = {};
 			//On set le point de depart pour calculer les distances
 			var point1 = new google.maps.LatLng(lat, lng);
 			//Variable de max et point2
-			var distance = 0;
+			var distance = 0,
+				maxDistance=0;
 			var hour = 0;
+			json.badges[5]={};
 			//Parcours des checkins
 			$.each(user.checkins, function (index, value) {
 				//Set du point 2 (checkin parcouru) pour le calcul
 				var point2 = new google.maps.LatLng((value.venue.location.lat),(value.venue.location.lng));
 				//Calcul de la distance et test si c'est la valeur maximale
 				distance = google.maps.geometry.spherical.computeDistanceBetween(point1, point2);
+				if(distance>maxDistance){
+			                 maxDistance = distance;
+			             }
 				hour = value.createdAt+7200;
 				json.checkins[index] = {} ;
 				json.checkins[index].h = scaleHour(hour%86400);
@@ -120,6 +126,18 @@ json.general = {};
 				}
 				json.checkins[index].d = scaleDistance(distance) ;
 			})
+
+			if(maxDistance<50000){
+			     json.badges[5].label="sédentaire";
+			     json.badges[5].description="Toi tu n'aimes pas trop t'éloigner de chez toi. Tu sais, le monde est merveilleux alors bouge toi !";
+			 }else if(maxDistance<400000){
+			     json.badges[5].label="nomade";
+			     json.badges[5].description="Tu aimes bien te balader mais n'aies pas peur, va encore plus loin !";
+			 }else{
+			     json.badges[5].label="voyageur";
+			     json.badges[5].description="Ça voyage, ça voyage… Tu connais la France comme ta poche mais tu sais, les autres pays sont plutôt cool aussi.";   
+			 }
+
 			setBadges();
 			magic();
 		});
@@ -159,19 +177,33 @@ json.general = {};
 
 		json.maxChecks[0]={};
 		json.maxChecks[1]={};
+		json.general.hour={};
 		
-		if(max==coucheTard){
+		json.badges[4]={};
+
+		if(max==0){
+			json.maxChecks[0].h=0;
+			json.maxChecks[1].h=0;
+		}else if(max==coucheTard){
 			json.maxChecks[0].h=19;
 			json.maxChecks[1].h=24;
+			json.badges[4].label="couche-tard";
+			json.badges[4].description="Tu aimes checker le soir. Tu dois sans doute beaucoup sortir avec tes amis. Essaye de ne pas accumuler la fatigue !";
 		}else if(max==matinal){
 			json.maxChecks[0].h=6;
 			json.maxChecks[1].h=12;
+			json.badges[4].label="matinal";
+			json.badges[4].description="Toi tu aimes te lever tôt. Autorise toi une grasse matinée de temps de temps, cela ne fait pas de mal !";
 		}else if(max==diurne){
 			json.maxChecks[0].h=12;
 			json.maxChecks[1].h=19;	
+			json.badges[4].label="diurne";
+			json.badges[4].description="Tu checkes principalement la journée. Tout est normal chez toi, rien à signaler !";
 		}else{
 			json.maxChecks[0].h=0;
 			json.maxChecks[1].h=6;	
+			json.badges[4].label="insomniaque";
+			json.badges[4].description="Apparemment tu checkes souvent la nuit… Soit tu vis à l'envers des êtres humains normaux, soit tu es un vampire, ouuh...";
 		}
 	}
 
@@ -255,98 +287,6 @@ json.general = {};
 		 user.getGeneral();
 		 user.getCheckins();
 	}
-
-	// user.getHour = function(){
-	// 	var coucheTard = 0,
-	// 		insomniaque = 0,
-	// 		matinal = 0,
-	// 		diurne = 0,
-	// 		heure = 3600;
-			
-	// 	$.each(user.checkins, function (index, value) {
-	// 		var hr = value.createdAt%86400;
-			
-	// 		if(hr<6*heure){
-	// 			insomniaque++;
-	// 		}else if(hr<12*heure){
-	// 			matinal = matinal + 1;
-	// 		}else if(hr<19*heure){
-	// 			diurne++;
-	// 		}else{
-	// 			coucheTard++;
-	// 		}
-	// 	})
-		
-	// 	var max = Math.max(coucheTard, insomniaque ,matinal ,diurne);
-	// 	console.log("tard :"+coucheTard);
-	// 	console.log("matin :"+matinal);
-	// 	console.log("diurne :"+diurne);
-	// 	console.log("insomniaque:"+insomniaque);
-		
-	// 	if(max==coucheTard){
-	// 		console.log("Resultat : Couche tard !");
-	// 	}else if(max==matinal){
-	// 		console.log("Resultat : Matinal !");
-	// 	}else if(max==diurne){
-	// 		console.log("Resultat : Diurne !");	
-	// 	}else{
-	// 		console.log("Resultat : Insomniaque !");	
-	// 	}
-	// }
-	
-	// user.getDistance = function(){
-	// 	var lat,
-	// 		lng;
-	// 	var geocoder = new google.maps.Geocoder();
-	// 	geocoder.geocode({"address":user.city}, function(data,status){
-	// 		if(status=='OK'){
-	// 			console.log("Ville : "+user.city)
-	// 			lat=data[0].geometry.location.lat();
-	// 			lng=data[0].geometry.location.lng();
-	// 		}else{
-	// 			//Si aucun resultat sur l'api de google maps
-	// 			console.log("Aucun résultat, calcul du barycentre :");
-	// 			var totalLat = 0,
-	// 				totalLng = 0;
-					
-	// 			$.each(user.checkins, function (index, value) {
-	// 				totalLat = totalLat + value.venue.location.lat;
-	// 				totalLng = totalLng + value.venue.location.lng;
-	// 			})
-	// 			//calcul de la moyenne
-	// 			lat = totalLat/(user.checkins.length);
-	// 			lng = totalLng/(user.checkins.length);
-	// 		}
-	// 		console.log("Lattitude: "+lat);
-	// 		console.log("Longitude: "+lng);
-			
-	// 		//On set le point de depart pour calculer les distances
-	// 		var point1 = new google.maps.LatLng(lat, lng);
-	// 		//Variable de max et point2
-	// 		var maxDistance = 0,
-	// 			distance = 0;
-	// 		//Parcours des checkins
-	// 		$.each(user.checkins, function (index, value) {
-	// 			//Set du point 2 (checkin parcouru) pour le calcul
-	// 			var point2 = new google.maps.LatLng((value.venue.location.lat),(value.venue.location.lng));
-	// 			//Calcul de la distance et test si c'est la valeur maximale
-	// 			distance = google.maps.geometry.spherical.computeDistanceBetween(point1, point2);
-	// 			if(distance>maxDistance){
-	// 				maxDistance = distance;
-	// 			}
-	// 		})
-	// 		console.log("Check le plus loin : "+(maxDistance/1000)+" km");
-	// 		//Test final selon la valeur max pour definir la classification
-	// 		if(maxDistance<50000){
-	// 			console.log("Resultat : Sédentaire !");
-	// 		}else if(maxDistance<400000){
-	// 			console.log("Resultat : Nomade !");
-	// 		}else{
-	// 			console.log("Resultat : Voyageur !");	
-	// 		}
-	// 	});
-		
-	// }
 	
 	// user.getMayorship = function(){
 	// 	console.log("Nb Mayorship : "+user.mayorshipNumber);
