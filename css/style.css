@@ -53,11 +53,12 @@ background-position:0px -360px;-webkit-transition:all ease .3s;}
 -webkit-transition:all ease .5s;}
 #note.on #titlenote {opacity: 1;margin-top:10px;}
 #conteneurSchema {width: 80%;margin: 50px auto 0px;}
-#badgeNote {width: 50%;display: inline-block;}
-#badgeNote img {width:80%;}
-#texteNote {width: 40%;height: auto;display:inline-block;vertical-align: top;}
-#texteNote p {font-size: 1em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
+#badgeNote {width: 50%;display: inline-block;position: relative;text-align: center;}
+#badgeNote img {width:80%;z-index:88;position: relative;}
+#badgeNote p {color: #f2f2f2;font-size: 7em;font-family: 'DINProBold';position: absolute;z-index: 89;margin-top: -423px;width: 100%;}
 
+#texteNote {width: 40%;height: auto;display:inline-block;vertical-align: top;}
+#texteNote p {font-size: 2em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
 
 #legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;}
 #legende.on {height: 100%;opacity: 1;}
@@ -111,8 +112,8 @@ position:relative; width:173px; height: 173px;}
 #desc-bloc2 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
 background-position:20px -112px ;padding: 7px 0px 2px 69px;}
 #desc-bloc2 > p:nth-child(2) {color: #f2f2f2;font-size: 1.2em;margin-left: 20px;}
-.nomProfil {color: #1abc9c;font-family: 'DINProBold';}
-.nomProfil:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
+#desc-bloc2 .nomProfil {color: #1abc9c;font-family: 'DINProBold';}
+#desc-bloc2 .nomProfil:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
 #desc-bloc2 > p:nth-child(3) {color: #f2f2f2;margin-left: 20px;text-align: justify;font-family: 'DINProRegular'}
 #desc-bloc2 a {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;border: 1px solid #f2f2f2;
 padding: 10px;text-decoration: none;margin-left: 20px;display: block;width:140px;}
@@ -172,31 +173,14 @@ background-position:-20px 0px;}
 
 /*Code Bastien*/
 
-#svgContent{
-    position: relative;
-    height: 100%;
-
-}
-svg{
-    height: 100%;
-    width: 100%;
-
-}
-
+#svgContent{position: relative;height: 100%;}
+svg{ height: 100%;width: 100%;}
 
 @media (max-width: 1510px) {
 
 #texteNote p {margin-top: 100px;}
-
-#desc-bloc1 {
-    width:70%;
-    }
-
-
-#desc-bloc2 {
-    margin-top: 250px;
-    }
-
+#desc-bloc1 {width:70%;}
+#desc-bloc2 {margin-top: 250px;}
 #badge li:nth-child(2):after {content:'';clear: both;font-size: 0;}
 
 }
