@@ -298,6 +298,38 @@ json.badges = [];
 	     }
 	}
 
+	user.getFrequence = function(){
+	     var recent = 0,
+	         ancien = Math.floor((new Date()));
+	            
+	     if(user.checkins.length>0){
+		     $.each(user.checkins, function (index, value) {
+		         if(value.createdAt<ancien){
+		             ancien = value.createdAt;
+		         }
+		         if(value.createdAt>recent){
+		             recent = value.createdAt;
+		         }
+		     })
+		     //Calcul de la moyenne
+		     var moyCheck = Math.floor((user.checkins.length)/Math.floor((recent-ancien)/86400));
+		}else{
+			moyCheck=0;
+		}
+	      json.badges[1]={};
+	      json.badges[1].nb=moyCheck;
+	     if(moyCheck==0){
+	         json.badges[1].label="flemmard";
+	         json.badges[1].description="Oh le flemmard ! Et bien, qu'est ce que tu attends pour checker ?";
+	     }else if(moyCheck<4){
+	         json.badges[1].label="frétillant";
+	         json.badges[1].description="Tu es dans la moyenne, c'est bien. Essaye de frétiller un peu plus pour voir…";
+	     }else{
+	         json.badges[1].label="hyper-actif";
+	         json.badges[1].description="Ah ça pour checker, ça check ! Attention à ne pas passer ta vie sur Foursquare ;)";
+	     }
+	}
+
 	user.getGeneral = function(){
 		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo};
 	}
@@ -311,38 +343,9 @@ json.badges = [];
 		 user.getGeneral();
 		 user.getCheckins();
 		 user.getMayorship();
+		 user.getFrequence();
 	}
-	
-	// user.getCheck = function(){
-	// 	var recent = 0,
-	// 		ancien = Math.floor((new Date()));
-			
-	// 	$.each(user.checkins, function (index, value) {
-	// 		if(value.createdAt<ancien){
-	// 			ancien = value.createdAt;
-	// 		}
-	// 		if(value.createdAt>recent){
-	// 			recent = value.createdAt;
-	// 		}
-	// 	})
-		
-	// 	console.log("Check plus recent : "+recent);
-	// 	console.log("Check plus ancien : "+ancien);
-	// 	console.log("Nb de check dans le tableau : "+user.checkins.length);
-		
-	// 	//Calcul de la moyenne
-	// 	var moyCheck = Math.floor((user.checkins.length)/Math.floor((recent-ancien)/86400));
-	// 	console.log("Moyenne de checks : "+moyCheck+" /jour");
-		
-	// 	if(moyCheck==0){
-	// 		console.log("Resultat : Flemmard");
-	// 	}else if(moyCheck<4){
-	// 		console.log("Resultat : Frétillant");
-	// 	}else{
-	// 		console.log("Resultat : Hyper-actif");	
-	// 	}
-	// }
-	
+
 	// user.getTip = function(){
 	// 	console.log("Nb Tips : "+user.tipsNumber);
 	// 	if(user.tipsNumber<2){
