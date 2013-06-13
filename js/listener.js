@@ -33,11 +33,13 @@ function setBadges () {
         comportementLabel += json.badges[5].label;
         comportementDescription += '<p>'+json.badges[5].description+'</p>';
     }
+    initComportement();
     
     function updateComportement(label, description, toOffset){
         cl.html(label);
         cd.html(description);
-        if(toOffset>0) $('#content').animate({scrollTop: toOffset});
+        console.log(toOffset);
+        $('#content').animate({scrollTop: $(this).height()});
     }
     /*** [END] DESCRIPTION ***/
 }

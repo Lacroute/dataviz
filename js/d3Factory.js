@@ -12,8 +12,8 @@ function magic(){
 		rvii = rh+25, // rayon vert interne invisible
 		rve = rh+40, // rayon vert externe
 		rd = ro*6, // rayon décoration
-		h = [{h:0, t:'0h'}, {h:3, t:'3h'}, {h:6, t:'6h'}, {h:9, t:'9h'}, {h:12, t:'12h'}, {h:15, t:'15h'}, {h:18, t:'18h'}, {h:21, t:'21h'}], // horaires
-		m = [{h:0, t:'0%'}, {h:6, t:'25%'}, {h:12, t:'50%'}, {h:18, t:'75%'}], // moyenne check
+		h = [{h:0, t:'0'}, {h:3, t:'3'}, {h:6, t:'6'}, {h:9, t:'9'}, {h:12, t:'12'}, {h:15, t:'15'}, {h:18, t:'18'}, {h:21, t:'21'}], // horaires
+		m = [{h:0, t:'0'}, {h:6, t:'25'}, {h:12, t:'50'}, {h:18, t:'75'}], // moyenne check
 		checkJson = json.checkins;
 		tipsJson = json.tips;
 		checkAvgJson = json.maxChecks,
