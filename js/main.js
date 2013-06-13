@@ -35,16 +35,16 @@ $(document).ready(function(){
     	$('#content').toggleClass('on');
     });
 
-    $('#svgContent').on('click', function(event){
+    /*$('#svgContent').on('click', function(event){
         event.preventDefault();
         if($(this).is('.on')){
             $('#content').toggleClass('on');
             $('#svgContent').toggleClass('on');
         }
-    });
+    });*/
 
     //resize des blocs en hauteur dans la div description
-    resizeDescriptionBlocks();
+   /* resizeDescriptionBlocks();
     $(window).resize(function(){
         resizeDescriptionBlocks();
     });         
@@ -52,7 +52,7 @@ $(document).ready(function(){
     function resizeDescriptionBlocks(){
         var height = $("#content").height();
         $(".description").height((height/2)-$("header").height());
-    }
+    }*/
 
 	
 });
