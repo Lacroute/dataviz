@@ -126,7 +126,7 @@ background-position:-40px -359px ;padding: 7px 70px 3px 39px;text-transform: upp
 
 /***********************************************MENU*****************************************************************/
 
-#menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;padding: 0px;margin: 0;overflow-y:auto; }
+#menu {background: #061828; width:30%;height:100%;display: inline-block; vertical-align: top;z-index:993;padding: 0px;margin: 0;overflow-y: auto;}
 #info{width: 100%;}
 #info > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;background-position:0px -24px ;padding: 0px 0px 0px 50px;margin-left: 20px}
 #deconnexion {text-decoration: none;color:#f2f2f2;font-size: .4em;text-transform: uppercase;}

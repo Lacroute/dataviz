@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
-    
+    $('body').on('click', function(event){
+        event.preventDefault();
+        $('#content').animate({scrollTop:0}, 1000);
+    });  
 
     $('#content header').on('click', function(event){
             event.preventDefault();
