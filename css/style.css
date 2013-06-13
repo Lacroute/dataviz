@@ -49,23 +49,16 @@ overflow: hidden;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
 background-position:0px -360px;-webkit-transition:all ease .3s;}
 #note.on a:hover { -webkit-transform:rotate(90deg);}
-#note p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
+#titlenote {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
 -webkit-transition:all ease .5s;}
-#note.on p {opacity: 1;margin-top:10px;}
-#note.on div {width: 100%;position: relative;}
-#note.on div #titreNote {width:50%;display: inline-block;background: #f2f2f2;text-align: center}
-#note div {display: none;}
-#note.on div {display: block;}
-#note.on div #titreNote p:nth-child(1) {font-size: 5em;color:  #061828;text-align: left;margin-left: 20px;margin-bottom: 8px;
-display: inline-block;text-align: center;}
-#note.on div #titreNote p:nth-child(1) span {font-family: 'DINProBold'}
-#note.on div #titreNote p:nth-child(2) {display: inline-block;vertical-align: top;color: #e74c3c;font-family: 'DINProBold';font-size: 15em;
-text-align: right;margin:-40px 0px -30px 20px;}
-#note div {display: none}
-#note.on div #descriptionNote {width: 45%;display: inline-block;vertical-align: text-bottom;padding-left: 20px}
-#note.on div #descriptionNote p {text-transform: none;font-size: 1em;text-align: justify;}
-#note.on div #totalNote {width: 50%;height:316px;background-color: #f2f2f2;background-image: url(img/tramage_note100.png);float: right;}
-#note.on div #totalNote p {font-size: 19em;color:#061828;text-align: center;font-family: 'DINProMedium';margin-top: -50px;}
+#note.on #titlenote {opacity: 1;margin-top:10px;}
+#conteneurSchema {width: 80%;margin: 50px auto 0px;}
+#badgeNote {width: 50%;display: inline-block;}
+#badgeNote img {width:80%;}
+#texteNote {width: 40%;height: auto;display:inline-block;vertical-align: top;}
+#texteNote p {font-size: 1em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
+
+
 #legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;}
 #legende.on {height: 100%;opacity: 1;}
 #legende.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
@@ -118,8 +111,8 @@ position:relative; width:173px; height: 173px;}
 #desc-bloc2 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
 background-position:20px -112px ;padding: 7px 0px 2px 69px;}
 #desc-bloc2 > p:nth-child(2) {color: #f2f2f2;font-size: 1.2em;margin-left: 20px;}
-#desc-bloc2 > p:nth-child(2) span {color: #1abc9c;font-family: 'DINProBold';}
-#desc-bloc2 > p:nth-child(2) span:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
+.nomProfil {color: #1abc9c;font-family: 'DINProBold';}
+.nomProfil:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
 #desc-bloc2 > p:nth-child(3) {color: #f2f2f2;margin-left: 20px;text-align: justify;font-family: 'DINProRegular'}
 #desc-bloc2 a {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;border: 1px solid #f2f2f2;
 padding: 10px;text-decoration: none;margin-left: 20px;display: block;width:140px;}
@@ -192,6 +185,8 @@ svg{
 
 
 @media (max-width: 1510px) {
+
+#texteNote p {margin-top: 100px;}
 
 #desc-bloc1 {
     width:70%;
