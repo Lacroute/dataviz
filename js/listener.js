@@ -1,18 +1,25 @@
 function setBadges () {
-    console.log(json.badges[5]);
-    $('.nomProfil').html(json.general.nom);
+    console.log(json);
+    /*** JSON.GENERAL ***/
+    $('#nomProfil').html(json.general.nom_complet);
+    $('#nomDescription').html(json.general.prenom);
     $('#avatar').attr('src', json.general.photo);
+    /*** [END] JSON.GENERAL ***/
+
+    /*** BADGES ***/
+    $('#grade img').attr('src', 'media/badge_'+json.badges[0].label+'.png')
+
+    /*** [END] BADGES ***/
+
+    /*** DESCRIPTION ***/
     var comportementLabel = '', comportementDescription = '';
-    console.log(json.badges[4]);
     if(json.badges[4].length != undefined){
-        console.log('caca');
         comportementLabel = json.badges[4].label + ' ';
         comportementDescription = '<p>'+json.badges[4].description+'</p>';
-        console.log('********* '+comportementLabel);
     }
     comportementLabel += json.badges[5].label;
     comportementDescription += '<p>'+json.badges[5].description+'</p>';
     $('#comportementLabel').html(comportementLabel);
     $('#comportementDescription').html(comportementDescription);
-
+    /*** [END] DESCRIPTION ***/
 }
