@@ -2,9 +2,9 @@ function magic(){
 
 	/*** Initialisation des variables ***/
 	var svg = d3.select('#pool').append('svg:svg'),
-		o = {x:400, y:330}, // point origine
+		o = {x:300, y:330}, // point origine
 		pi = Math.PI,
-		rcat = [10, 40, 100], // rayon de distance
+		rcat = [10, 40, '100+'], // rayon de distance
 		ro = 50, // rayon origine
 		rdist = [2, 20, '300+'], // rayon de distance check
 		rh = ro*4.5, // rayon horaire
@@ -25,7 +25,7 @@ function magic(){
 		cc = '#fbfbfb', // check color
 		rvc = ' #1abc9c', // rond vert color
 		tc = '#fbfbfb', // tips color
-		avgc = '#e74c3c', // avg check color
+		avgc = '#fbfbfb', // avg check color
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
 
@@ -247,7 +247,7 @@ function magic(){
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
 		.attr('fill', avgc)
-		.style('opacity', 0.2);
+		.style('opacity', 0.1);
 
 	var dailyAvgChecks = svg.selectAll('.dailyAvgChecks')
 		.data(dailyAvgChecksJson)
