@@ -36,6 +36,10 @@ $(document).ready(function(){
         $('#content').animate({scrollTop:0}, 1000);
     });
 
+    $('#deployChecks').on('click', function(event){
+        initComportement();
+    });
+
     /*$('#svgContent').on('click', function(event){
         event.preventDefault();
         if($(this).is('.on')){

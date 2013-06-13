@@ -1,6 +1,81 @@
+/*** GESTION CLICKS ***/
+var comportementLabel = '',
+    comportementDescription = '',
+    cl = $('#comportementLabel'),
+    cd = $('#comportementDescription');
+
+$('#content header').on('click', function(event){
+        event.preventDefault();
+        $('#content').toggleClass('on');
+        $('#svgContent').toggleClass('on');
+});
+
+$('#openNote').on('click', function(event){
+    event.preventDefault();
+    $('#note').toggleClass('on');
+
+});
+
+$('#openLegende').on('click', function(event){
+    event.preventDefault();
+    $('#legende').toggleClass('on');
+
+});
+
+$('#closeLegende').on('click', function(event){
+    event.preventDefault();
+    $('#legende').toggleClass('on');
+    $('#content').toggleClass('on');
+});
+
+$('#closeNote').on('click', function(event){
+    event.preventDefault();
+    $('#note').toggleClass('on');
+    $('#content').toggleClass('on');
+});
+
+$('#menu a').on('click', function(event){
+    event.preventDefault();
+    $('#content').toggleClass('on');
+    $('#content').animate({scrollTop:0}, 1000);
+});
+
+$('#deployChecks').on('click', function(event){
+    initComportement();
+});
+
+$('#deployDailyTips').on('click', function(event){
+    comportementLabel += json.badges[6].label;
+    comportementDescription += json.badges[6].description;
+    updateComportement(comportementLabel, comportementDescription, 0);
+});
+
+/*** [END] GESTION CLICKS ***/
+
+function initComportement(){
+    console.log('CACACACA');
+    if(json.badges[4].length != undefined){
+        comportementLabel = json.badges[4].label + ' ';
+        comportementDescription = '<p>'+json.badges[4].description+'</p>';
+    }
+    comportementLabel += json.badges[5].label;
+    comportementDescription += '<p>'+json.badges[5].description+'</p>';
+    
+    updateComportement(comportementLabel, comportementDescription, 0);
+
+    comportementLabel = comportementDescription = '';
+}
+
+function updateComportement(label, description, toOffset){
+    cl.html(label);
+    cd.html(description);
+    console.log(toOffset);
+    $('#content').animate({scrollTop: $(this).height()});
+}
+
 function setBadges () {
+
     console.log(json);
-    var comportementLabel = '', comportementDescription = '', cl = $('#comportementLabel'), cd = $('#comportementDescription');
 
     /*** JSON.GENERAL ***/
     $('#nomProfil').html(json.general.nom_complet);
@@ -23,6 +98,13 @@ function setBadges () {
         updateComportement(json.badges[1].label, json.badges[1].description, $(this).offset().top);
     });
 
+    $('#amis p').html(json.badges[2].nb);
+    $('#amis').on('click', function(event){
+        event.preventDefault();
+        closeMenu();
+        updateComportement(json.badges[2].label, json.badges[2].description, $(this).offset().top);
+    });
+
     $('#follow img').attr('src', 'media/badge_'+noAccent(json.badges[3].label)+'.png');
     $('#follow').on('click', function(event){
         event.preventDefault();
@@ -32,25 +114,7 @@ function setBadges () {
 
     /*** [END] BADGES ***/
 
-    /*** DESCRIPTION ***/
-    
-    function initComportement(){
-        if(json.badges[4].length != undefined){
-            comportementLabel = json.badges[4].label + ' ';
-            comportementDescription = '<p>'+json.badges[4].description+'</p>';
-        }
-        comportementLabel += json.badges[5].label;
-        comportementDescription += '<p>'+json.badges[5].description+'</p>';
-    }
     initComportement();
-    
-    function updateComportement(label, description, toOffset){
-        cl.html(label);
-        cd.html(description);
-        console.log(toOffset);
-        $('#content').animate({scrollTop: $(this).height()});
-    }
-    /*** [END] DESCRIPTION ***/
 
     function noAccent (my_string) {
         var new_string = "";
