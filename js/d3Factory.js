@@ -26,6 +26,7 @@ function magic(){
 		rvc = ' #1abc9c', // rond vert color
 		tc = '#2980b9', // tips color
 		avgc = '#0a7dbc', // avg check color
+		javgc = '#fbfbfb', // jauge avg check color
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
 
@@ -258,7 +259,7 @@ function magic(){
 		.attr('class', 'dailyAvgChecks')
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
-		.attr('fill', avgc)
+		.attr('fill', javgc)
 		.style('opacity', 0.5);
 
 	var dailyAvgTips = svg.selectAll('.dailyAvgTips')
@@ -268,7 +269,7 @@ function magic(){
 		.attr('class', 'dailyAvgTips')
 		.attr('d', function(d){return arcFunction(d);})
 		.attr('transform', function(){return 'translate('+o.x+','+o.y+')';})
-		.attr('fill', avgc)
+		.attr('fill', javgc)
 		.style('opacity', 0.5);
 
 	var cat = svg.selectAll('.cat')
