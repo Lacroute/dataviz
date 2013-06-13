@@ -294,32 +294,102 @@ function magic(){
 	/*** [END] Initialisation échelles ***/
 
 	/*** Aparition des décoration ***/
-	function deploy(){
-	origine
- 		.transition()
-		.duration(1300)
-		.delay(200)
-		.attr('r', ro);
+	function deployDeco(){
+		origine
+				.transition()
+			.duration(1300)
+			.delay(200)
+			.attr('r', ro);
 
-	cerlceVertInterne
-		.transition()
-		.duration(1300)
-		.delay(200)
-		.attr('r', rvi);
+		cerlceVertInterne
+			.transition()
+			.duration(1300)
+			.delay(200)
+			.attr('r', rvi);
 
-	cerlceVertInterneInvisible
-		.transition()
-		.duration(1300)
-		.delay(200)
-		.attr('r', rvii);
+		cerlceVertInterneInvisible
+			.transition()
+			.duration(1300)
+			.delay(200)
+			.attr('r', rvii);
 
-	cerlceVertExterne
-		.transition()
-		.duration(1300)
-		.delay(200)
-		.attr('r', rve);
+		cerlceVertExterne
+			.transition()
+			.duration(1300)
+			.delay(200)
+			.attr('r', rve);
 	}
-	deploy();
+
+	function deployChecks(){
+		/*** Effacer les anciennes données ***/
+		hideCat();
+		hideMoyenneChecks();
+		hideMoyenneTips();
+
+		/*** [END] Effacer ***/
+
+		/*** Afficher les nouvelles données ***/
+		deco
+			.transition()
+			.duration(500)
+			.delay(0)
+			.attr('opacity', 1);
+
+		echelleDeco
+			.transition()
+			.duration(500)
+			.delay(0)
+			.style('opacity', 0.2)
+			.transition()
+			.attr('r', rd);
+
+		echelleDistance
+			.transition()
+			.duration(500)
+			.delay(200)
+			.attr('r', function(d, i){return (i+2)*ro;});
+
+		indicDistCheck
+			.transition()
+			.duration(500)
+			.delay(200)
+			.style('opacity', 0.8);
+
+		indicHoraire
+			.transition()
+			.duration(500)
+			.delay(250)
+			.style('opacity', 1);
+
+		checks
+			.transition()
+			.duration(1000)
+			.delay(600)
+			.attr('x2', function(d){return d.x2;})
+			.attr('y2', function(d){return d.y2;});
+
+		tips
+			.transition()
+			.duration(1000)
+			.delay(600)
+			.attr('d', function(d){
+				d.outerRadius = rve+10;
+				return arcFunction(d);
+			});
+
+		checkAvg
+			.transition()
+			.duration(1000)
+			.delay(700)
+			.attr('d', function(d){
+				d.outerRadius = rh;
+				return arcFunction(d);
+			});
+
+		/*** [END] Afficher ***/
+	}
+	deployDeco();
+	deployChecks();
 	/*** [END] Aparition des décorations ***/
 
 	/*** Gestion des survols ***/
@@ -485,72 +555,7 @@ function magic(){
 	/*** Gestion des clics ***/
 	d3.select('#deployChecks').on('click', function(){
 
-		/*** Effacer les anciennes données ***/
-		hideCat();
-		hideMoyenneChecks();
-		hideMoyenneTips();
-
-		/*** [END] Effacer ***/
-
-		/*** Afficher les nouvelles données ***/
-		deco
-			.transition()
-			.duration(500)
-			.delay(0)
-			.attr('opacity', 1);
-
-		echelleDeco
-			.transition()
-			.duration(500)
-			.delay(0)
-			.style('opacity', 0.2)
-			.transition()
-			.attr('r', rd);
-
-		echelleDistance
-			.transition()
-			.duration(500)
-			.delay(200)
-			.attr('r', function(d, i){return (i+2)*ro;});
-
-		indicDistCheck
-			.transition()
-			.duration(500)
-			.delay(200)
-			.style('opacity', 0.8);
-
-		indicHoraire
-			.transition()
-			.duration(500)
-			.delay(250)
-			.style('opacity', 1);
-
-		checks
-			.transition()
-			.duration(1000)
-			.delay(600)
-			.attr('x2', function(d){return d.x2;})
-			.attr('y2', function(d){return d.y2;});
-
-		tips
-			.transition()
-			.duration(1000)
-			.delay(600)
-			.attr('d', function(d){
-				d.outerRadius = rve+10;
-				return arcFunction(d);
-			});
-
-		checkAvg
-			.transition()
-			.duration(1000)
-			.delay(700)
-			.attr('d', function(d){
-				d.outerRadius = rh;
-				return arcFunction(d);
-			});
-
-		/*** [END] Afficher ***/
+		deployChecks();
 	});
 
 	d3.select('#deployCat').on('click', function(){
