@@ -186,6 +186,8 @@ json.badges = [];
 		if(max==0){
 			json.maxChecks[0].h=0;
 			json.maxChecks[1].h=0;
+			json.badges[4].label="";
+			json.badges[4].description="";
 		}else if(max==coucheTard){
 			json.maxChecks[0].h=19;
 			json.maxChecks[1].h=24;
@@ -276,8 +278,28 @@ json.badges = [];
 		json.tipsAvg = [{h:0}, {h:scaleTips(tips)}];
 	}
 
+	user.getMayorship = function(){
+	     json.badges[0]={};
+	     if(user.mayorshipNumber==0){
+	         json.badges[0].label="candidat";
+	         json.badges[0].description="Tu n'as jamais été maire. Soit tu débutes sur Foursquare, soit tu n'es pas du tout actif. Allez, on s'active !";
+	     }else if(user.mayorshipNumber<25){
+	         json.badges[0].label="conseiller général";
+	         json.badges[0].description="C'est un bon début. Mais tu peux faire mieux, allez !";
+	     }else if(user.mayorshipNumber<50){
+	         json.badges[0].label="député";
+	         json.badges[0].description="C'est plutôt pas mal ça..! Encore un petit effort et ce sera parfait !";
+	     }else if(user.mayorshipNumber>=50){
+	         json.badges[0].label="président";
+	         json.badges[0].description="Félicitations, tu as acquis le statut de président ! Tu es plus de 50 fois maire de lieux différents."; 
+	     }else{
+	         json.badges[0].label="candidat";
+	         json.badges[0].description="Tu n'as jamais été maire. Soit tu débutes sur Foursquare, soit tu n'es pas du tout actif. Allez, on s'active !";
+	     }
+	}
+
 	user.getGeneral = function(){
-		json.general={nom: user.firstName+" "+user.lastName, photo: user.photo};
+		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo};
 	}
 
 	user.getJson = function(){
@@ -288,20 +310,8 @@ json.badges = [];
 		 user.getTipsAvg();
 		 user.getGeneral();
 		 user.getCheckins();
+		 user.getMayorship();
 	}
-	
-	// user.getMayorship = function(){
-	// 	console.log("Nb Mayorship : "+user.mayorshipNumber);
-	// 	if(user.mayorshipNumber==0){
-	// 		console.log("Resultat : Candidat");
-	// 	}else if(user.mayorshipNumber<25){
-	// 		console.log("Resultat : Conseiller général");
-	// 	}else if(user.mayorshipNumber<50){
-	// 		console.log("Resultat : Député");	
-	// 	}else{
-	// 		console.log("Resultat : Président");	
-	// 	}
-	// }
 	
 	// user.getCheck = function(){
 	// 	var recent = 0,
