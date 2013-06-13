@@ -149,7 +149,21 @@ json.badges = [];
 				hour = value.createdAt+7200;
 				json.tips[index] = {} ;
 				json.tips[index].h = scaleHour(hour%86400);
-			})
+		})
+		 json.badges[6]={};
+		if(user.tipsNumber<2){
+			json.badges[6].label="égoïste";
+			json.badges[6].description="Oh le vilain, tu n'as aucun tip à ton actif... Qu'est ce que tu attends pour laisser une trace sur les endroits où tu checks ?";
+		 }else if(user.tipsNumber<6){
+		     	json.badges[6].label="avare";
+			json.badges[6].description="C'est bien mais c'est peu. On peut dire qu'il y a de l'idée mais on compte sur toi pour laisser encore plus de tips !";
+		 }else if(user.tipsNumber<20){
+		     	json.badges[6].label="charitable";
+			json.badges[6].description="Tu es ce qu'on appelle une âme charitable. C'est plutôt généreux de ta part, la communauté te remercie !"; 
+		 }else{
+		     	json.badges[6].label="bienfaisant";
+			json.badges[6].description="Bravo, tu es bienfaisant pour la communauté ! Grâce à toi, les autres peuvent bénéficier de tes super conseils.";
+		 }
 	}
 	
 	user.getHours = function(){
@@ -360,22 +374,6 @@ json.badges = [];
 		 user.getFrequence();
 		 user.getFollow();
 	}
-
-	// user.getTip = function(){
-	// 	console.log("Nb Tips : "+user.tipsNumber);
-	// 	if(user.tipsNumber<2){
-	// 		console.log("Resultat : Egoïste");
-	// 	}else if(user.tipsNumber<6){
-	// 		console.log("Resultat : Avare");
-	// 	}else if(user.tipsNumber<20){
-	// 		console.log("Resultat : Charitable");	
-	// 	}else{
-	// 		console.log("Resultat : Bienfaisant");	
-	// 	}
-	// }
-	
-
-
 
 	// Fonction de Clément pour récuperer le Token dans l'url
 	function getUrlParam(name){
