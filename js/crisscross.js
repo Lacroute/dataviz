@@ -297,6 +297,9 @@ json.badges = [];
 	     json.badges[2]={};
 	     json.badges[2].nb=user.friends;
 	     if(user.friends<10){
+	     	user.friends="0"+user.friends;
+	     }
+	     if(user.friends<10){
 	         json.badges[2].label="solitaire";
 	         json.badges[2].description="Tu es un solitaire dans l'âme. Fais attention à ne pas te couper du monde !";
 	     }else if(user.friends<80){
