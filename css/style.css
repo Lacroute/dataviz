@@ -47,10 +47,10 @@ body {background: #061828;margin:0;padding: 0;font-family: 'DINProRegular', aria
 overflow: hidden;}
 #note.on {height: 100%;opacity: 1;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
-background-position:0px -360px;-webkit-transition:all ease .3s;}
-#note.on a:hover { -webkit-transform:rotate(90deg);}
+background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: all ease .3s; -ms-transition: all ease .3s; -o-transition: all ease .3s; transition:all ease .3s;}
+#note.on a:hover { -webkit-transform:rotate(90deg);-moz-transition: rotate(90deg); -ms-transition: rotate(90deg); -o-transition: rotate(90deg); transition: rotate(90deg);}
 #titlenote {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -55px;
--webkit-transition:all ease .5s;}
+-webkit-transition:all ease .5s;-moz-transition: all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
 #note.on #titlenote {opacity: 1;margin-top:10px;}
 #conteneurSchema {width: 80%;margin: 50px auto 0px;}
 #badgeNote {width: 50%;display: inline-block;position: relative;text-align: center;}
@@ -60,22 +60,22 @@ background-position:0px -360px;-webkit-transition:all ease .3s;}
 #texteNote {width: 40%;height: auto;display:inline-block;vertical-align: top;}
 #texteNote p {font-size: 2em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
 
-#legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;}
+#legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;-moz-transition: all ease .8s; -ms-transition: all ease .8s; -o-transition: all ease .8s; transition: all ease .8s;}
 #legende.on {height: 100%;opacity: 1;}
 #legende.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
-background-position:0px -360px;-webkit-transition:all ease .3s;}
+background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: all ease .3s; -ms-transition: all ease .3s; -o-transition: all ease .3s; transition: all ease .3s;}
 #legende.on a:hover { -webkit-transform:rotate(90deg);}
 #legende p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -70px;
--webkit-transition:all ease .5s;}
+-webkit-transition:all ease .5s;-moz-transition:all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
 #legende.on p {opacity: 1;margin:0px 0px 20px 0px;}
-#legende div {width: 80%;height: 0%;margin:10px auto 0px;-webkit-transition:all .8s ease 1;}
+#legende div {width: 80%;height: 0%;margin:10px auto 0px;-webkit-transition:all .8s ease 1;-moz-transition:all .8s ease 1; -ms-transition: all .8s ease 1; -o-transition: all .8s ease 1; transition: all .8s ease 1;}
 #legende.on div {height: 80%;overflow: hidden;}
 #legende img {width: 100%;display: none;}
 #legende.on img {display: block; }
 
 /***********************************************DATAVIZ*****************************************************************/
 
-#content {background: #00182b; width:100%;height:100%;-webkit-transition:all ease .5s;padding:0px 5px 0px 25px;z-index:994;position: absolute;
+#content {background: #00182b; width:100%;height:100%;-webkit-transition:all ease .5s;-moz-transition: all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;padding:0px 5px 0px 25px;z-index:994;position: absolute;
 -moz-box-shadow: -2px 0px 15px 0px rgba(0,0,0, .5);
 -webkit-box-shadow: -2px 0px 15px 0px  rgba(0,0,0, .5);
 -o-box-shadow: -2px 0px 15px 0px  rgba(0,0,0, .5);
@@ -83,8 +83,7 @@ box-shadow: -2px 0px 15px 0px  rgba(0,0,0, .5);
 overflow-x: hidden;}
 #content.on {margin-left:30%;}
 #content header nav {display: inline-block;}
-#content header nav a {width: 30px; height:25px; background:url(img/sprite.png) ;background-position: 0px -332px;display: block;-webkit-transition:all .2s;
-margin-top: 35px;}
+#content header nav a {width: 30px; height:25px; background:url(img/sprite.png) ;background-position: 0px -332px;display: block;-webkit-transition:all .2s; -moz-transition: all .2s; -ms-transition: all .2s; -o-transition: all .2s; transition: all .2s; margin-top: 35px;}
 #content header nav a:hover {background-position: -41px -332px;}
 #content header div {width: 293px; height: 70px;background: url(img/logo.png);display: inline-block;vertical-align: top; margin-left: 25px;border-radius: 2px;
 margin-top: 20px;}
@@ -98,10 +97,9 @@ margin-top: 20px;}
 background-position:2px -67px ;padding: 4px 0px 0px 65px;margin-bottom:0;}
 #desc-bloc1 div {width: 173px;height: 173px;display: inline-block;vertical-align: top;}
 #badge {margin: 0;padding: 0;width: 100%;height: auto;}
-#badge li {display: inline-block;list-style-type: none;float: left;-webkit-transition:all ease .2s;margin-top: 20px;;
-position:relative; width:173px; height: 173px;}
+#badge li {display: inline-block;list-style-type: none;float: left;-webkit-transition:all ease .2s;-moz-transition: all ease .2s; -ms-transition: all ease .2s; -o-transition: all ease .2s; transition: all ease .2s;margin-top: 20px;position:relative; width:173px; height: 173px;}
 
-#badge li a {text-decoration: none;position: absolute;margin-top:20px;height: 173px; -webkit-transition:all ease .2s;}
+#badge li a {text-decoration: none;position: absolute;margin-top:20px;height: 173px; -webkit-transition:all ease .2s;-moz-transition: all ease .2s; -ms-transition: all ease .2s; -o-transition: all ease .2s; transition: all ease .2s;}
 #badge li a:hover {margin-top: 0px;}
 #badge li a img {position: relative;width: 100%;}
 #check p {color:#1abc9c;font-size: 5em;font-family: 'DINProBold';text-align: center;position: absolute;top:26%;left:65px; margin:0; height: auto;}
@@ -147,7 +145,7 @@ border-bottom: 3px solid #1abc9c;margin-bottom: 50px;}
 #visualisation nav {width:100%;}
 #visualisation nav ul {list-style-type: none;margin: 0;padding: 0;}
 #visualisation nav ul li {background: transparent;margin: 0;border-bottom: 2px solid #f2f2f2;position: relative;}
-#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;padding: 25px 10px 25px 65px;color: #f2f2f2;-webkit-transition:padding ease .2s;display: block;}
+#visualisation nav ul li a {text-transform: uppercase;text-decoration: none;padding: 25px 10px 25px 65px;color: #f2f2f2;-webkit-transition:padding ease .2s;-moz-transition: padding ease .2s; -ms-transition: padding ease .2s; -o-transition: padding ease .2s; transition: padding ease .2s;display: block;}
 #visualisation nav ul li a:before {content:'';position: absolute;}
 #visualisation nav ul li:first-child:hover {background: #f2f2f2;border-top: 1px solid #1abc9c;border-bottom: 2px solid #1abc9c;}
 #visualisation nav ul li:hover {background: #f2f2f2;border-bottom: 2px solid #1abc9c;}
@@ -162,9 +160,9 @@ border-bottom: 3px solid #1abc9c;margin-bottom: 50px;}
 #visualisation nav ul li:nth-child(4):hover a:before { background-position:-40px -301px;}
 #visualisation nav ul li a span {font-family: 'DINProBold';}
 #visualisation > a {text-decoration: none;text-transform: uppercase;color: #f2f2f2;margin-top: 40px;text-align: center;display: block;
-margin-bottom:50px;-webkit-transition:all ease .2s;position: relative;}
+margin-bottom:50px;-webkit-transition:all ease .2s;-moz-transition: all ease .2s; -ms-transition: all ease .2s; -o-transition: all ease .2s; transition: all ease .2s;position: relative;}
 #visualisation > a:before {width:18px;height:24px;content:'';position: absolute;background: url(img/sprite.png) no-repeat;margin: 0px 0px 0px -30px;
--webkit-transition:all ease .2s;}
+-webkit-transition:all ease .2s;-moz-transition: all ease .2s; -ms-transition: all ease .2s; -o-transition: all ease .2s; transition: all ease .2s;}
 #visualisation > a:hover {color: #3499d1;}
 #visualisation > a:hover:before {width:18px;height:24px;content:'';position: absolute;background: url(img/sprite.png) no-repeat;
 background-position:-20px 0px;}
@@ -193,19 +191,3 @@ svg{ height: 100%;width: 100%;}
 #desc-bloc2 {margin-top: 150px;}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
