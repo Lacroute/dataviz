@@ -49,10 +49,9 @@ overflow: hidden;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
 background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: all ease .3s; -ms-transition: all ease .3s; -o-transition: all ease .3s; transition:all ease .3s;}
 #note.on a:hover { -webkit-transform:rotate(90deg);-moz-transition: rotate(90deg); -ms-transition: rotate(90deg); -o-transition: rotate(90deg); transition: rotate(90deg);}
-#titlenote {font-family: 'DINProBold';font-size: 3em;color: #1abc9c;margin-top: -55px; margin-left: 30px;
+#titlenote {font-family: 'DINProBold';font-size: 3em;color: #1abc9c;margin-top: -65px; margin-left: 40px;
 -webkit-transition:all ease .5s;-moz-transition: all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
-#titlenote span {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;margin-top: -55px; margin-left: 20px;
--webkit-transition:all ease .5s;-moz-transition: all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
+#titlenote span {font-family: 'DINProRegular';color: #f2f2f2;}
 #note.on #titlenote {opacity: 1;margin-top:10px;}
 #conteneurSchema {width: 80%;margin: 50px auto 0px;}
 #badgeNote {width: 50%;display: inline-block;position: relative;text-align: center;}
