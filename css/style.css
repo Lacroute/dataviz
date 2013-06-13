@@ -54,12 +54,12 @@ background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: 
 #titlenote span {font-family: 'DINProRegular';color: #f2f2f2;}
 #note.on #titlenote {opacity: 1;margin-top:10px;}
 #conteneurSchema {width: 80%;margin: 50px auto 0px;}
-#badgeNote {width: 50%;display: inline-block;position: relative;text-align: center;}
-#badgeNote img {width:80%;z-index:88;position: relative;}
-#badgeNote p {color: #f2f2f2;font-size: 7em;font-family: 'DINProBold';position: absolute;z-index: 89;margin-top: -423px;width: 100%;}
+
+#badgeNote {width:55%;display: inline-block;position: relative;text-align: center;}
+#badgeNote p {padding-top:110px;width:625px; height:623px; color: #f2f2f2;font-size: 9em;font-family: 'DINProBold'; position: relative; background:url(img/badge_noteglobale.png) no-repeat; margin-top:-20px;}
 
 #texteNote {width: 40%;height: auto;display:inline-block;vertical-align: top;}
-#texteNote p {font-size: 2em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
+#texteNote p {font-size: 1.5em;margin-top: 200px;text-transform: none;color: #f2f2f2;font-family: 'DINProRegular';text-align: justify;}
 
 #legende {width: 100%;height: 0%;background:rgba(9, 30, 51, .95);z-index:996;position: absolute;-webkit-transition:all ease .8s;-moz-transition: all ease .8s; -ms-transition: all ease .8s; -o-transition: all ease .8s; transition: all ease .8s;}
 #legende.on {height: 100%;opacity: 1;}
