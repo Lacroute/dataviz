@@ -330,6 +330,20 @@ json.badges = [];
 	     }
 	}
 
+	user.getFollow = function(){
+	 	json.badges[3]={};
+		 if(user.followNumber<4){
+		    	 json.badges[3].label="marginal";
+	         		json.badges[3].description="Tu aimes te différencier des autres et ne pas te fondre dans le moule, mais attention à ne pas rejeter tout ce qui t'entoure !";
+		 }else if(user.followNumber<15){
+		     	json.badges[3].label="groupie";
+	         		json.badges[3].description="Tu es une groupie mais cela reste raisonnable. Attention à ne pas tomber dans les excès !";
+		 }else{
+		     	json.badges[3].label="mouton";
+	         		json.badges[3].description="Tu suis tellement de choses qu'on pourrait croire que tu n'as aucune personnalité…";
+		 }
+	}
+
 	user.getGeneral = function(){
 		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo};
 	}
@@ -344,6 +358,7 @@ json.badges = [];
 		 user.getCheckins();
 		 user.getMayorship();
 		 user.getFrequence();
+		 user.getFollow();
 	}
 
 	// user.getTip = function(){
@@ -359,16 +374,7 @@ json.badges = [];
 	// 	}
 	// }
 	
-	// user.getFollow = function(){
-	// 	console.log("Nb Follows : "+user.followNumber);
-	// 	if(user.followNumber<4){
-	// 		console.log("Resultat : Marginal");
-	// 	}else if(user.followNumber<15){
-	// 		console.log("Resultat : Groupie");
-	// 	}else{
-	// 		console.log("Resultat : Mouton");	
-	// 	}
-	// }
+
 
 
 	// Fonction de Clément pour récuperer le Token dans l'url
