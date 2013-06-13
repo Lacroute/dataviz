@@ -159,7 +159,8 @@ json.badges = [];
 			diurne = 0,
 			heure = 3600;
 			
-		$.each(user.checkins, function (index, value) {
+		if(user.checkins.length>0){
+			$.each(user.checkins, function (index, value) {
 			var hr = value.createdAt%86400;
 			
 			if(hr<6*heure){
@@ -172,6 +173,7 @@ json.badges = [];
 				coucheTard++;
 			}
 		})
+		}
 		
 		var max = Math.max(coucheTard, insomniaque ,matinal ,diurne);
 
