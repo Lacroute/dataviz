@@ -95,7 +95,7 @@ margin-top: 35px;}
 #content header div {width: 293px; height: 70px;background: url(img/logo.png);display: inline-block;vertical-align: top; margin-left: 25px;border-radius: 2px;
 margin-top: 20px;}
 
-#pool {display: inline-block;width: 100%;height: auto}
+#pool {height: 100%}
 #description{position: absolute;right: 40;top: 0;width: 45%;height: 100%;padding-right: 20px;}
 #desc-bloc1{width: 100%;display: block; height: 270px;margin-top:100px;}
 #desc-bloc1 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
@@ -179,6 +179,11 @@ background-position:-20px 0px;}
 
 #svgContent{
     position: relative;
+    height: 100%;
+}
+svg{
+    height: 100%;
+    width: 100%;
 }
 
 
