@@ -25,7 +25,7 @@ function magic(){
 		cc = '#fbfbfb', // check color
 		rvc = ' #1abc9c', // rond vert color
 		tc = '#2980b9', // tips color
-		avgc = '#fbfbfb', // avg check color
+		avgc = '#0a7dbc', // avg check color
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
 
@@ -535,7 +535,7 @@ function magic(){
 			.duration(1000)
 			.delay(600)
 			.attr('d', function(d){
-				d.outerRadius = rve;
+				d.outerRadius = rve+10;
 				return arcFunction(d);
 			});
 
