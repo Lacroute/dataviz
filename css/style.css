@@ -122,7 +122,7 @@ background-position:20px -112px ;padding: 7px 0px 2px 69px;}
 #openLegende {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;
 padding: 10px;text-decoration: none;margin-left: 5px;margin-top: -50px;display: block;width:140px; height: 35px; z-index: 100; position: absolute; background: url(img/bouton_legende.png) no-repeat;}
 
-#desc-bloc3{ width: 100%;display: block;margin-top: 50px;height: auto;}
+#desc-bloc3{ width: 100%;display: block;margin-top: 250px;height: auto;}
 #desc-bloc3 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
 background-position:-40px -359px ;padding: 7px 70px 3px 39px;text-transform: uppercase;}
 #desc-bloc3 div {background:url(img/background_top9_03.png);width: 501px;height: 249px;}
@@ -173,6 +173,8 @@ margin-bottom:50px;-webkit-transition:all ease .2s;-moz-transition: all ease .2s
 background-position:-20px 0px;}
 
 .echelleDistance, .echelleCat, .echelleExterieur{opacity: 0.2;}
+
+#top9 p{margin: 0; padding: 0;}
 
 /*Code Bastien*/
 

@@ -42,9 +42,20 @@ $('#menu a').on('click', function(event){
 
 $('#deployChecks').on('click', function(event){
     initComportement();
+    $("#desc-bloc3").slideUp();
+    $("#desc-bloc2").slideDown();
+});
+
+$("#desc-bloc3").slideUp();
+
+$('#deployCat').on('click', function(event){
+    $("#desc-bloc2").slideUp();
+    $("#desc-bloc3").slideDown();
 });
 
 $('#deployDailyTips').on('click', function(event){
+    $("#desc-bloc3").slideUp();
+    $("#desc-bloc2").slideDown();
     comportementLabel = json.badges[6].label;
     comportementDescription = json.badges[6].description;
     updateComportement(comportementLabel, comportementDescription);
