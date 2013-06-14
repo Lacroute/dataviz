@@ -120,7 +120,6 @@ function setBadges () {
     initComportement();
     initShareText();
     setCookie();
-    alert(isFirstTime());
 
     function initShareText(){
         $("#share-container").attr("addthis:title","J'ai obtenu un score de "+json.general.note+" sur Omnisquare ! Découvre la tienne sur http://past.is/Py2z #omnisquare #foursquare");
@@ -152,10 +151,10 @@ function setBadges () {
     }
 
     function setCookie(){
-        $("#legende").addClass(classLegende);
+        $("#legende").addClass(isFirstTime());
         var exdate=new Date(),
         c_name = "omnisquare_visited",
-        value = "1",
+        value = "prout",
         exdays = 30;
         exdate.setDate(exdate.getDate() + exdays);
         var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
@@ -163,14 +162,8 @@ function setBadges () {
     }
 
     function isFirstTime(){
-        var output;
         var visited=getCookie("omnisquare_visited");
-        if (visited == "1"){
-            output = "";
-        }else{
-            output = "on";
-        }
-        return output;
+        return visited;
     }
 
     function noAccent (my_string) {
