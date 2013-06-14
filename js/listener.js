@@ -119,51 +119,9 @@ function setBadges () {
 
     initComportement();
     initShareText();
-    setCookie();
 
     function initShareText(){
         $("#share-container").attr("addthis:title","J'ai obtenu un score de "+json.general.note+" sur Omnisquare ! Découvre la tienne sur http://past.is/Py2z #omnisquare #foursquare");
-    }
-
-    function getCookie(c_name)
-    {
-    var c_value = document.cookie;
-    var c_start = c_value.indexOf(" " + c_name + "=");
-    if (c_start == -1)
-      {
-      c_start = c_value.indexOf(c_name + "=");
-      }
-    if (c_start == -1)
-      {
-      c_value = null;
-      }
-    else
-      {
-      c_start = c_value.indexOf("=", c_start) + 1;
-      var c_end = c_value.indexOf(";", c_start);
-      if (c_end == -1)
-      {
-    c_end = c_value.length;
-    }
-    c_value = unescape(c_value.substring(c_start,c_end));
-    }
-    return c_value;
-    }
-
-    function setCookie(){
-        $("#legende").addClass(isFirstTime());
-        var exdate=new Date(),
-        c_name = "omnisquare_visited",
-        value = "prout",
-        exdays = 30;
-        exdate.setDate(exdate.getDate() + exdays);
-        var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-        document.cookie=c_name + "=" + c_value;
-    }
-
-    function isFirstTime(){
-        var visited=getCookie("omnisquare_visited");
-        return visited;
     }
 
     function noAccent (my_string) {
