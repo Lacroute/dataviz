@@ -45,8 +45,8 @@ $('#deployChecks').on('click', function(event){
 });
 
 $('#deployDailyTips').on('click', function(event){
-    comportementLabel += json.badges[6].label;
-    comportementDescription += json.badges[6].description;
+    comportementLabel = json.badges[6].label;
+    comportementDescription = json.badges[6].description;
     updateComportement(comportementLabel, comportementDescription);
 });
 
@@ -63,12 +63,13 @@ function initComportement(){
 }
 
 function updateComportement(label, description){
+    console.log(cl.html());
     cl.html('');
     cd.html('');
-
+    console.log(cl.html());
     cl.html(label);
     cd.html(description);
-    $('#content').animate({scrollTop: $(this).height()}, 700);
+    console.log(cl.html());
 }
 
 function setBadges () {
@@ -79,6 +80,7 @@ function setBadges () {
     $('#nomProfil').html(json.general.nom_complet);
     $('#nomDescription').html(json.general.prenom);
     $('#avatar').attr('src', json.general.photo);
+
     /*** [END] JSON.GENERAL ***/
 
     /*** BADGES ***/
@@ -87,6 +89,7 @@ function setBadges () {
         event.preventDefault();
         closeMenu();
         updateComportement(json.badges[0].label, json.badges[0].description);
+        $('#content').animate({scrollTop: $(this).height()}, 700);
     });
 
     $('#check p').html(json.badges[1].nb);
@@ -94,6 +97,7 @@ function setBadges () {
         event.preventDefault();
         closeMenu();
         updateComportement(json.badges[1].label, json.badges[1].description);
+        $('#content').animate({scrollTop: $(this).height()}, 700);
     });
 
     $('#amis p').html(json.badges[2].nb);
@@ -102,6 +106,7 @@ function setBadges () {
         event.preventDefault();
         closeMenu();
         updateComportement(json.badges[2].label, json.badges[2].description);
+        $('#content').animate({scrollTop: $(this).height()}, 700);
     });
 
     $('#follow img').attr('src', 'media/badge_'+noAccent(json.badges[3].label)+'.png');
@@ -109,6 +114,7 @@ function setBadges () {
         event.preventDefault();
         closeMenu();
         updateComportement(json.badges[3].label, json.badges[3].description);
+        $('#content').animate({scrollTop: $(this).height()}, 700);
     });
 
     /*** [END] BADGES ***/
