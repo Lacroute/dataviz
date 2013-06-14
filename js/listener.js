@@ -118,6 +118,11 @@ function setBadges () {
     /*** [END] BADGES ***/
 
     initComportement();
+    initShareText();
+
+    function initShareText(){
+        $("#share-container").attr("addthis:title","J'ai obtenu un score de "+json.general.note+" sur Omnisquare ! Découvre la tienne sur http://past.is/Py2z #omnisquare #foursquare");
+    }
 
     function noAccent (my_string) {
         var new_string = "";
