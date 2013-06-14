@@ -167,6 +167,11 @@ var noteGlobale = 0;
 		     	json.badges[6].label="bienfaisant";
 			json.badges[6].description="Bravo, tu es bienfaisant pour la communauté ! Grâce à toi, les autres peuvent bénéficier de tes super conseils.";
 		 }
+		 if(user.tipsNumber>15){
+			noteGlobale = noteGlobale + 15;
+		}else{
+			noteGlobale = noteGlobale + user.tipsNumber;
+		}
 	}
 	
 	user.getHours = function(){
@@ -318,6 +323,11 @@ var noteGlobale = 0;
 	         json.badges[2].description="Bravo, tu es une star ! Les gens t'adorent, tu as vraiment beaucoup d'amis. Mais fais attention, parfois la qualité vaut mieux que la quantité…";
 	     }
 	     json.badges[2].nb=user.friends;
+	     if((user.friends/5)>15){
+			noteGlobale = noteGlobale + 15;
+		}else{
+			noteGlobale = noteGlobale + Math.floor(user.friends/5);
+		}
 	}
 
 	user.getMayorship = function(){
@@ -373,9 +383,9 @@ var noteGlobale = 0;
 	         json.badges[1].description="Ah ça pour checker, ça check ! Attention à ne pas passer ta vie sur Foursquare ;)";
 	     }
 	     if(user.moyCheck>5){
-			noteGlobale = noteGlobale + 15;
+			noteGlobale = noteGlobale + 20;
 		}else{
-			noteGlobale = noteGlobale + (moyCheck*3);
+			noteGlobale = noteGlobale + (moyCheck*4);
 		}
 
 	}
@@ -392,6 +402,11 @@ var noteGlobale = 0;
 		     	json.badges[3].label="mouton";
 	         		json.badges[3].description="Tu suis tellement de choses qu'on pourrait croire que tu n'as aucune personnalité…";
 		 }
+		 if((user.followNumber/3)>5){
+			noteGlobale = noteGlobale + 5;
+		}else{
+			noteGlobale = noteGlobale + Math.floor(user.followNumber/3);
+		}
 	}
 
 	user.getBadges = function(){
