@@ -429,7 +429,7 @@ var noteGlobale = 0;
 			textNote = "Au dessus de la moyenne, \"ouf\" comme on dit. Y'a pas de rattrapage mais faut pas lâcher l'affaire pour autant !";
 		}else if(noteGlobale<91){
 			textNote = "Ça se rapproche de la perfection là. Il reste encore un tout petit effort à faire, mais t'inquiètes pas, tu es déjà très bien.";
-		}else if{
+		}else{
 			textNote = "Alors là, félicitations, tu es vraiment très actif ! Ça check, ça follow, ça donne des conseils, tu es aussi de très nombreuses fois maires. Rien à dire, continue comme ça, on t'embrasse !";
 		}
 		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo, note: noteGlobale, nbtips: user.tipsNumber, txtNote: textNote};
