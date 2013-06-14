@@ -295,13 +295,10 @@ json.badges = [];
 
 	user.getFriends = function(){
 	     json.badges[2]={};
-	     json.badges[2].nb=user.friends;
-	     if(user.friends<10){
-	     	user.friends="0"+user.friends;
-	     }
 	     if(user.friends<10){
 	         json.badges[2].label="solitaire";
 	         json.badges[2].description="Tu es un solitaire dans l'âme. Fais attention à ne pas te couper du monde !";
+	         user.friends = ('0' + user.friends).slice(-2);
 	     }else if(user.friends<80){
 	         json.badges[2].label="sociable";
 	         json.badges[2].description="Tu es quelqu'un de sociable, c'est très bien. Ne change pas !";
@@ -309,6 +306,7 @@ json.badges = [];
 	         json.badges[2].label="star";
 	         json.badges[2].description="Bravo, tu es une star ! Les gens t'adorent, tu as vraiment beaucoup d'amis. Mais fais attention, parfois la qualité vaut mieux que la quantité…";
 	     }
+	     json.badges[2].nb=user.friends;
 	}
 
 	user.getMayorship = function(){
