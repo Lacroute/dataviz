@@ -68,7 +68,7 @@ function updateComportement(label, description){
 
     cl.html(label);
     cd.html(description);
-    $('#content').animate({scrollTop: $(this).height()});
+    $('#content').animate({scrollTop: $(this).height()}, 700);
 }
 
 function setBadges () {
