@@ -30,6 +30,8 @@ function magic(){
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
 
+		console.log(catJson);
+
 		/*** [END] Initialisation variables ***/
 
 	/*** Initialisation json ***/
@@ -271,6 +273,16 @@ function magic(){
 		.attr('fill', javgc)
 		.style('opacity', 0.5);
 
+	$('.dailyAvgChecks').tipsy({ 
+        gravity: 'n', 
+        html: true, 
+        title: function() {
+        	console.log('ok');
+          var d = this.__data__, c = 'test';
+          return 'Hi there! My color is <span style="color:' + c + '">' + c + '</span>'; 
+        }
+      });
+
 	var cat = svg.selectAll('.cat')
 		.data(catJson)
 		.enter()
@@ -281,6 +293,7 @@ function magic(){
 		.style('opacity', 0.5)
 		.attr('fill', cac);
 
+   	console.log(cat);
 	/*** [END] Création selecteurs***/
 
 	/*** Initialisation des échelles ***/
@@ -554,7 +567,6 @@ function magic(){
 
 	/*** Gestion des clics ***/
 	d3.select('#deployChecks').on('click', function(){
-
 		deployChecks();
 	});
 

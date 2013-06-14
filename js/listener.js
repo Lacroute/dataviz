@@ -58,28 +58,26 @@ function initComportement(){
     comportementLabel += json.badges[5].label;
     comportementDescription += '<p>'+json.badges[5].description+'</p>';
     
-    console.log(comportementLabel);
     updateComportement(comportementLabel, comportementDescription);
 }
 
 function updateComportement(label, description){
-    console.log(cl.html());
     cl.html('');
     cd.html('');
-    console.log(cl.html());
+
     cl.html(label);
     cd.html(description);
-    console.log(cl.html());
 }
 
 function setBadges () {
-    console.log(json.badges[4]);
+    // console.log(json.badges[4]);
     console.log(json);
 
     /*** JSON.GENERAL ***/
     $('#nomProfil').html(json.general.nom_complet);
     $('#nomDescription').html(json.general.prenom);
     $('#avatar').attr('src', json.general.photo);
+    $('#badgeNote p').html(json.general.note);
 
     /*** [END] JSON.GENERAL ***/
 
