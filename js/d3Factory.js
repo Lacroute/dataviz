@@ -130,8 +130,10 @@ function magic(){
 	// Génère les coordonées de l'arc de cercle pour la moyenne horaire des tips
 	function checksAvgCoords(checkAvgJson){
 		var  checkEnd = checkAvgJson.pop(),
-			checkStart = checkAvgJson.pop();
-		return [{start: checkStart.h*(pi/12), size: Math.abs(checkStart.alpha-checkEnd.alpha), innerRadius: ro, outerRadius: ro}];
+			checkStart = checkAvgJson.pop(),
+			computeSize = Math.abs(checkStart.alpha-checkEnd.alpha),
+			percent = parseInt(computeSize/(2*pi)*100);
+		return [{start: checkStart.h*(pi/12), size: computeSize, innerRadius: ro, outerRadius: ro, t: percent}];
 	}
 
 	// Génère les coordonées d'un arc de cercle par catégorie
@@ -273,16 +275,6 @@ function magic(){
 		.attr('fill', javgc)
 		.style('opacity', 0.5);
 
-	$('.dailyAvgChecks').tipsy({ 
-        gravity: 'n', 
-        html: true, 
-        title: function() {
-        	console.log('ok');
-          var d = this.__data__, c = 'test';
-          return 'Hi there! My color is <span style="color:' + c + '">' + c + '</span>'; 
-        }
-      });
-
 	var cat = svg.selectAll('.cat')
 		.data(catJson)
 		.enter()
@@ -295,6 +287,43 @@ function magic(){
 
    	console.log(cat);
 	/*** [END] Création selecteurs***/
+
+	/*** TOOLTIPS ***/
+	$('.dailyAvgChecks').tipsy({ 
+        gravity: 'n', 
+        html: true, 
+        title: function() {
+          var d = this.__data__, toolText;
+          console.log(d);
+          if(json.badges[1].nb < 2.5){
+          	toolText = 'Tu checks quotidiennement moins que la moyenne de la communauté foursquare (2,5)';
+          }else if(json.badges[1].nb > 2.5){
+          	toolText = 'Tu checks quotidiennement plus que la moyenne de la communauté foursquare (2,5)';
+          }else{
+          	toolText = 'Tu checks autant que la moyenne de la communauté foursquare (2,5)';
+          }
+          return toolText; 
+        }
+  	});
+
+  	$('.dailyAvgTips').tipsy({ 
+        gravity: 'n', 
+        html: true, 
+        title: function() {
+          var d = this.__data__, toolText;
+          console.log(d);
+          if(json.badges[1].nb < 2.5){
+          	toolText = 'Tu partages moins de tips que la moyenne de la communauté foursquare (10)';
+          }else if(json.badges[1].nb > 2.5){
+          	toolText = 'Tu partages plus de tips que la moyenne de la communauté foursquare (10)';
+          }else{
+          	toolText = 'Tu partages autant de tips que la moyenne de la communauté foursquare (10)';
+          }
+          return toolText; 
+        }
+  	});
+
+	/*** [END] TOOLTIPS ***/
 
 	/*** Initialisation des échelles ***/
 	var echelleDistance = echelleGenerator('echelleDistance', rdist);
