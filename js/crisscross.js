@@ -10,6 +10,18 @@ json.general = {};
 json.badges = [];
 var noteGlobale = 0;
 
+/*** TOP9 ***/
+    $("#topCulture")
+    $("topUniversite")
+    $("topManger")
+    $("topNocture")
+    $("topLoisirs")
+    $("topPro")
+    $("topResidence")
+    $("topBoutique")
+    $("topVoyage")
+    /*** [END] TOP9***/
+
 	user.init = function(data){
 
 		console.log(data.response);
