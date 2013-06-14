@@ -418,7 +418,21 @@ var noteGlobale = 0;
 	}
 
 	user.getGeneral = function(){
-		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo, note: noteGlobale, nbtips: user.tipsNumber};
+		var textNote;
+		if(noteGlobale<11){
+			textNote = "C'est vraiment une toute petite note ça dis donc… Soit tu es tout nouveau sur Foursquare, soit tu as oublié que tu avais un compte. Allez on se remue !";
+		}else if(noteGlobale<31){
+			textNote = "C'est un tout petit début. N'hésites pas à checker dès que tu te déplaces, motive toi !";
+		}else if(noteGlobale<51){
+			textNote = "Tu es juste en dessous de la moyenne, c'est pas si mal mais c'est pas fou non plus, ne te décourage surtout pas !";
+		}else if(noteGlobale<71){
+			textNote = "Au dessus de la moyenne, \"ouf\" comme on dit. Y'a pas de rattrapage mais faut pas lâcher l'affaire pour autant !";
+		}else if(noteGlobale<91){
+			textNote = "Ça se rapproche de la perfection là. Il reste encore un tout petit effort à faire, mais t'inquiètes pas, tu es déjà très bien.";
+		}else if{
+			textNote = "Alors là, félicitations, tu es vraiment très actif ! Ça check, ça follow, ça donne des conseils, tu es aussi de très nombreuses fois maires. Rien à dire, continue comme ça, on t'embrasse !";
+		}
+		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo, note: noteGlobale, nbtips: user.tipsNumber, txtNote: textNote};
 	}
 
 	user.getJson = function(){
