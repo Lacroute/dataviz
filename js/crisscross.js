@@ -25,6 +25,7 @@ var noteGlobale = 0;
 		user.followNumber = data.response.user.following.count;
 		user.checkinsNumber = data.response.user.checkins.count;
 		user.friends = data.response.user.friends.count;
+		user.badges = data.response.user.badges.count;
 		
 		//checkins
 		jQuery.ajax({
@@ -260,6 +261,15 @@ var noteGlobale = 0;
 	    		}
 	    	}
 	    })
+		 culture =  ('0' + culture).slice(-2);
+		 universitaire=  ('0' + universitaire).slice(-2);
+		 manger=  ('0' + manger).slice(-2);
+		 nocturne=  ('0' + nocturne).slice(-2);
+		 ext=  ('0' + ext).slice(-2);
+		 pro=  ('0' + pro).slice(-2);
+		 residence=  ('0' + residence).slice(-2);
+		 boutique=  ('0' + boutique).slice(-2);
+		 voyage=  ('0' + voyage).slice(-2);
 	    	json.categories=[{name: 'Culture et loisirs', count: scaleCategorie(culture), nb: culture}, {name: 'Établissement universitaire', count: scaleCategorie(universitaire), nb: universitaire}, {name: 'Manger', count: scaleCategorie(manger), nb: manger}, {name: 'Vie nocturne', count: scaleCategorie(nocturne), nb: nocturne}, {name: 'Extérieur et loisirs', count: scaleCategorie(ext), nb: ext}, {name: 'Lieux professionnels ou autres', count: scaleCategorie(pro), nb: pro}, {name: 'Résidence', count: scaleCategorie(residence), nb: residence}, {name: 'Boutiques et services', count: scaleCategorie(boutique), nb: boutique}, {name: 'Voyages et transport', count: scaleCategorie(voyage), nb: voyage}];
 
 	}
@@ -325,6 +335,11 @@ var noteGlobale = 0;
 	         json.badges[0].label="président";
 	         json.badges[0].description="Félicitations, tu as acquis le statut de président ! Tu es plus de 50 fois maire de lieux différents."; 
 	      }
+		  if((user.mayorshipNumber*2)>25){
+			noteGlobale = noteGlobale + 25;
+		}else{
+			noteGlobale = noteGlobale + (user.mayorshipNumber*2);
+		}
 	}
 
 	user.getFrequence = function(){
@@ -357,6 +372,12 @@ var noteGlobale = 0;
 	         json.badges[1].label="hyper-actif";
 	         json.badges[1].description="Ah ça pour checker, ça check ! Attention à ne pas passer ta vie sur Foursquare ;)";
 	     }
+	     if(user.moyCheck>5){
+			noteGlobale = noteGlobale + 15;
+		}else{
+			noteGlobale = noteGlobale + (moyCheck*3);
+		}
+
 	}
 
 	user.getFollow = function(){
@@ -371,6 +392,14 @@ var noteGlobale = 0;
 		     	json.badges[3].label="mouton";
 	         		json.badges[3].description="Tu suis tellement de choses qu'on pourrait croire que tu n'as aucune personnalité…";
 		 }
+	}
+
+	user.getBadges = function(){
+		if(user.badges>20){
+			noteGlobale = noteGlobale + 20;
+		}else{
+			noteGlobale = noteGlobale + user.badges;
+		}
 	}
 
 	user.getGeneral = function(){
@@ -388,6 +417,7 @@ var noteGlobale = 0;
 		 user.getFrequence();
 		 user.getFollow();
 		 user.getFriends();
+		 user.getBadges();
 		 user.getGeneral();
 	}
 
