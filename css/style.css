@@ -49,7 +49,7 @@ overflow: hidden;}
 #note.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
 background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: all ease .3s; -ms-transition: all ease .3s; -o-transition: all ease .3s; transition:all ease .3s;}
 #note.on a:hover { -webkit-transform:rotate(90deg);-moz-transition: rotate(90deg); -ms-transition: rotate(90deg); -o-transition: rotate(90deg); transition: rotate(90deg);}
-#titlenote {font-family: 'DINProBold';font-size: 3em;color: #1abc9c;margin-bottom: -1%; margin-left: 40px;
+#titlenote {font-family: 'DINProBold';font-size: 3em;color: #1abc9c;margin-bottom: -1%; margin-left: 40px; margin-top:-70px;
 -webkit-transition:all ease .5s;-moz-transition: all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
 #titlenote span {font-family: 'DINProRegular';color: #f2f2f2;}
 #note.on #titlenote {opacity: 1;margin-top:10px;}
@@ -66,7 +66,7 @@ background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: 
 #legende.on a {display: block;width: 40px;height: 40px;right: 20;top:20;position: absolute;background:url(img/sprite.png);
 background-position:0px -360px;-webkit-transition:all ease .3s;-moz-transition: all ease .3s; -ms-transition: all ease .3s; -o-transition: all ease .3s; transition: all ease .3s;}
 #legende.on a:hover { -webkit-transform:rotate(90deg);}
-#legende p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase;margin-top: -70px;
+#legende p {font-family: 'DINProRegular';font-size: 3em;color: #f2f2f2;text-align: center;text-transform: uppercase; margin-top: -70px;
 -webkit-transition:all ease .5s;-moz-transition:all ease .5s; -ms-transition: all ease .5s; -o-transition: all ease .5s; transition: all ease .5s;}
 #legende.on p {opacity: 1;margin:0px 0px 20px 0px;}
 #legende div {width: 80%;height: 0%;margin:10px auto 0px;-webkit-transition:all .8s ease 1;-moz-transition:all .8s ease 1; -ms-transition: all .8s ease 1; -o-transition: all .8s ease 1; transition: all .8s ease 1;}
@@ -114,9 +114,9 @@ background-position:20px -112px ;padding: 7px 0px 2px 69px;}
 #desc-bloc2 .nomProfil {color: #1abc9c;font-family: 'DINProBold';}
 #desc-bloc2 .nomProfil:before {content: '';position: absolute;width: 73px;height: 31px;background: url(img/description.png) no-repeat;margin:-12 0 0 -80}
 #desc-bloc2 > p:nth-child(3) {color: #f2f2f2;margin-left: 20px;text-align: justify;font-family: 'DINProRegular'}
-#desc-bloc2 a {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;border: 1px solid #f2f2f2;
-padding: 10px;text-decoration: none;margin-left: 20px;display: block;width:140px;}
-#desc-bloc2 a:hover {color:#00182b;background: #f2f2f2;}
+
+#openLegende {color: #f2f2f2;text-transform: uppercase;font-size: 1em;background: transparent;
+padding: 10px;text-decoration: none;margin-left: 5px;margin-top: -50px;display: block;width:140px; height: 35px; z-index: 100; position: absolute; background: url(img/bouton_legende.png) no-repeat;}
 
 #desc-bloc3{ width: 100%;display: block;margin-top: 50px;height: auto;}
 #desc-bloc3 > p:nth-child(1){font-size: 1.5em;color:#1abc9c ;background: url(img/sprite.png) no-repeat;
