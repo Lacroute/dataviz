@@ -8,6 +8,7 @@ json.dailyAvgChecks = [];
 json.tipsAvg = [];
 json.general = {};
 json.badges = [];
+var noteGlobale = 0;
 
 	user.init = function(data){
 
@@ -155,15 +156,19 @@ json.badges = [];
 		if(user.tipsNumber<2){
 			json.badges[6].label="égoïste";
 			json.badges[6].description="Oh le vilain, tu n'as aucun tip à ton actif... Qu'est ce que tu attends pour laisser une trace sur les endroits où tu checks ?";
+			noteGlobale=noteGlobale+3;
 		 }else if(user.tipsNumber<6){
 		     	json.badges[6].label="avare";
 			json.badges[6].description="C'est bien mais c'est peu. On peut dire qu'il y a de l'idée mais on compte sur toi pour laisser encore plus de tips !";
+			noteGlobale=noteGlobale+12;
 		 }else if(user.tipsNumber<20){
 		     	json.badges[6].label="charitable";
 			json.badges[6].description="Tu es ce qu'on appelle une âme charitable. C'est plutôt généreux de ta part, la communauté te remercie !"; 
+			noteGlobale=noteGlobale+18;
 		 }else{
 		     	json.badges[6].label="bienfaisant";
 			json.badges[6].description="Bravo, tu es bienfaisant pour la communauté ! Grâce à toi, les autres peuvent bénéficier de tes super conseils.";
+			noteGlobale=noteGlobale+20;
 		 }
 	}
 	
@@ -299,12 +304,15 @@ json.badges = [];
 	         json.badges[2].label="solitaire";
 	         json.badges[2].description="Tu es un solitaire dans l'âme. Fais attention à ne pas te couper du monde !";
 	         user.friends = ('0' + user.friends).slice(-2);
+	         noteGlobale=noteGlobale+4;
 	     }else if(user.friends<80){
 	         json.badges[2].label="sociable";
 	         json.badges[2].description="Tu es quelqu'un de sociable, c'est très bien. Ne change pas !";
+	         noteGlobale=noteGlobale+13;
 	     }else{
 	         json.badges[2].label="star";
 	         json.badges[2].description="Bravo, tu es une star ! Les gens t'adorent, tu as vraiment beaucoup d'amis. Mais fais attention, parfois la qualité vaut mieux que la quantité…";
+	         noteGlobale=noteGlobale+15;
 	     }
 	     json.badges[2].nb=user.friends;
 	}
@@ -314,19 +322,20 @@ json.badges = [];
 	     if(user.mayorshipNumber==0){
 	         json.badges[0].label="candidat";
 	         json.badges[0].description="Tu n'as jamais été maire. Soit tu débutes sur Foursquare, soit tu n'es pas du tout actif. Allez, on s'active !";
+	         noteGlobale=noteGlobale+3;
 	     }else if(user.mayorshipNumber<25){
 	         json.badges[0].label="conseiller général";
 	         json.badges[0].description="C'est un bon début. Mais tu peux faire mieux, allez !";
+	         noteGlobale=noteGlobale+18;
 	     }else if(user.mayorshipNumber<50){
 	         json.badges[0].label="député";
 	         json.badges[0].description="C'est plutôt pas mal ça..! Encore un petit effort et ce sera parfait !";
-	     }else if(user.mayorshipNumber>=50){
+	         noteGlobale=noteGlobale+24;
+	     }else{
 	         json.badges[0].label="président";
 	         json.badges[0].description="Félicitations, tu as acquis le statut de président ! Tu es plus de 50 fois maire de lieux différents."; 
-	     }else{
-	         json.badges[0].label="candidat";
-	         json.badges[0].description="Tu n'as jamais été maire. Soit tu débutes sur Foursquare, soit tu n'es pas du tout actif. Allez, on s'active !";
-	     }
+	         noteGlobale=noteGlobale+30;
+	      }
 	}
 
 	user.getFrequence = function(){
@@ -352,12 +361,15 @@ json.badges = [];
 	     if(moyCheck<3){
 	         json.badges[1].label="flemmard";
 	         json.badges[1].description="Oh le flemmard ! Et bien, qu'est ce que tu attends pour checker ?";
+	         noteGlobale=noteGlobale+7;
 	     }else if(moyCheck<8){
 	         json.badges[1].label="frétillant";
 	         json.badges[1].description="Tu es dans la moyenne, c'est bien. Essaye de frétiller un peu plus pour voir…";
+	         noteGlobale=noteGlobale+20;
 	     }else{
 	         json.badges[1].label="hyper-actif";
 	         json.badges[1].description="Ah ça pour checker, ça check ! Attention à ne pas passer ta vie sur Foursquare ;)";
+	         noteGlobale=noteGlobale+30;
 	     }
 	}
 
@@ -366,17 +378,20 @@ json.badges = [];
 		 if(user.followNumber<4){
 		    	 json.badges[3].label="marginal";
 	         		json.badges[3].description="Tu aimes te différencier des autres et ne pas te fondre dans le moule, mais attention à ne pas rejeter tout ce qui t'entoure !";
+	         		noteGlobale=noteGlobale+2;
 		 }else if(user.followNumber<15){
 		     	json.badges[3].label="groupie";
 	         		json.badges[3].description="Tu es une groupie mais cela reste raisonnable. Attention à ne pas tomber dans les excès !";
+	         		noteGlobale=noteGlobale+4;
 		 }else{
 		     	json.badges[3].label="mouton";
 	         		json.badges[3].description="Tu suis tellement de choses qu'on pourrait croire que tu n'as aucune personnalité…";
+	         		noteGlobale=noteGlobale+5;
 		 }
 	}
 
 	user.getGeneral = function(){
-		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo};
+		json.general={nom_complet: user.firstName+" "+user.lastName, prenom: user.firstName, photo: user.photo, note: noteGlobale};
 	}
 
 	user.getJson = function(){
@@ -385,12 +400,12 @@ json.badges = [];
 		 user.getCategories();
 		 user.getDailyAvgChecks();
 		 user.getTipsAvg();
-		 user.getGeneral();
 		 user.getCheckins();
 		 user.getMayorship();
 		 user.getFrequence();
 		 user.getFollow();
 		 user.getFriends();
+		 user.getGeneral();
 	}
 
 	// Fonction de Clément pour récuperer le Token dans l'url
