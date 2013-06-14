@@ -145,6 +145,7 @@ function setBadges () {
     initShareText();
 
     function initShareText(){
+        $("#texteNote p").html(json.general.txtNote);
         $("#share-container").attr("addthis:title","J'ai obtenu un score de "+json.general.note+" sur Omnisquare ! Découvre la tienne sur http://past.is/Py2z #omnisquare #foursquare");
     }
 
