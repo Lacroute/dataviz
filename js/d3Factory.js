@@ -30,8 +30,6 @@ function magic(){
 		cac = '#e74c3c',  // category color
 		sr =  15.016; // soleil r
 
-		console.log(catJson);
-
 		/*** [END] Initialisation variables ***/
 
 	/*** Initialisation json ***/
@@ -285,7 +283,6 @@ function magic(){
 		.style('opacity', 0.5)
 		.attr('fill', cac);
 
-   	console.log(cat);
 	/*** [END] Création selecteurs***/
 
 	/*** TOOLTIPS ***/
