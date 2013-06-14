@@ -312,14 +312,25 @@ function magic(){
         title: function() {
           var d = this.__data__, toolText;
           console.log(d);
-          if(json.badges[1].nb < 2.5){
+          if(json.general.nbtips < 10){
           	toolText = 'Tu partages moins de tips que la moyenne de la communauté foursquare (10)';
-          }else if(json.badges[1].nb > 2.5){
+          }else if(json.general.nbtips > 10){
           	toolText = 'Tu partages plus de tips que la moyenne de la communauté foursquare (10)';
           }else{
           	toolText = 'Tu partages autant de tips que la moyenne de la communauté foursquare (10)';
           }
+          console.log(toolText);
           return toolText; 
+        }
+  	});
+
+  	$('.cat').tipsy({ 
+        gravity: 'n', 
+        html: true, 
+        title: function() {
+          var d = this.__data__;
+          console.log(d);
+          return d.name + ' ('+parseInt(d.nb)+' checks)'; 
         }
   	});
 
