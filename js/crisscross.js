@@ -382,10 +382,10 @@ var noteGlobale = 0;
 	         json.badges[1].label="hyper-actif";
 	         json.badges[1].description="Ah ça pour checker, ça check ! Attention à ne pas passer ta vie sur Foursquare ;)";
 	     }
-	     if(user.moyCheck>5){
+	     if((user.moyCheck*5)>5){
 			noteGlobale = noteGlobale + 20;
 		}else{
-			noteGlobale = noteGlobale + (moyCheck*4);
+			noteGlobale = noteGlobale + (moyCheck*5);
 		}
 
 	}
@@ -410,10 +410,10 @@ var noteGlobale = 0;
 	}
 
 	user.getBadges = function(){
-		if(user.badges>20){
+		if((user.badges*2)>20){
 			noteGlobale = noteGlobale + 20;
 		}else{
-			noteGlobale = noteGlobale + user.badges;
+			noteGlobale = noteGlobale + (user.badges*2);
 		}
 	}
 
