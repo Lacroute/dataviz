@@ -81,6 +81,19 @@ function setBadges () {
 
     /*** [END] JSON.GENERAL ***/
 
+    
+                    /*** TOP9 ***/
+        $("#topCulture").html(json.categories[0].nb);
+        $("topUniversite").html(json.categories[1].nb)
+        $("topManger").html(json.categories[2].nb)
+        $("topNocture").html(json.categories[3].nb)
+        $("topLoisirs").html(json.categories[4].nb)
+        $("topPro").html(json.categories[5].nb)
+        $("topResidence").html(json.categories[6].nb)
+        $("topBoutique").html(json.categories[7].nb)
+        $("topVoyage").html(json.categories[8].nb)
+    /*** [END] TOP9***/
+
     /*** BADGES ***/
     $('#grade img').attr('src', 'media/badge_'+noAccent(json.badges[0].label)+'.png');
     $('#grade').on('click', function(event){
